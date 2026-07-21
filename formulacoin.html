@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Coin Checker Admin</title>
+
+<style>
+
+body{
+font-family:Arial,sans-serif;
+background:linear-gradient(135deg,#dbeafe,#f8fafc);
+padding:20px;
+margin:0;
+}
+
+body.login-mode{
+background:#000;
+}
+
+h2{
+color:#1e3a8a;
+}
+
+input,textarea{
+padding:12px;
+border-radius:10px;
+border:1px solid #cbd5e1;
+width:90%;
+box-sizing:border-box;
+}
+
+button{
+background:#2563eb;
+color:white;
+border:none;
+padding:12px 20px;
+border-radius:10px;
+cursor:pointer;
+margin:5px;
+}
+
+button:hover{
+background:#1d4ed8;
+}
+
+
+#loginBox{
+
+background:white;
+
+width:300px;
+
+padding:25px;
+
+border-radius:15px;
+
+margin:120px auto;
+
+box-shadow:
+0 0 15px red,
+0 0 30px rgba(255,0,0,.5);
+
+text-align:center;
+
+}
+
+
+#loginBox input{
+
+width:90%;
+
+margin-bottom:10px;
+
+}
+
+
+#loginBox button{
+
+width:95%;
+
+}
+
+
+#content{
+
+background:white;
+
+padding:25px;
+
+border-radius:20px;
+
+box-shadow:0 10px 30px rgba(0,0,0,.15);
+
+}
+
+
+table{
+
+width:100%;
+
+border-collapse:collapse;
+
+margin-top:15px;
+
+}
+
+
+th{
+
+background:#2563eb;
+
+color:white;
+
+padding:12px;
+
+}
+
+
+td{
+
+padding:10px;
+
+border:1px solid #ddd;
+
+text-align:center;
+
+}
+
+
+.menu{
+
+margin-bottom:20px;
+
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div id="loginBox">
+
+
+<h2>Coin Checker Admin</h2>
+
+
+<input id="email" placeholder="Email">
+
+
+<br><br>
+
+
+<input id="password" type="password" placeholder="Password">
+
+
+<br><br>
+
+
+<button onclick="login()">
+Login
+</button>
+
+
+</div>
+
+
+
+
+<div id="content" style="display:none">
+
+
+<div class="menu">
+
+
+<button onclick="showDeposit()">
+💰 Deposit
+</button>
+
+
+<button onclick="showWithdraw()">
+💸 Withdraw
+</button>
+
+
+<button onclick="logout()">
+🚪 Logout
+</button>
+
+
+</div>
+
+
+
+<div id="depositPage">
+
+
+<h2>History Coin</h2>
+
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Date</th>
+<th>Info</th>
+<th>Username</th>
+<th>BY</th>
+<th>Coin</th>
+<th>Last Coin</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="data"></tbody>
+
+
+</table>
+
+
+<hr>
+
+
+<h2>Upload History Coin CSV</h2>
+
+
+<input type="file" id="csvFile" accept=".csv">
+
+
+<br><br>
+
+
+<h2>Paste Data Google Sheet</h2>
+
+
+<textarea id="sheetData" rows="10"></textarea>
+
+
+<br><br>
+
+
+<button onclick="processData()">
+
+⚙️ Proses Deposit
+
+</button>
+
+
+<h2>Difference Deposit</h2>
+
+
+<table>
+
+
+<thead>
+
+<tr>
+
+<th>Username</th>
+<th>Administration</th>
+<th>Google Sheet</th>
+<th>Selisih</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="difference"></tbody>
+
+
+</table>
+
+
+</div>
+
+
+
+<div id="withdrawPage" style="display:none">
+
+
+<h2>
+💸 Withdraw Checker
+</h2>
+
+
+<h2>
+Upload History Withdraw CSV
+</h2>
+
+
+<input type="file" id="withdrawCsv" accept=".csv">
+
+
+<br><br>
+
+
+<h2>
+Paste Data Google Sheet Withdraw
+</h2>
+
+
+<textarea id="withdrawSheetData" rows="10"></textarea>
+
+
+<br><br>
+
+
+<button onclick="processWithdraw()">
+
+⚙️ Proses Withdraw
+
+</button>
+
+
+<table>
+
+
+<thead>
+
+<tr>
+
+<th>Username</th>
+<th>Administration</th>
+<th>Google Sheet</th>
+<th>Selisih</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="withdrawDifference"></tbody>
+
+
+</table>
+
+
+</div>
+
+
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+<script>
+
+
+const supabaseClient = supabase.createClient(
+
+"https://uoiorjjsodnbtmiyajly.supabase.co",
+
+"sb_publishable_CbcQOm9l5ZOVuZjWbZNP2g_D2DziBnT"
+
+);
+
+
+
+window.onload = async function(){
+
+const {data}=await supabaseClient.auth.getSession();
+
+
+if(data.session){
+
+document.body.classList.remove("login-mode");
+
+document.getElementById("loginBox").style.display="none";
+
+document.getElementById("content").style.display="block";
+
+loadData();
+
+}
+
+else{
+
+document.body.classList.add("login-mode");
+
+}
+
+};
+
+
+
+window.addEventListener("keydown",function(e){
+
+if(e.key==="Enter"){
+
+if(document.activeElement.id==="password"){
+
+login();
+
+}
+
+}
+
+});
+
+
+
+async function login(){
+
+const email=document.getElementById("email").value.trim();
+
+const password=document.getElementById("password").value.trim();
+
+
+if(!email || !password){
+
+alert("Isi email dan password");
+
+return;
+
+}
+
+
+const {error}=await supabaseClient.auth.signInWithPassword({
+
+email,
+
+password
+
+});
+
+
+if(error){
+
+alert(error.message);
+
+return;
+
+}
+
+document.body.classList.remove("login-mode");
+
+document.getElementById("loginBox").style.display="none";
+
+document.getElementById("content").style.display="block";
+
+
+loadData();
+
+
+}
+
+async function loadData(){
+
+const {data,error}=await supabaseClient
+
+.from("history_coin")
+
+.select("*");
+
+
+if(error){
+
+console.log(error);
+
+return;
+
+}
+
+
+document.getElementById("data").innerHTML=data.map(row=>`
+
+<tr>
+
+<td>${row.date}</td>
+
+<td>${row.info}</td>
+
+<td>${row.username}</td>
+
+<td>${row.by}</td>
+
+<td>${Number(row.coin).toLocaleString()}</td>
+
+<td>${Number(row.last_coin).toLocaleString()}</td>
+
+</tr>
+
+`).join("");
+
+}
+
+
+
+
+async function logout(){
+
+await supabaseClient.auth.signOut();
+
+location.reload();
+
+}
+
+
+
+
+function showDeposit(){
+
+document.getElementById("depositPage").style.display="block";
+
+document.getElementById("withdrawPage").style.display="none";
+
+}
+
+
+
+function showWithdraw(){
+
+document.getElementById("depositPage").style.display="none";
+
+document.getElementById("withdrawPage").style.display="block";
+
+}
+
+
+
+
+
+
+// =======================
+// DEPOSIT CHECKER
+// =======================
+
+
+async function processData(){
+
+
+const file=document.getElementById("csvFile").files[0];
+
+const sheetText=document.getElementById("sheetData").value;
+
+
+
+if(!file){
+
+alert("Upload CSV dulu");
+
+return;
+
+}
+
+
+
+if(!sheetText.trim()){
+
+alert("Paste Google Sheet dulu");
+
+return;
+
+}
+
+
+
+
+// GOOGLE SHEET
+
+let googleSheet={};
+
+
+
+sheetText.trim().split("\n").forEach(row=>{
+
+
+let col=row.trim().split(/\s+/);
+
+
+
+if(col.length<2){
+
+return;
+
+}
+
+
+
+let username=col[0].trim().toLowerCase();
+
+
+
+let coin=Number(
+
+col[1].replace(/,/g,"").trim()
+
+);
+
+
+
+if(!googleSheet[username]){
+
+googleSheet[username]=0;
+
+}
+
+
+
+googleSheet[username]+=coin;
+
+
+
+});
+
+
+
+
+
+
+// CSV ADMIN DEPOSIT
+
+
+let csvText=await file.text();
+
+let rows=csvText.split("\n");
+
+
+let administration={};
+
+
+
+rows.forEach((line,index)=>{
+
+
+if(index===0 && line.toLowerCase().includes("date")){
+
+return;
+
+}
+
+
+
+let col=line.split(",");
+
+
+
+if(col.length<5){
+
+return;
+
+}
+
+
+
+
+let info=col[1]
+
+.replace(/"/g,"")
+
+.trim()
+
+.toLowerCase();
+
+
+
+
+let username=col[2]
+
+.replace(/"/g,"")
+
+.trim()
+
+.toLowerCase();
+
+
+
+
+let by=col[3]
+
+.replace(/"/g,"")
+
+.trim()
+
+.toLowerCase();
+
+
+
+
+let coin=Number(
+
+col[4]
+
+.replace(/"/g,"")
+
+.replace(/,/g,"")
+
+.trim()
+
+);
+
+
+
+
+
+// HANYA DEPOSIT SAJA
+
+if(info!=="deposit"){
+
+return;
+
+}
+
+
+
+
+// BUANG VJGAAACB SAJA
+
+if(by.startsWith("vjgaacb")){
+
+return;
+
+}
+
+
+
+
+
+if(!administration[username]){
+
+administration[username]=0;
+
+}
+
+
+
+administration[username]+=coin;
+
+
+
+});
+
+
+
+
+
+
+// HITUNG SELISIH
+
+
+let result=[];
+
+
+
+Object.keys(administration).forEach(username=>{
+
+
+let adminCoin=administration[username];
+
+
+let sheetCoin=googleSheet[username] || 0;
+
+
+
+let selisih=sheetCoin-adminCoin;
+
+
+
+if(selisih!==0){
+
+
+result.push({
+
+username,
+
+administration:adminCoin,
+
+googleSheet:sheetCoin,
+
+selisih
+
+});
+
+
+}
+
+
+});
+
+
+
+
+
+
+document.getElementById("difference").innerHTML=result.map(row=>`
+
+<tr>
+
+<td>${row.username}</td>
+
+<td>${row.administration.toLocaleString()}</td>
+
+<td>${row.googleSheet.toLocaleString()}</td>
+
+<td>${row.selisih.toLocaleString()}</td>
+
+</tr>
+
+`).join("");
+
+
+
+alert(
+"Deposit selesai : "
++result.length
++" berbeda"
+);
+
+
+
+}
+
+// =======================
+// WITHDRAW CHECKER
+// =======================
+
+
+async function processWithdraw(){
+
+
+const file=document.getElementById("withdrawCsv").files[0];
+
+const sheetText=document.getElementById("withdrawSheetData").value;
+
+
+
+if(!file){
+
+alert("Upload CSV Withdraw dulu");
+
+return;
+
+}
+
+
+
+if(!sheetText.trim()){
+
+alert("Paste Google Sheet Withdraw dulu");
+
+return;
+
+}
+
+
+
+
+
+
+// GOOGLE SHEET WITHDRAW
+
+let googleSheet={};
+
+
+
+sheetText.trim().split("\n").forEach(row=>{
+
+
+let col=row.trim().split(/\s+/);
+
+
+
+if(col.length<2){
+
+return;
+
+}
+
+
+
+let username=col[0].trim().toLowerCase();
+
+
+
+let coin=Number(
+
+col[1].replace(/,/g,"").trim()
+
+);
+
+
+
+if(!googleSheet[username]){
+
+googleSheet[username]=0;
+
+}
+
+
+
+googleSheet[username]+=coin;
+
+
+
+});
+
+
+
+
+
+
+
+
+// CSV ADMIN WITHDRAW
+
+
+let csvText=await file.text();
+
+let rows=csvText.split("\n");
+
+
+let administration={};
+
+
+
+rows.forEach((line,index)=>{
+
+
+if(index===0 && line.toLowerCase().includes("date")){
+
+return;
+
+}
+
+
+
+let col=line.split(",");
+
+
+
+if(col.length<5){
+
+return;
+
+}
+
+
+
+
+let info=col[1]
+
+.replace(/"/g,"")
+
+.trim()
+
+.toLowerCase();
+
+
+
+
+let username=col[2]
+
+.replace(/"/g,"")
+
+.trim()
+
+.toLowerCase();
+
+
+
+
+let by=col[3]
+
+.replace(/"/g,"")
+
+.trim()
+
+.toLowerCase();
+
+
+
+
+let coin=Number(
+
+col[4]
+
+.replace(/"/g,"")
+
+.replace(/,/g,"")
+
+.trim()
+
+);
+
+
+
+
+
+
+
+// HANYA WITHDRAW
+
+if(
+
+info!=="withdraw" &&
+
+info!=="withdraw(pga-idf)"
+
+){
+
+return;
+
+}
+
+
+
+
+
+
+// REJECT TIDAK IKUT
+
+if(info.includes("reject")){
+
+return;
+
+}
+
+
+
+
+
+
+// COIN MINUS TIDAK IKUT
+
+if(coin<=0){
+
+return;
+
+}
+
+
+
+
+
+
+// BUANG VJGAAACB
+
+if(by.startsWith("vjgaacb")){
+
+return;
+
+}
+
+
+
+
+
+if(!administration[username]){
+
+administration[username]=0;
+
+}
+
+
+
+administration[username]+=coin;
+
+
+
+});
+
+
+
+
+
+
+
+
+
+// HITUNG SELISIH
+
+
+let result=[];
+
+
+
+Object.keys(administration).forEach(username=>{
+
+
+let adminCoin=administration[username] || 0;
+
+
+let sheetCoin=googleSheet[username] || 0;
+
+
+
+let selisih=sheetCoin-adminCoin;
+
+
+
+
+if(selisih!==0){
+
+
+result.push({
+
+username,
+
+administration:adminCoin,
+
+googleSheet:sheetCoin,
+
+selisih
+
+});
+
+
+}
+
+
+});
+
+
+
+
+
+
+
+
+
+// TAMPIL HASIL
+
+
+document.getElementById("withdrawDifference").innerHTML=result.map(row=>`
+
+<tr>
+
+<td>${row.username}</td>
+
+<td>${row.administration.toLocaleString()}</td>
+
+<td>${row.googleSheet.toLocaleString()}</td>
+
+<td>${row.selisih.toLocaleString()}</td>
+
+</tr>
+
+`).join("");
+
+
+
+
+
+
+alert(
+
+"Withdraw selesai : "
+
++result.length
+
++" berbeda"
+
+);
+
+
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>
