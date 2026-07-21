@@ -1,98 +1,130 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Admin Coin</title>
+
+<title>Coin Checker Admin</title>
 
 <style>
 
 body{
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg,#dbeafe,#f8fafc);
-    padding:20px;
+font-family:Arial,sans-serif;
+background:linear-gradient(135deg,#dbeafe,#f8fafc);
+padding:20px;
 }
 
 h2{
-    color:#1e3a8a;
+color:#1e3a8a;
 }
 
-input, textarea{
-    padding:12px;
-    border-radius:10px;
-    border:1px solid #cbd5e1;
-    width:90%;
+input,textarea{
+padding:12px;
+border-radius:10px;
+border:1px solid #cbd5e1;
+width:90%;
 }
 
 button{
-    background:#2563eb;
-    color:white;
-    border:none;
-    padding:12px 20px;
-    border-radius:10px;
-    cursor:pointer;
+background:#2563eb;
+color:white;
+border:none;
+padding:12px 20px;
+border-radius:10px;
+cursor:pointer;
+margin:5px;
 }
 
 button:hover{
-    background:#1d4ed8;
+background:#1d4ed8;
 }
 
 #content{
-    background:white;
-    padding:25px;
-    border-radius:20px;
-    box-shadow:0 10px 30px rgba(0,0,0,.15);
+background:white;
+padding:25px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,.15);
 }
 
+
 table{
-    width:100%;
-    border-collapse:collapse;
-    background:white;
-    margin-top:15px;
+width:100%;
+border-collapse:collapse;
+margin-top:15px;
 }
 
 th{
-    background:#2563eb;
-    color:white;
-    padding:12px;
+background:#2563eb;
+color:white;
+padding:12px;
 }
 
 td{
-    padding:10px;
-    border:1px solid #ddd;
-    text-align:center;
+padding:10px;
+border:1px solid #ddd;
+text-align:center;
 }
 
+
 tr:hover{
-    background:#eff6ff;
+background:#eff6ff;
 }
+
+
+.menu{
+margin-bottom:20px;
+}
+
 
 </style>
 
 </head>
 
+
 <body>
 
-<h2>Login Admin</h2>
+
+<h2>Coin Checker Admin</h2>
+
+
+<div id="loginBox">
 
 <input id="email" placeholder="Email">
+
 <br><br>
 
 <input id="password" type="password" placeholder="Password">
+
 <br><br>
 
 <button onclick="login()">Login</button>
 
-<hr>
+</div>
+
+
 
 <div id="content" style="display:none">
 
+
+<div class="menu">
+
+<button onclick="showDeposit()">💰 Deposit</button>
+
+<button onclick="showWithdraw()">💸 Withdraw</button>
+
 <button onclick="logout()">🚪 Logout</button>
 
-<br><br>
+</div>
+
+
+
+<div id="depositPage">
 
 <h2>History Coin</h2>
 
+
 <table border="1">
+
 <thead>
+
 <tr>
 <th>Date</th>
 <th>Info</th>
@@ -101,9 +133,13 @@ tr:hover{
 <th>Coin</th>
 <th>Last Coin</th>
 </tr>
+
 </thead>
 
+
 <tbody id="data"></tbody>
+
+
 </table>
 
 
@@ -111,6 +147,7 @@ tr:hover{
 
 
 <h2>Upload History Coin CSV</h2>
+
 
 <input type="file" id="csvFile" accept=".csv">
 
@@ -120,36 +157,94 @@ tr:hover{
 
 <h2>Paste Data Google Sheet</h2>
 
+
 <textarea id="sheetData" rows="10" cols="80"></textarea>
 
 
 <br><br>
 
 
-<button onclick="processData()">⚙️ Proses Data</button>
+<button onclick="processData()">
+⚙️ Proses Deposit
+</button>
 
 
-<h2>Difference</h2>
+
+<h2>Difference Deposit</h2>
+
 
 <table border="1">
 
+
 <thead>
+
 <tr>
+
 <th>Username</th>
 <th>Administration</th>
 <th>Google Sheet</th>
 <th>Selisih</th>
+
 </tr>
+
 </thead>
 
 
 <tbody id="difference"></tbody>
+
+
+</table>
+
+
+
+</div>
+
+
+
+
+<div id="withdrawPage" style="display:none">
+
+
+<h2>💸 Withdraw Checker</h2>
+
+
+<p>
+Halaman Withdraw masih kosong.
+</p>
+
+
+<p>
+Rumus Withdraw akan dimasukkan nanti.
+</p>
+
+
+
+<table border="1">
+
+
+<thead>
+
+<tr>
+
+<th>Username</th>
+<th>Administration</th>
+<th>Google Sheet</th>
+<th>Selisih</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="withdrawDifference"></tbody>
+
 
 </table>
 
 
 </div>
 
+</div>
 
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -168,74 +263,8 @@ const supabaseClient = supabase.createClient(
 
 
 
-// RESET DATA SAAT REFRESH TAPI LOGIN TETAP
 
-window.onload = async function(){
-
-
-document.getElementById("csvFile").value="";
-
-document.getElementById("sheetData").value="";
-
-document.getElementById("difference").innerHTML="";
-
-
-const {data}=await supabaseClient.auth.getSession();
-
-
-
-if(data.session){
-
-document.getElementById("content").style.display="block";
-
-loadData();
-
-}
-
-else{
-
-document.getElementById("content").style.display="none";
-
-}
-
-
-};
-
-
-
-
-
-window.addEventListener("keydown",function(e){
-
-if(e.key==="Enter"){
-
-if(document.activeElement.id==="password"){
-
-login();
-
-}
-
-}
-
-});
-
-
-
-
-
-document.addEventListener("keydown",function(e){
-
-if(e.key==="Escape"){
-
-logout();
-
-}
-
-});
-
-
-
-
+// LOGIN
 
 async function login(){
 
@@ -266,8 +295,7 @@ return;
 
 
 
-alert("Login berhasil");
-
+document.getElementById("loginBox").style.display="none";
 
 document.getElementById("content").style.display="block";
 
@@ -281,6 +309,7 @@ loadData();
 
 
 
+// LOAD HISTORY COIN
 
 async function loadData(){
 
@@ -332,7 +361,7 @@ document.getElementById("data").innerHTML=data.map(row=>`
 
 
 
-
+// LOGOUT
 
 async function logout(){
 
@@ -340,17 +369,31 @@ async function logout(){
 await supabaseClient.auth.signOut();
 
 
-
-document.getElementById("content").style.display="none";
-
-
-document.getElementById("email").value="";
-
-document.getElementById("password").value="";
+location.reload();
 
 
-alert("Logout berhasil");
+}
 
+
+
+
+// MENU
+
+function showDeposit(){
+
+document.getElementById("depositPage").style.display="block";
+
+document.getElementById("withdrawPage").style.display="none";
+
+}
+
+
+
+function showWithdraw(){
+
+document.getElementById("depositPage").style.display="none";
+
+document.getElementById("withdrawPage").style.display="block";
 
 }
 
@@ -359,6 +402,8 @@ alert("Logout berhasil");
 
 
 
+
+// RUMUS DEPOSIT
 
 async function processData(){
 
@@ -390,8 +435,6 @@ return;
 
 
 
-
-
 // GOOGLE SHEET
 
 let googleSheet={};
@@ -405,21 +448,12 @@ let col=row.trim().split(/\s+/);
 
 
 
-let username=col[0]
-
-.trim()
-
-.toLowerCase();
-
+let username=col[0].trim().toLowerCase();
 
 
 let coin=Number(
 
-col[1]
-
-.replace(/,/g,"")
-
-.trim()
+col[1].replace(/,/g,"").trim()
 
 );
 
@@ -443,21 +477,14 @@ googleSheet[username]+=coin;
 
 
 
-
-
-
-
-// CSV ADMINISTRATION
+// CSV
 
 let csvText=await file.text();
-
 
 let rows=csvText.split("\n");
 
 
 let administration={};
-
-
 
 
 
@@ -469,7 +496,6 @@ if(index===0 && line.toLowerCase().includes("date")){
 return;
 
 }
-
 
 
 let col=line.split(",");
@@ -484,36 +510,13 @@ return;
 
 
 
-
-let info=col[1]
-
-.replace(/"/g,"")
-
-.trim();
+let info=col[1].replace(/"/g,"").trim();
 
 
-
-let username=col[2]
-
-.replace(/"/g,"")
-
-.trim()
-
-.toLowerCase();
+let username=col[2].replace(/"/g,"").trim().toLowerCase();
 
 
-
-
-
-let by=col[3]
-
-.replace(/"/g,"")
-
-.trim()
-
-.toLowerCase();
-
-
+let by=col[3].replace(/"/g,"").trim().toLowerCase();
 
 
 
@@ -532,7 +535,6 @@ col[4]
 
 
 
-
 if(info!=="Deposit"){
 
 return;
@@ -541,15 +543,11 @@ return;
 
 
 
-
-
 if(by.startsWith("vjgaacb")){
 
 return;
 
 }
-
-
 
 
 
@@ -571,12 +569,7 @@ administration[username]+=coin;
 
 
 
-
-
-
-
-// CEK SELISIH
-
+// HASIL
 
 let result=[];
 
@@ -595,9 +588,7 @@ googleSheet[username]-administration[username];
 
 
 
-
 if(selisih!==0){
-
 
 
 result.push({
@@ -613,7 +604,6 @@ selisih
 });
 
 
-
 }
 
 
@@ -624,14 +614,6 @@ selisih
 });
 
 
-
-
-
-
-
-
-
-// TAMPILKAN HASIL
 
 
 document.getElementById("difference").innerHTML=result.map(row=>`
@@ -655,7 +637,6 @@ document.getElementById("difference").innerHTML=result.map(row=>`
 
 
 alert("Selesai. Data berbeda: "+result.length);
-
 
 
 }
