@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin Coin</title>
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg,#dbeafe,#f8fafc);
+    padding:20px;
+}
+
+h2{
+    color:#1e3a8a;
+}
+
+input, textarea{
+    padding:12px;
+    border-radius:10px;
+    border:1px solid #cbd5e1;
+    width:90%;
+}
+
+button{
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#1d4ed8;
+}
+
+#content{
+    background:white;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    margin-top:15px;
+}
+
+th{
+    background:#2563eb;
+    color:white;
+    padding:12px;
+}
+
+td{
+    padding:10px;
+    border:1px solid #ddd;
+    text-align:center;
+}
+
+tr:hover{
+    background:#eff6ff;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h2>Login Admin</h2>
+
+<input id="email" placeholder="Email">
+<br><br>
+
+<input id="password" type="password" placeholder="Password">
+<br><br>
+
+<button onclick="login()">Login</button>
+
+<hr>
+
+<div id="content" style="display:none">
+
+<button onclick="logout()">🚪 Logout</button>
+
+<br><br>
+
+<h2>History Coin</h2>
+
+<table border="1">
+<thead>
+<tr>
+<th>Date</th>
+<th>Info</th>
+<th>Username</th>
+<th>BY</th>
+<th>Coin</th>
+<th>Last Coin</th>
+</tr>
+</thead>
+
+<tbody id="data"></tbody>
+</table>
+
+
+<hr>
+
+
+<h2>Upload History Coin CSV</h2>
+
+<input type="file" id="csvFile" accept=".csv">
+
+
+<br><br>
+
+
+<h2>Paste Data Google Sheet</h2>
+
+<textarea id="sheetData" rows="10" cols="80"></textarea>
+
+
+<br><br>
+
+
+<button onclick="processData()">⚙️ Proses Data</button>
+
+
+<h2>Difference</h2>
+
+<table border="1">
+
+<thead>
+<tr>
+<th>Username</th>
+<th>Administration</th>
+<th>Google Sheet</th>
+<th>Selisih</th>
+</tr>
+</thead>
+
+
+<tbody id="difference"></tbody>
+
+</table>
+
+
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+<script>
+
+
+const supabaseClient = supabase.createClient(
+
+"https://uoiorjjsodnbtmiyajly.supabase.co",
+
+"sb_publishable_CbcQOm9l5ZOVuZjWbZNP2g_D2DziBnT"
+
+);
+
+
+
+// RESET DATA SAAT REFRESH TAPI LOGIN TETAP
+
+window.onload = async function(){
+
+
+document.getElementById("csvFile").value="";
+
+document.getElementById("sheetData").value="";
+
+document.getElementById("difference").innerHTML="";
+
+
+const {data}=await supabaseClient.auth.getSession();
+
+
+
+if(data.session){
+
+document.getElementById("content").style.display="block";
+
+loadData();
+
+}
+
+else{
+
+document.getElementById("content").style.display="none";
+
+}
+
+
+};
+
+
+
+
+
+window.addEventListener("keydown",function(e){
+
+if(e.key==="Enter"){
+
+if(document.activeElement.id==="password"){
+
+login();
+
+}
+
+}
+
+});
+
+
+
+
+
+document.addEventListener("keydown",function(e){
+
+if(e.key==="Escape"){
+
+logout();
+
+}
+
+});
+
+
+
+
+
+async function login(){
+
+
+const email=document.getElementById("email").value;
+
+const password=document.getElementById("password").value;
+
+
+
+const {error}=await supabaseClient.auth.signInWithPassword({
+
+email,
+
+password
+
+});
+
+
+
+if(error){
+
+alert("Login gagal");
+
+return;
+
+}
+
+
+
+alert("Login berhasil");
+
+
+document.getElementById("content").style.display="block";
+
+
+loadData();
+
+
+}
+
+
+
+
+
+
+async function loadData(){
+
+
+const {data,error}=await supabaseClient
+
+.from("history_coin")
+
+.select("*");
+
+
+
+if(error){
+
+console.log(error);
+
+return;
+
+}
+
+
+
+document.getElementById("data").innerHTML=data.map(row=>`
+
+
+<tr>
+
+<td>${row.date}</td>
+
+<td>${row.info}</td>
+
+<td>${row.username}</td>
+
+<td>${row.by}</td>
+
+<td>${Number(row.coin).toLocaleString()}</td>
+
+<td>${Number(row.last_coin).toLocaleString()}</td>
+
+</tr>
+
+
+`).join("");
+
+
+
+}
+
+
+
+
+
+
+async function logout(){
+
+
+await supabaseClient.auth.signOut();
+
+
+
+document.getElementById("content").style.display="none";
+
+
+document.getElementById("email").value="";
+
+document.getElementById("password").value="";
+
+
+alert("Logout berhasil");
+
+
+}
+
+
+
+
+
+
+
+async function processData(){
+
+
+const file=document.getElementById("csvFile").files[0];
+
+const sheetText=document.getElementById("sheetData").value;
+
+
+
+if(!file){
+
+alert("Upload CSV dulu");
+
+return;
+
+}
+
+
+
+if(!sheetText.trim()){
+
+alert("Paste Google Sheet dulu");
+
+return;
+
+}
+
+
+
+
+
+
+// GOOGLE SHEET
+
+let googleSheet={};
+
+
+
+sheetText.trim().split("\n").forEach(row=>{
+
+
+let col=row.trim().split(/\s+/);
+
+
+
+let username=col[0]
+
+.trim()
+
+.toLowerCase();
+
+
+
+let coin=Number(
+
+col[1]
+
+.replace(/,/g,"")
+
+.trim()
+
+);
+
+
+
+if(!googleSheet[username]){
+
+googleSheet[username]=0;
+
+}
+
+
+
+googleSheet[username]+=coin;
+
+
+
+});
+
+
+
+
+
+
+
+
+
+// CSV ADMINISTRATION
+
+let csvText=await file.text();
+
+
+let rows=csvText.split("\n");
+
+
+let administration={};
+
+
+
+
+
+rows.forEach((line,index)=>{
+
+
+if(index===0 && line.toLowerCase().includes("date")){
+
+return;
+
+}
+
+
+
+let col=line.split(",");
+
+
+
+if(col.length<6){
+
+return;
+
+}
+
+
+
+
+let info=col[1]
+
+.replace(/"/g,"")
+
+.trim();
+
+
+
+let username=col[2]
+
+.replace(/"/g,"")
+
+.trim()
+
+.toLowerCase();
+
+
+
+
+
+let by=col[3]
+
+.replace(/"/g,"")
+
+.trim()
+
+.toLowerCase();
+
+
+
+
+
+let coin=Number(
+
+col[4]
+
+.replace(/"/g,"")
+
+.replace(/,/g,"")
+
+.trim()
+
+);
+
+
+
+
+
+if(info!=="Deposit"){
+
+return;
+
+}
+
+
+
+
+
+if(by.startsWith("vjgaacb")){
+
+return;
+
+}
+
+
+
+
+
+if(!administration[username]){
+
+administration[username]=0;
+
+}
+
+
+
+administration[username]+=coin;
+
+
+
+});
+
+
+
+
+
+
+
+
+
+// CEK SELISIH
+
+
+let result=[];
+
+
+
+Object.keys(administration).forEach(username=>{
+
+
+if(googleSheet[username]!==undefined){
+
+
+
+let selisih=
+
+googleSheet[username]-administration[username];
+
+
+
+
+if(selisih!==0){
+
+
+
+result.push({
+
+username,
+
+administration:administration[username],
+
+googleSheet:googleSheet[username],
+
+selisih
+
+});
+
+
+
+}
+
+
+}
+
+
+
+});
+
+
+
+
+
+
+
+
+
+// TAMPILKAN HASIL
+
+
+document.getElementById("difference").innerHTML=result.map(row=>`
+
+
+<tr>
+
+<td>${row.username}</td>
+
+<td>${row.administration.toLocaleString()}</td>
+
+<td>${row.googleSheet.toLocaleString()}</td>
+
+<td>${row.selisih.toLocaleString()}</td>
+
+</tr>
+
+
+`).join("");
+
+
+
+alert("Selesai. Data berbeda: "+result.length);
+
+
+
+}
+
+
+
+</script>
+
+
+</body>
+
+</html>
