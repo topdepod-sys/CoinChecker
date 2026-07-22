@@ -517,6 +517,7 @@ TOTAL AMOUNT :
 <th>ID</th>
 <th>AMOUNT</th>
 <th>TRANSACTION ID</th>
+<th>STATUS</th>
 
 </tr>
 
@@ -764,8 +765,9 @@ document.getElementById("withdrawPage").style.display="none";
 
 document.getElementById("qrisPage").style.display="none";
 
-}
+document.getElementById("cashBackPage").style.display="none";
 
+}
 
 function showWithdraw(){
 
@@ -775,8 +777,20 @@ document.getElementById("withdrawPage").style.display="block";
 
 document.getElementById("qrisPage").style.display="none";
 
-}
+document.getElementById("cashBackPage").style.display="none";
 
+}
+function showQris(){
+
+document.getElementById("depositPage").style.display="none";
+
+document.getElementById("withdrawPage").style.display="none";
+
+document.getElementById("qrisPage").style.display="block";
+
+document.getElementById("cashBackPage").style.display="none";
+
+}
 
 function showCashBack(){
 
@@ -1438,31 +1452,22 @@ let status=col[5]
 .toUpperCase();
 
 
-
 let member=col[6]
 .replace(/"/g,"")
 .trim();
 
 
-
-if(status!=="SUCCESS"){
-
-return;
-
-}
-
-
-
+// MASUKKAN SEMUA STATUS TERMASUK GAGAL
 qrisResult.push({
 
 id:member,
 
 amount:amount,
 
-transactionId:transactionId
+transactionId:transactionId,
+status:status
 
 });
-
 
 
 totalAmount+=amount;
@@ -1496,6 +1501,8 @@ qrisResult.map(row=>`
 <td>${row.amount.toLocaleString()}</td>
 
 <td>${row.transactionId}</td>
+
+<td>${row.status}</td>
 
 </tr>
 
