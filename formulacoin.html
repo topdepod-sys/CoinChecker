@@ -535,34 +535,22 @@ document.getElementById("withdrawPage").style.display="block";
 // DEPOSIT CHECKER
 // =======================
 
-
 async function processData(){
 
-
 const file=document.getElementById("csvFile").files[0];
-
 const sheetText=document.getElementById("sheetData").value;
 
 
-
 if(!file){
-
 alert("Upload CSV dulu");
-
 return;
-
 }
-
 
 
 if(!sheetText.trim()){
-
 alert("Paste Google Sheet dulu");
-
 return;
-
 }
-
 
 
 
@@ -571,44 +559,29 @@ return;
 let googleSheet={};
 
 
-
 sheetText.trim().split("\n").forEach(row=>{
-
 
 let col=row.trim().split(/\s+/);
 
-
-
 if(col.length<2){
-
 return;
-
 }
-
 
 
 let username=col[0].trim().toLowerCase();
 
 
-
 let coin=Number(
-
 col[1].replace(/,/g,"").trim()
-
 );
 
 
-
 if(!googleSheet[username]){
-
 googleSheet[username]=0;
-
 }
 
 
-
 googleSheet[username]+=coin;
-
 
 
 });
@@ -616,15 +589,11 @@ googleSheet[username]+=coin;
 
 
 
-
-
 // CSV ADMIN DEPOSIT
-
 
 let csvText=await file.text();
 
 let rows=csvText.split("\n");
-
 
 let administration={};
 
@@ -634,108 +603,70 @@ rows.forEach((line,index)=>{
 
 
 if(index===0 && line.toLowerCase().includes("date")){
-
 return;
-
 }
-
 
 
 let col=line.split(",");
 
 
-
 if(col.length<5){
-
 return;
-
 }
-
 
 
 
 let info=col[1]
-
 .replace(/"/g,"")
-
 .trim()
-
 .toLowerCase();
-
 
 
 
 let username=col[2]
-
 .replace(/"/g,"")
-
 .trim()
-
 .toLowerCase();
-
 
 
 
 let by=col[3]
-
 .replace(/"/g,"")
-
 .trim()
-
 .toLowerCase();
 
 
 
-
 let coin=Number(
-
 col[4]
-
 .replace(/"/g,"")
-
 .replace(/,/g,"")
-
 .trim()
-
 );
 
 
 
-
-
-// HANYA DEPOSIT SAJA
+// HANYA DEPOSIT
 
 if(info!=="deposit"){
-
 return;
-
 }
 
 
-
-
-// BUANG VJGAAACB SAJA
+// BUANG VJGAAACB
 
 if(by.startsWith("vjgaacb")){
-
 return;
-
 }
-
-
 
 
 
 if(!administration[username]){
-
 administration[username]=0;
-
 }
 
 
-
 administration[username]+=coin;
-
 
 
 });
@@ -744,18 +675,25 @@ administration[username]+=coin;
 
 
 
-
-// HITUNG SELISIH
-
+// HITUNG SELISIH SEMUA USER
 
 let result=[];
 
 
+let allUsers=new Set([
 
-Object.keys(administration).forEach(username=>{
+...Object.keys(administration),
+
+...Object.keys(googleSheet)
+
+]);
 
 
-let adminCoin=administration[username];
+
+allUsers.forEach(username=>{
+
+
+let adminCoin=administration[username] || 0;
 
 
 let sheetCoin=googleSheet[username] || 0;
@@ -791,7 +729,6 @@ selisih
 
 
 
-
 document.getElementById("difference").innerHTML=result.map(row=>`
 
 <tr>
@@ -819,6 +756,11 @@ alert(
 
 
 }
+
+
+
+
+
 
 // =======================
 // WITHDRAW CHECKER
@@ -856,7 +798,6 @@ return;
 
 
 
-
 // GOOGLE SHEET WITHDRAW
 
 let googleSheet={};
@@ -871,9 +812,7 @@ let col=row.trim().split(/\s+/);
 
 
 if(col.length<2){
-
 return;
-
 }
 
 
@@ -883,17 +822,13 @@ let username=col[0].trim().toLowerCase();
 
 
 let coin=Number(
-
 col[1].replace(/,/g,"").trim()
-
 );
 
 
 
 if(!googleSheet[username]){
-
 googleSheet[username]=0;
-
 }
 
 
@@ -909,10 +844,7 @@ googleSheet[username]+=coin;
 
 
 
-
-
 // CSV ADMIN WITHDRAW
-
 
 let csvText=await file.text();
 
@@ -927,9 +859,7 @@ rows.forEach((line,index)=>{
 
 
 if(index===0 && line.toLowerCase().includes("date")){
-
 return;
-
 }
 
 
@@ -939,61 +869,38 @@ let col=line.split(",");
 
 
 if(col.length<5){
-
 return;
-
 }
 
 
 
-
 let info=col[1]
-
 .replace(/"/g,"")
-
 .trim()
-
 .toLowerCase();
-
 
 
 
 let username=col[2]
-
 .replace(/"/g,"")
-
 .trim()
-
 .toLowerCase();
-
 
 
 
 let by=col[3]
-
 .replace(/"/g,"")
-
 .trim()
-
 .toLowerCase();
 
 
 
-
 let coin=Number(
-
 col[4]
-
 .replace(/"/g,"")
-
 .replace(/,/g,"")
-
 .trim()
-
 );
-
-
-
 
 
 
@@ -1001,19 +908,13 @@ col[4]
 // HANYA WITHDRAW
 
 if(
-
 info!=="withdraw" &&
-
 info!=="withdraw(pga-idf)"
-
 ){
 
 return;
 
 }
-
-
-
 
 
 
@@ -1027,9 +928,6 @@ return;
 
 
 
-
-
-
 // COIN MINUS TIDAK IKUT
 
 if(coin<=0){
@@ -1040,9 +938,6 @@ return;
 
 
 
-
-
-
 // BUANG VJGAAACB
 
 if(by.startsWith("vjgaacb")){
@@ -1050,8 +945,6 @@ if(by.startsWith("vjgaacb")){
 return;
 
 }
-
-
 
 
 
@@ -1076,15 +969,24 @@ administration[username]+=coin;
 
 
 
-
-// HITUNG SELISIH
-
+// HITUNG SEMUA USER
 
 let result=[];
 
 
 
-Object.keys(administration).forEach(username=>{
+let allUsers=new Set([
+
+...Object.keys(administration),
+
+...Object.keys(googleSheet)
+
+]);
+
+
+
+
+allUsers.forEach(username=>{
 
 
 let adminCoin=administration[username] || 0;
@@ -1095,7 +997,6 @@ let sheetCoin=googleSheet[username] || 0;
 
 
 let selisih=sheetCoin-adminCoin;
-
 
 
 
@@ -1126,11 +1027,6 @@ selisih
 
 
 
-
-
-// TAMPIL HASIL
-
-
 document.getElementById("withdrawDifference").innerHTML=result.map(row=>`
 
 <tr>
@@ -1151,21 +1047,15 @@ document.getElementById("withdrawDifference").innerHTML=result.map(row=>`
 
 
 
-
 alert(
-
 "Withdraw selesai : "
-
 +result.length
-
 +" berbeda"
-
 );
 
 
 
 }
-
 
 </script>
 
