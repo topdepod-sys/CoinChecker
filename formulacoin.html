@@ -127,13 +127,62 @@ text-align:center;
 }
 
 
-.menu{
-
-margin-bottom:20px;
-
+.menuBox{
+display:none;
+margin-top:15px;
 }
 
 
+.menuLayout{
+display:flex;
+flex-direction:column;
+align-items:flex-start;
+gap:15px;
+width:250px;
+}
+
+.leftMenu{
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+
+
+.rightMenu{
+background:#f8fafc;
+padding:15px;
+border-radius:15px;
+border:1px solid #cbd5e1;
+width:100%;
+box-sizing:border-box;
+}
+
+
+.rightMenu h3{
+margin-top:0;
+}
+
+.leftMenu button{
+width:220px;
+text-align:left;
+}
+
+
+.rightMenu input[type="checkbox"]{
+    width:18px;
+    height:18px;
+    margin:0;
+    padding:0;
+    flex:none;
+}
+
+.rightMenu label{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    height:25px;
+    margin:8px 0;
+}
 </style>
 
 </head>
@@ -173,33 +222,79 @@ Login
 <div id="content" style="display:none">
 
 
-<div class="menu">
-
-
-<button onclick="showDeposit()">
-💰 Deposit
+<button onclick="openMenu()">
+☰ MENU
 </button>
 
 
-<button onclick="showWithdraw()">
-💸 Withdraw
-</button>
+<div id="menuBox" class="menuBox">
+
+<div class="menuLayout">
 
 
-<button onclick="logout()">
-🚪 Logout
-</button>
+<div class="rightMenu">
+
+<h3>MENU SELECTION</h3>
+
+<label>
+<input type="checkbox" id="checkDeposit" checked onchange="toggleMenu()">
+Deposit
+</label>
+
+<label>
+<input type="checkbox" id="checkWithdraw" checked onchange="toggleMenu()">
+Withdraw
+</label>
+
+<label>
+<input type="checkbox" id="checkQris" checked onchange="toggleMenu()">
+QRIS Cepat
+</label>
+
+<label>
+<input type="checkbox" id="checkCashBack" checked onchange="toggleMenu()">
+Coin Cash Back
+</label>
 
 
 </div>
 
 
+<hr style="width:250px;">
+
+
+<div class="leftMenu">
+
+<button id="btnDeposit" onclick="showDeposit()">
+💰 Deposit
+</button>
+
+<button id="btnWithdraw" onclick="showWithdraw()">
+💸 Withdraw
+</button>
+
+<button id="btnQris" onclick="showQris()">
+⚡ QRIS Cepat
+</button>
+
+<button id="btnCashBack" onclick="showCashBack()">
+💎 Coin Cash Back
+</button>
+
+<button onclick="logout()">
+🚪 Logout
+</button>
+
+</div>
+
+
+</div>
+
+</div>
 
 <div id="depositPage">
 
-
 <h2>History Coin</h2>
-
 
 <table>
 
@@ -252,6 +347,14 @@ Login
 
 </button>
 
+<button onclick="copyDepositDifference()">
+📋 COPY USERNAME + SELISIH
+</button>
+
+<button onclick="clearDeposit()">
+🗑 CLEAR ALL
+</button>
+
 
 <h2>Difference Deposit</h2>
 
@@ -278,14 +381,9 @@ Login
 
 </table>
 
-
 </div>
 
-
-
 <div id="withdrawPage" style="display:none">
-
-
 <h2>
 💸 Withdraw Checker
 </h2>
@@ -319,6 +417,14 @@ Paste Data Google Sheet Withdraw
 
 </button>
 
+<button onclick="copyWithdrawDifference()">
+📋 COPY USERNAME + SELISIH
+</button>
+
+<button onclick="clearWithdraw()">
+🗑 CLEAR ALL
+</button>
+
 
 <table>
 
@@ -346,8 +452,147 @@ Paste Data Google Sheet Withdraw
 </div>
 
 
+<div id="qrisPage" style="display:none">
+
+<h2>
+⚡ QRIS Cepat
+</h2>
+
+
+<h2>
+Upload History QRIS CSV
+</h2>
+
+
+<input type="file" id="qrisCsv" accept=".csv">
+
+
+<br><br>
+
+
+<button onclick="processQris()">
+⚙️ Proses QRIS
+</button>
+
+
+<br><br>
+
+
+<button onclick="copyQrisIdAmount()">
+📋 COPY ID & AMOUNT
+</button>
+
+
+<button onclick="copyQrisTransaction()">
+📋 COPY TRANSACTION ID
+</button>
+
+
+<button onclick="clearQris()">
+🗑 CLEAR ALL
+</button>
+
+
+
+<h2>
+TOTAL DEPOSIT QRIS :
+<span id="totalQris">0</span>
+</h2>
+
+
+<h2>
+TOTAL AMOUNT :
+<span id="totalQrisAmount">Rp 0</span>
+</h2>
+
+
+
+<table>
+
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+<th>AMOUNT</th>
+<th>TRANSACTION ID</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="qrisData"></tbody>
+
+
+</table>
+
+
 </div>
 
+<div id="cashBackPage" style="display:none">
+
+<h2>
+💎 Coin Cash Back
+</h2>
+
+<h2>
+Upload History Cash Back CSV
+</h2>
+
+<input type="file" id="cashBackCsv" accept=".csv">
+
+<br><br>
+
+<h2>
+Paste Data Google Sheet Cash Back
+</h2>
+
+<textarea id="cashBackSheetData" rows="10"></textarea>
+
+<br><br>
+
+<button onclick="processCashBack()">
+⚙️ Proses Cash Back
+</button>
+
+<button onclick="copyCashBackDifference()">
+📋 COPY USERNAME + SELISIH
+</button>
+
+<button onclick="clearCashBack()">
+🗑 CLEAR ALL
+</button>
+
+
+<h2>
+Difference Cash Back
+</h2>
+
+<table>
+
+<thead>
+<tr>
+
+<th>Username</th>
+<th>Administration</th>
+<th>Google Sheet</th>
+<th>Selisih</th>
+
+</tr>
+</thead>
+
+
+<tbody id="cashBackDifference"></tbody>
+
+
+</table>
+
+
+</div>
+
+</div>
 
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -380,6 +625,8 @@ document.getElementById("loginBox").style.display="none";
 document.getElementById("content").style.display="block";
 
 loadData();
+
+toggleMenu();
 
 }
 
@@ -451,6 +698,7 @@ document.getElementById("content").style.display="block";
 
 loadData();
 
+toggleMenu();
 
 }
 
@@ -514,8 +762,9 @@ document.getElementById("depositPage").style.display="block";
 
 document.getElementById("withdrawPage").style.display="none";
 
-}
+document.getElementById("qrisPage").style.display="none";
 
+}
 
 
 function showWithdraw(){
@@ -524,9 +773,58 @@ document.getElementById("depositPage").style.display="none";
 
 document.getElementById("withdrawPage").style.display="block";
 
+document.getElementById("qrisPage").style.display="none";
+
 }
 
 
+function showCashBack(){
+
+document.getElementById("depositPage").style.display="none";
+
+document.getElementById("withdrawPage").style.display="none";
+
+document.getElementById("qrisPage").style.display="none";
+
+document.getElementById("cashBackPage").style.display="block";
+
+}
+
+
+function openMenu(){
+
+let menu=document.getElementById("menuBox");
+
+if(menu.style.display==="block"){
+
+menu.style.display="none";
+
+}else{
+
+menu.style.display="block";
+
+}
+
+}
+
+
+
+function toggleMenu(){
+document.getElementById("btnDeposit").style.display =
+document.getElementById("checkDeposit").checked ? "block" : "none";
+
+
+document.getElementById("btnWithdraw").style.display =
+document.getElementById("checkWithdraw").checked ? "block" : "none";
+
+
+document.getElementById("btnQris").style.display =
+document.getElementById("checkQris").checked ? "block" : "none";
+
+document.getElementById("btnCashBack").style.display =
+document.getElementById("checkCashBack").checked ? "block" : "none";
+
+}
 
 
 
@@ -1054,6 +1352,688 @@ alert(
 );
 
 
+
+}
+
+// =======================
+// QRIS CEPAT
+// =======================
+
+let qrisResult=[];
+
+
+// PROSES QRIS CSV
+
+async function processQris(){
+
+const file=document.getElementById("qrisCsv").files[0];
+
+
+if(!file){
+
+alert("Upload QRIS CSV dulu");
+
+return;
+
+}
+
+
+let csvText=await file.text();
+
+let rows=csvText.split("\n");
+
+
+qrisResult=[];
+
+
+let totalAmount=0;
+
+
+
+rows.forEach((line,index)=>{
+
+
+// skip header
+
+if(index===0){
+
+return;
+
+}
+
+
+let col = line.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g)
+.map(x=>x.replace(/^"|"$/g,""));
+
+
+
+if(col.length<7){
+
+return;
+
+}
+
+
+
+// ambil kolom
+
+let transactionId=col[2]
+.replace(/"/g,"")
+.trim();
+
+
+
+let amount=Number(
+col[3]
+.replace(/"/g,"")
+.replace(/,/g,"")
+.trim()
+);
+
+
+
+let status=col[5]
+.replace(/"/g,"")
+.trim()
+.toUpperCase();
+
+
+
+let member=col[6]
+.replace(/"/g,"")
+.trim();
+
+
+
+if(status!=="SUCCESS"){
+
+return;
+
+}
+
+
+
+qrisResult.push({
+
+id:member,
+
+amount:amount,
+
+transactionId:transactionId
+
+});
+
+
+
+totalAmount+=amount;
+
+
+
+});
+
+
+
+
+
+document.getElementById("totalQris").innerHTML =
+qrisResult.length;
+
+
+
+document.getElementById("totalQrisAmount").innerHTML =
+"Rp " + totalAmount.toLocaleString();
+
+
+
+document.getElementById("qrisData").innerHTML =
+qrisResult.map(row=>`
+
+
+<tr>
+
+<td>${row.id}</td>
+
+<td>${row.amount.toLocaleString()}</td>
+
+<td>${row.transactionId}</td>
+
+</tr>
+
+
+`).join("");
+
+
+
+alert(
+"QRIS selesai : "
++qrisResult.length
++" transaksi"
+);
+
+
+}
+
+
+
+
+
+// COPY ID + AMOUNT
+
+function copyQrisIdAmount(){
+
+
+if(qrisResult.length===0){
+
+alert("Belum ada data QRIS");
+
+return;
+
+}
+
+
+
+let text=qrisResult.map(row=>
+
+
+row.id+"\t"+row.amount.toLocaleString()
+
+
+).join("\n");
+
+
+
+navigator.clipboard.writeText(text);
+
+
+
+alert("ID & AMOUNT berhasil di copy");
+
+
+}
+
+
+
+
+
+// COPY TRANSACTION ID
+
+function copyQrisTransaction(){
+
+
+if(qrisResult.length===0){
+
+alert("Belum ada data QRIS");
+
+return;
+
+}
+
+
+
+let text=qrisResult.map(row=>
+
+row.transactionId
+
+).join("\n");
+
+
+
+navigator.clipboard.writeText(text);
+
+
+
+alert("Transaction ID berhasil di copy");
+
+
+}
+
+
+
+
+
+// CLEAR QRIS
+
+function clearQris(){
+
+
+qrisResult=[];
+
+
+document.getElementById("qrisData").innerHTML="";
+
+
+document.getElementById("totalQris").innerHTML="0";
+
+
+document.getElementById("totalQrisAmount").innerHTML="Rp 0";
+
+
+document.getElementById("qrisCsv").value="";
+
+
+}
+
+// =======================
+// CASH BACK CHECKER
+// =======================
+
+async function processCashBack(){
+
+const file=document.getElementById("cashBackCsv").files[0];
+const sheetText=document.getElementById("cashBackSheetData").value;
+
+
+if(!file){
+alert("Upload CSV Cash Back dulu");
+return;
+}
+
+
+if(!sheetText.trim()){
+alert("Paste Google Sheet Cash Back dulu");
+return;
+}
+
+
+// GOOGLE SHEET CASH BACK
+
+let googleSheet={};
+
+
+sheetText.trim().split("\n").forEach(row=>{
+
+let col=row.trim().split(/\s+/);
+
+
+if(col.length<2){
+return;
+}
+
+
+let username=col[0].trim().toLowerCase();
+
+
+let coin=Number(
+col[1].replace(/,/g,"").trim()
+);
+
+
+if(!googleSheet[username]){
+googleSheet[username]=0;
+}
+
+
+googleSheet[username]+=coin;
+
+
+});
+
+
+
+
+// CSV ADMIN CASH BACK
+
+let csvText=await file.text();
+
+let rows=csvText.split("\n");
+
+let administration={};
+
+
+
+rows.forEach((line,index)=>{
+
+
+if(index===0 && line.toLowerCase().includes("date")){
+return;
+}
+
+
+let col=line.split(",");
+
+
+if(col.length<5){
+return;
+}
+
+
+
+let info=col[1]
+.replace(/"/g,"")
+.trim()
+.toLowerCase();
+
+
+
+let username=col[2]
+.replace(/"/g,"")
+.trim()
+.toLowerCase();
+
+
+
+let by=col[3]
+.replace(/"/g,"")
+.trim()
+.toLowerCase();
+
+
+
+let coin=Number(
+col[4]
+.replace(/"/g,"")
+.replace(/,/g,"")
+.trim()
+);
+
+
+
+// KHUSUS CASH BACK
+
+let isCashBack =
+by==="vjgaacb" ||
+by.startsWith("vjgaacb");
+
+if(
+info!=="deposit" &&
+!isCashBack
+){
+return;
+}
+
+
+
+if(!administration[username]){
+administration[username]=0;
+}
+
+
+administration[username]+=coin;
+
+
+});
+
+
+
+
+
+// HITUNG SELISIH
+
+let result=[];
+
+
+let allUsers=new Set([
+
+...Object.keys(administration),
+...Object.keys(googleSheet)
+
+]);
+
+
+
+allUsers.forEach(username=>{
+
+
+let adminCoin=administration[username] || 0;
+
+
+let sheetCoin=googleSheet[username] || 0;
+
+
+let selisih=sheetCoin-adminCoin;
+
+
+
+if(selisih!==0){
+
+
+result.push({
+
+username,
+
+administration:adminCoin,
+
+googleSheet:sheetCoin,
+
+selisih
+
+});
+
+
+}
+
+
+});
+
+
+
+
+
+document.getElementById("cashBackDifference").innerHTML =
+result.map(row=>`
+
+<tr>
+
+<td>${row.username}</td>
+
+<td>${row.administration.toLocaleString()}</td>
+
+<td>${row.googleSheet.toLocaleString()}</td>
+
+<td>${row.selisih.toLocaleString()}</td>
+
+</tr>
+
+`).join("");
+
+
+
+alert(
+"Cash Back selesai : "
++result.length
++" berbeda"
+);
+
+
+}
+
+// COPY USERNAME + SELISIH CASH BACK
+
+function copyCashBackDifference(){
+
+let rows=document.querySelectorAll("#cashBackDifference tr");
+
+
+if(rows.length===0){
+
+alert("Belum ada data Cash Back");
+
+return;
+
+}
+
+
+let text=[];
+
+
+rows.forEach(row=>{
+
+let col=row.querySelectorAll("td");
+
+
+if(col.length>=4){
+
+let username=col[0].innerText.trim();
+
+
+let selisih=Number(
+col[3].innerText.replace(/,/g,"")
+).toLocaleString();
+
+
+text.push(
+username+"\t"+selisih
+);
+
+}
+
+});
+
+
+navigator.clipboard.writeText(text.join("\n"));
+
+
+alert("Username + Selisih berhasil di copy");
+
+}
+
+
+
+// CLEAR ALL CASH BACK
+
+function clearCashBack(){
+
+document.getElementById("cashBackCsv").value="";
+
+document.getElementById("cashBackSheetData").value="";
+
+document.getElementById("cashBackDifference").innerHTML="";
+
+alert("Cash Back CLEAR ALL");
+
+}
+
+// COPY USERNAME + SELISIH DEPOSIT
+
+function copyDepositDifference(){
+
+let rows=document.querySelectorAll("#difference tr");
+
+
+if(rows.length===0){
+
+alert("Belum ada data Deposit");
+
+return;
+
+}
+
+
+let text=[];
+
+
+rows.forEach(row=>{
+
+let col=row.querySelectorAll("td");
+
+
+if(col.length>=4){
+
+let username=col[0].innerText.trim();
+
+
+let selisih=Number(
+col[3].innerText.replace(/,/g,"")
+).toLocaleString();
+
+
+text.push(
+username+"\t"+selisih
+);
+
+}
+
+});
+
+
+navigator.clipboard.writeText(text.join("\n"));
+
+
+alert("Username + Selisih Deposit berhasil di copy");
+
+}
+
+
+
+
+// CLEAR ALL DEPOSIT
+
+function clearDeposit(){
+
+document.getElementById("csvFile").value="";
+
+document.getElementById("sheetData").value="";
+
+document.getElementById("difference").innerHTML="";
+
+
+alert("Deposit CLEAR ALL");
+
+}
+
+// COPY USERNAME + SELISIH WITHDRAW
+
+function copyWithdrawDifference(){
+
+let rows=document.querySelectorAll("#withdrawDifference tr");
+
+
+if(rows.length===0){
+
+alert("Belum ada data Withdraw");
+
+return;
+
+}
+
+
+let text=[];
+
+
+rows.forEach(row=>{
+
+let col=row.querySelectorAll("td");
+
+
+if(col.length>=4){
+
+let username=col[0].innerText.trim();
+
+
+let selisih=col[3].innerText.replace(/,/g,"");
+
+
+text.push(
+username+"\t"+selisih
+);
+
+}
+
+});
+
+
+navigator.clipboard.writeText(text.join("\n"));
+
+
+alert("Username + Selisih Withdraw berhasil di copy");
+
+}
+
+
+
+
+// CLEAR ALL WITHDRAW
+
+function clearWithdraw(){
+
+document.getElementById("withdrawCsv").value="";
+
+document.getElementById("withdrawSheetData").value="";
+
+document.getElementById("withdrawDifference").innerHTML="";
+
+
+alert("Withdraw CLEAR ALL");
 
 }
 
