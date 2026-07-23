@@ -10,6 +10,89 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
 <style>
 
+/* CLOCK CARD */
+
+#adminInfo{
+
+background:
+linear-gradient(135deg,#020617,#1e3a8a);
+
+color:white;
+
+padding:20px 35px;
+
+border-radius:25px;
+
+width:300px;
+
+text-align:center;
+
+box-shadow:
+0 20px 50px rgba(0,0,0,.35);
+
+margin-bottom:25px;
+
+}
+
+
+#serverStatus{
+
+font-size:14px;
+
+color:#4ade80;
+
+font-weight:bold;
+
+margin-bottom:10px;
+
+}
+
+
+#adminName{
+
+font-size:18px;
+
+font-weight:bold;
+
+margin-bottom:15px;
+
+}
+
+
+#currentDate{
+
+font-size:14px;
+
+color:#e2e8f0;
+
+}
+
+
+#currentTime{
+
+font-size:42px;
+
+font-weight:900;
+
+letter-spacing:3px;
+
+margin:8px 0;
+
+text-shadow:
+0 0 20px rgba(255,255,255,.5);
+
+}
+
+
+#timezone{
+
+font-size:13px;
+
+color:#cbd5e1;
+
+}
+
+
 body{
     font-family:Arial,sans-serif;
     background:linear-gradient(135deg,#dbeafe,#f8fafc);
@@ -1218,6 +1301,83 @@ font-size:40px;
 
 }
 
+#adminInfo{
+
+background:
+linear-gradient(135deg,#020617,#1e3a8a);
+
+color:white;
+
+padding:20px 35px;
+
+border-radius:25px;
+
+width:max-content;
+
+min-width:280px;
+
+text-align:center;
+
+margin-bottom:25px;
+
+box-shadow:
+0 20px 50px rgba(0,0,0,.35);
+
+}
+
+
+#serverStatus{
+
+color:#4ade80;
+
+font-weight:bold;
+
+margin-bottom:10px;
+
+}
+
+
+#adminName{
+
+font-size:18px;
+
+font-weight:bold;
+
+margin-bottom:12px;
+
+}
+
+
+#currentDate{
+
+font-size:14px;
+
+opacity:.9;
+
+}
+
+
+#currentTime{
+
+font-size:36px;
+
+font-weight:800;
+
+letter-spacing:3px;
+
+margin:8px 0;
+
+}
+
+
+#timezone{
+
+font-size:13px;
+
+color:#cbd5e1;
+
+}
+
 </style>
 
 </head>
@@ -1255,6 +1415,26 @@ font-size:40px;
 
 
 <div id="content" style="display:none">
+
+<div id="adminInfo">
+
+<div id="serverStatus">
+🟢 SERVER ONLINE
+</div>
+
+<div id="adminName">
+👤 ADMIN : -
+</div>
+
+<div id="currentDate"></div>
+
+<div id="currentTime"></div>
+
+<div id="timezone">
+🌏 Cambodia GMT +7
+</div>
+
+</div>
 
 
 <button onclick="openMenu()">
@@ -3092,6 +3272,44 @@ document.getElementById("withdrawDifference").innerHTML="";
 alert("Withdraw CLEAR ALL");
 
 }
+
+function updateClock(){
+
+let now = new Date();
+
+let date = now.toLocaleDateString("id-ID",{
+
+weekday:"long",
+year:"numeric",
+month:"long",
+day:"numeric",
+
+timeZone:"Asia/Phnom_Penh"
+
+});
+
+
+let time = now.toLocaleTimeString("id-ID",{
+
+hour:"2-digit",
+minute:"2-digit",
+second:"2-digit",
+
+timeZone:"Asia/Phnom_Penh"
+
+});
+
+
+document.getElementById("currentDate").innerHTML=date;
+
+document.getElementById("currentTime").innerHTML=time;
+
+}
+
+
+setInterval(updateClock,1000);
+
+updateClock();
 
 </script>
 
