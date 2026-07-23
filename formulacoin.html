@@ -1378,6 +1378,30 @@ color:#cbd5e1;
 
 }
 
+.topBar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.logoutBtn{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:12px 18px;
+    border:none;
+    border-radius:16px;
+    background:linear-gradient(135deg,#ef4444,#dc2626);
+    color:white;
+    font-weight:bold;
+    font-size:15px;
+}
+
+.logoutBtn i{
+    font-size:16px;
+}
+
 </style>
 
 </head>
@@ -1437,9 +1461,18 @@ color:#cbd5e1;
 </div>
 
 
+<div class="topBar">
+
 <button onclick="openMenu()">
 ☰ MENU
 </button>
+
+<button class="logoutBtn" onclick="logout()">
+<i class="fa-solid fa-power-off"></i>
+Logout
+</button>
+
+</div>
 
 
 <div id="menuBox" class="menuBox">
@@ -1494,10 +1527,6 @@ Coin Cash Back
 
 <button id="btnCashBack" onclick="showCashBack()">
 💎 Coin Cash Back
-</button>
-
-<button onclick="logout()">
-🚪 Logout
 </button>
 
 </div>
