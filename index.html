@@ -2020,6 +2020,216 @@ font-size:35px;
 
 </style>
 
+<style>
+
+#formulaPage{
+    padding:30px;
+    animation: fadeIn 0.5s ease;
+}
+
+#formulaPage h2{
+    font-size:32px;
+    text-align:center;
+    color:#38bdf8;
+    text-shadow:0 0 15px #38bdf8;
+    margin-bottom:10px;
+}
+
+#formulaPage p{
+    text-align:center;
+    color:#94a3b8;
+    font-size:16px;
+    margin-bottom:35px;
+}
+
+
+.formulaGrid{
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
+
+}
+
+
+
+.formulaCard{
+
+    background:
+    linear-gradient(145deg,#0f172a,#1e293b);
+
+    border:1px solid rgba(56,189,248,.3);
+
+    border-radius:20px;
+
+    padding:30px;
+
+    text-align:center;
+
+    box-shadow:
+    0 0 20px rgba(56,189,248,.15),
+    inset 0 0 20px rgba(255,255,255,.03);
+
+    transition:.35s;
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+
+
+.formulaCard:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:
+    0 0 35px rgba(56,189,248,.5);
+
+}
+
+
+
+.formulaCard h3{
+
+    color:white;
+
+    font-size:22px;
+
+    margin-bottom:15px;
+
+}
+
+
+
+.formulaCard p{
+
+    color:#cbd5e1;
+
+    font-size:15px;
+
+}
+
+
+
+.formulaCard button{
+
+    margin-top:20px;
+
+    width:90%;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:
+    linear-gradient(135deg,#facc15,#eab308);
+
+    color:#111827;
+
+    font-weight:800;
+
+    font-size:15px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+
+
+.formulaCard button:hover{
+
+    transform:scale(1.05);
+
+    box-shadow:
+    0 0 20px #facc15;
+
+}
+
+
+
+.formulaCard button:active{
+
+    transform:scale(.95);
+
+}
+
+
+
+.status{
+
+    display:inline-block;
+
+    margin-top:15px;
+
+    padding:8px 18px;
+
+    border-radius:20px;
+
+    background:rgba(34,197,94,.15);
+
+    color:#4ade80;
+
+    font-size:13px;
+
+    border:1px solid rgba(34,197,94,.4);
+
+}
+
+
+
+.formulaCard::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:120px;
+
+    height:120px;
+
+    background:#38bdf8;
+
+    filter:blur(80px);
+
+    opacity:.2;
+
+    top:-40px;
+
+    right:-40px;
+
+}
+
+
+
+@keyframes fadeIn{
+
+from{
+
+opacity:0;
+
+transform:translateY(20px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+
+</style>
+
 </head>
 
 
@@ -2163,6 +2373,10 @@ Coin Cash Back
 
 <button id="btnCashBack" onclick="showCashBack()">
 💎 Coin Cash Back
+</button>
+
+<button id="btnFormula" onclick="showFormula()">
+📄 Export Formula
 </button>
 
 </div>
@@ -2489,6 +2703,89 @@ Difference Cash Back
 
 </table>
 
+</div>
+
+<div id="formulaPage" style="display:none">
+
+<h2>
+⚡ EXPORT DATA CENTER
+</h2>
+
+<p>
+Copy Formula kemudian Paste ke Google Spreadsheet
+</p>
+
+
+<div class="formulaCard">
+
+<h3>
+🏦 BANK EXPORT
+</h3>
+
+<p>
+Export seluruh Formula Data BANK
+</p>
+
+<button onclick="copyBankFormula()">
+📋 COPY FORMULA
+</button>
+
+</div>
+
+
+
+<div class="formulaCard">
+
+<h3>
+💳 DANA EXPORT
+</h3>
+
+<p>
+Export seluruh Formula Data DANA
+</p>
+
+<button onclick="copyDanaFormula()">
+📋 COPY FORMULA
+</button>
+
+</div>
+
+
+
+<div class="formulaCard">
+
+<h3>
+💸 WITHDRAW EXPORT
+</h3>
+
+<p>
+Export seluruh Formula Data WITHDRAW
+</p>
+
+<button onclick="copyWithdrawFormula()">
+📋 COPY FORMULA
+</button>
+
+</div>
+
+
+
+<div class="formulaCard">
+
+<h3>
+💎 CASH BACK EXPORT
+</h3>
+
+<p>
+Export seluruh Formula Data CASH BACK
+</p>
+
+<button onclick="copyCashBackFormula()">
+📋 COPY FORMULA
+</button>
+
+</div>
+
 
 </div>
 
@@ -2664,6 +2961,8 @@ document.getElementById("qrisPage").style.display="none";
 
 document.getElementById("cashBackPage").style.display="none";
 
+document.getElementById("formulaPage").style.display="none";
+
 }
 
 function showWithdraw(){
@@ -2676,7 +2975,10 @@ document.getElementById("qrisPage").style.display="none";
 
 document.getElementById("cashBackPage").style.display="none";
 
+document.getElementById("formulaPage").style.display="none";
+
 }
+
 function showQris(){
 
 document.getElementById("depositPage").style.display="none";
@@ -2686,6 +2988,8 @@ document.getElementById("withdrawPage").style.display="none";
 document.getElementById("qrisPage").style.display="block";
 
 document.getElementById("cashBackPage").style.display="none";
+
+document.getElementById("formulaPage").style.display="none";
 
 }
 
@@ -2699,7 +3003,77 @@ document.getElementById("qrisPage").style.display="none";
 
 document.getElementById("cashBackPage").style.display="block";
 
+document.getElementById("formulaPage").style.display="none";
+
 }
+
+function showFormula(){
+
+document.getElementById("depositPage").style.display="none";
+
+document.getElementById("withdrawPage").style.display="none";
+
+document.getElementById("qrisPage").style.display="none";
+
+document.getElementById("cashBackPage").style.display="none";
+
+document.getElementById("formulaPage").style.display="block";
+
+}
+
+function copyBankFormula(){
+
+const formula = `=ARRAYFORMULA(QUERY({BRI!B5:C999; BRI!I5:J999; BRI!P5:Q999; BRI!W5:X999; BRI!AD5:AE999; BRI!AK5:AL999; BCA!B5:C1499; BCA!I5:J1499; BCA!P5:Q1499; BCA!W5:X1499; BCA!AD5:AE1499; BCA!AK5:AL1499; BNI!B5:C999; BNI!W5:X999; BNI!I5:J999; BNI!P5:Q999; BNI!AD5:AE999; 'BRI II'!B5:C999; 'BRI II'!I5:J999; 'BRI II'!AD5:AE999; 'BRI II'!P5:Q999; 'BRI II'!W5:X999; BSI!B5:C999; BSI!I5:J999; BSI!P5:Q999; BSI!W5:X999; BSI!AD5:AE999; BSI!AK5:AL999; DEPO!B5:C999; DEPO!I5:J999; DEPO!P5:Q999; DEPO!W5:X999; DEPO!AD5:AE999; DEPO!AK5:AL999; BNS!B5:C2004; BNS!E5:F2004}, "SELECT * WHERE Col2 IS NOT NULL",0))`;
+
+navigator.clipboard.writeText(formula);
+
+alert("✅ Formula BANK berhasil dicopy");
+
+}
+
+function copyDanaFormula(){
+
+const formula = `=QUERY({'DN I'!B5:C2005;'DN I'!K5:L2005;'DN I'!T5:U2005;'DN II'!B5:C2005;'DN II'!K5:L2005;'DN II'!T5:U2005;'DN III'!B5:C2005;'DN III'!K5:L2005;'DN III'!T5:U2005;'DN IV'!B5:C2005;'DN IV'!K5:L2005;'DN IV'!T5:U2005},"SELECT * WHERE Col2 IS NOT NULL",0)`;
+
+navigator.clipboard.writeText(formula);
+
+alert("✅ Formula DANA berhasil dicopy");
+
+}
+
+
+
+function copyWithdrawFormula(){
+
+const formula = `=QUERY({'WD BCA'!B5:C999;'WD BCA'!I5:J999;'WD BCA'!P5:Q999;'WD BCA'!W5:X999;'WD BCA'!AD5:AE999;'WD BCA'!AK5:AL999;'WD BCA 2'!B5:C999;'WD BCA 2'!I5:J999;'WD BCA 2'!P5:Q999;'WD BCA 2'!W5:X999;'WD BCA 2'!AD5:AE999;'WD BCA 2'!AK5:AL999;'WD BRI'!B5:C999;'WD BRI'!I5:J999;'WD BRI'!P5:Q999;'WD BRI'!W5:X999;'WD BRI'!AD5:AE999;'WD BNI'!B5:C999;'WD BNI'!I5:J999;'WD BNI'!P5:Q999;'WD BNI'!W5:X999;'WD BNI'!AD5:AE999;'BANK TAMPUNG'!B5:C999;'BANK TAMPUNG'!I5:J999;'BANK TAMPUNG'!P5:Q999;'BANK TAMPUNG'!W5:X999;'BANK TAMPUNG'!AD5:AE999;'BANK TAMPUNG'!AK5:AL999;'WD BSI'!B5:C999;'WD BSI'!I5:J999;'WD BSI'!P5:Q999;'WD BSI'!W5:X999;'WD BSI'!AD5:AE999;'WD PGA'!B5:C999;'WD PGA'!I5:J999;'WD PGA'!P5:Q999;'WD PGA'!W5:X999;'WD PGA'!AD5:AE999;'WD PGA'!AK5:AL999;'WD PGA'!AR5:AS999;'WD PGA'!AY5:AZ999;'WD PGA'!BF5:BG999;'WD PGA'!BM5:BN999;'WD PGA'!BT5:BU999;BNS!F5:G999},"SELECT * WHERE Col2 IS NOT NULL",0)`;
+
+navigator.clipboard.writeText(formula);
+
+alert("✅ Formula WITHDRAW berhasil dicopy");
+
+}
+
+
+
+function copyCashBackFormula(){
+
+const formula = `=ARRAYFORMULA(QUERY({
+'CB1'!B4:H1003;'CB1'!K4:Q1003;'CB1'!T4:Z1003;'CB1'!AC4:AI1003;'CB1'!AL4:AR1003;
+'CB2'!B4:H1003;'CB2'!K4:Q1003;'CB2'!T4:Z1003;'CB2'!AC4:AI1003;'CB2'!AL4:AR1003;
+'CB3'!B4:H1003;'CB3'!K4:Q1003;'CB3'!T4:Z1003;'CB3'!AC4:AI1003;'CB3'!AL4:AR1003;
+'CB4'!B4:H1003;'CB4'!K4:Q1003;'CB4'!T4:Z1003;'CB4'!AC4:AI1003;'CB4'!AL4:AR1003;
+'CB5'!B4:H1003;'CB5'!K4:Q1003;'CB5'!T4:Z1003;'CB5'!AC4:AI1003;'CB5'!AL4:AR1003;
+'CB6'!B4:H1003;'CB6'!K4:Q1003;'CB6'!T4:Z1003;'CB6'!AC4:AI1003;'CB6'!AL4:AR1003
+},"SELECT * WHERE Col2 IS NOT NULL",0))`;
+
+navigator.clipboard.writeText(formula);
+
+alert("✅ Formula CASH BACK berhasil dicopy");
+
+}
+
+
+
 
 
 function openMenu(){
