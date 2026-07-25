@@ -4421,50 +4421,34 @@ alert(
 
 function copyWithdrawDifference(){
 
-let rows=document.querySelectorAll("#withdrawDifference tr");
+let rows = document.querySelectorAll("#withdrawDifference tr");
 
-
-if(rows.length===0){
-
-alert("Belum ada data Withdraw");
-
-return;
-
+if(rows.length === 0){
+    alert("Belum ada data Withdraw");
+    return;
 }
 
+let text = [];
 
-let text=[];
+rows.forEach(row => {
 
+    let col = row.querySelectorAll("td");
 
-rows.forEach(row=>{
+    if(col.length >= 4){
 
-let col=row.querySelectorAll("td");
+        let username = col[0].innerText.trim();
 
+        let selisih = col[3].innerText.trim();
 
-if(col.length>=4){
+        text.push(
+            username + "\t" + selisih
+        );
 
-let username=col[0].innerText.trim();
-
-
-let angka=Number(
-col[3].innerText.replace(/,/g,"")
-);
-
-
-let selisih=angka.toLocaleString("en-US");
-
-
-text.push(
-username+"\t"+selisih
-);
-
-}
+    }
 
 });
 
-
 navigator.clipboard.writeText(text.join("\n"));
-
 
 alert("Username + Selisih Withdraw berhasil di copy");
 
