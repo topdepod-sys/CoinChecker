@@ -4446,12 +4446,16 @@ if(col.length>=4){
 let username=col[0].innerText.trim();
 
 
-let angka = Number(
-    col[3].innerText.replace(/,/g,"")
+let angka=Number(
+col[3].innerText.replace(/,/g,"")
 );
 
+
+let selisih=angka.toLocaleString("en-US");
+
+
 text.push(
-    username + "\t" + angka
+username+"\t"+selisih
 );
 
 }
