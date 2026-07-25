@@ -4450,9 +4450,16 @@ let angka = Number(
     col[3].innerText.replace(/,/g,"")
 );
 
+let selisih = angka.toLocaleString("en-US");
+
+
 text.push(
-    username + "\t" + angka
+username+"\t"+selisih
 );
+
+}
+
+});
 
 
 navigator.clipboard.writeText(text.join("\n"));
