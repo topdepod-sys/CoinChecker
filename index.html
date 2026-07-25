@@ -2331,6 +2331,11 @@ Logout
 <h3>MENU SELECTION</h3>
 
 <label>
+<input type="checkbox" id="checkDepositPga" checked onchange="toggleMenu()">
+Deposit PGA
+</label>
+
+<label>
 <input type="checkbox" id="checkDeposit" checked onchange="toggleMenu()">
 Deposit
 </label>
@@ -2350,6 +2355,16 @@ QRIS Cepat
 Coin Cash Back
 </label>
 
+<label>
+<input type="checkbox" id="checkDoubleCashBack" checked onchange="toggleMenu()">
+Double Cash Back
+</label>
+
+<label>
+<input type="checkbox" id="checkDoubleAcc" checked onchange="toggleMenu()">
+Double ACC
+</label>
+
 
 </div>
 
@@ -2358,6 +2373,10 @@ Coin Cash Back
 
 
 <div class="leftMenu">
+
+<button id="btnDepositPga" onclick="showDepositPga()">
+💰 Deposit PGA
+</button>
 
 <button id="btnDeposit" onclick="showDeposit()">
 💰 Deposit
@@ -2375,6 +2394,14 @@ Coin Cash Back
 💎 Coin Cash Back
 </button>
 
+<button id="btnDoubleCashBack" onclick="showDoubleCashBack()">
+💎 Double Cash Back
+</button>
+
+<button id="btnDoubleAcc" onclick="showDoubleAcc()">
+🛡️ Double ACC
+</button>
+
 <button id="btnFormula" onclick="showFormula()">
 📄 Export Formula
 </button>
@@ -2383,6 +2410,94 @@ Coin Cash Back
 
 
 </div>
+
+</div>
+
+<div id="depositPgaPage" style="display:none">
+
+<h2>
+💰 Deposit PGA
+</h2>
+
+<h3>
+Deposit PGA Checker
+</h3>
+
+
+<h3>
+Upload History Deposit PGA CSV
+</h3>
+
+<input type="file" id="depositPgaCsv" accept=".csv">
+
+<br><br>
+
+<button onclick="processDepositPga()">
+⚙️ Proses Deposit PGA
+</button>
+
+<button onclick="copyDepositPga()">
+📋 COPY ID + AMOUNT + REFF NUMBER
+</button>
+
+<button onclick="clearDepositPga()">
+🗑 CLEAR ALL
+</button>
+
+<br><br>
+
+
+<div class="qrisTotalBox">
+
+
+<div class="qrisCard">
+
+<h2>
+TOTAL DEPOSIT PGA
+</h2>
+
+<span id="totalDepositPga">
+0
+</span>
+
+</div>
+
+
+
+<div class="qrisCard">
+
+<h2>
+TOTAL AMOUNT PGA
+</h2>
+
+<span id="totalAmountPga">
+Rp 0
+</span>
+
+</div>
+
+
+</div>
+
+
+<br><br>
+
+
+<table>
+
+<thead>
+<tr>
+<th>ID</th>
+<th>AMOUNT</th>
+<th>REFF NUMBER</th>
+</tr>
+</thead>
+
+<tbody id="depositPgaData"></tbody>
+
+
+</table>
+
 
 </div>
 
@@ -2705,6 +2820,116 @@ Difference Cash Back
 
 </div>
 
+<div id="doubleCashBackPage" style="display:none">
+
+<h2>
+💎 Double Cash Back
+</h2>
+
+
+<h2>
+Upload History Cash Back CSV
+</h2>
+
+
+<input type="file" id="doubleCashBackCsv" accept=".csv">
+
+
+<br><br>
+
+
+<button onclick="processDoubleCashBack()">
+⚙️ Proses Double Cash Back
+</button>
+
+
+<button onclick="copyDoubleCashBack()">
+📋 COPY USERNAME + AMOUNT
+</button>
+
+
+<button onclick="clearDoubleCashBack()">
+🗑 CLEAR ALL
+</button>
+
+
+<h2>
+Hasil Double Cash Back
+</h2>
+
+
+<table>
+
+<thead>
+
+<tr>
+<th>Username</th>
+<th>Amount</th>
+</tr>
+
+</thead>
+
+
+<tbody id="doubleCashBackResult"></tbody>
+
+
+</table>
+
+
+</div>
+
+<div id="doubleAccPage" style="display:none">
+
+<h2>
+🛡️ Double ACC
+</h2>
+
+<h2>
+Upload History Double ACC CSV
+</h2>
+
+<input type="file" id="doubleAccCsv" accept=".csv">
+
+<br><br>
+
+<button onclick="processDoubleAcc()">
+⚙️ Proses Double ACC
+</button>
+
+<button onclick="copyDoubleAcc()">
+📋 COPY USERNAME + AMOUNT
+</button>
+
+<button onclick="clearDoubleAcc()">
+🗑 CLEAR ALL
+</button>
+
+
+<h2>
+Hasil Double ACC
+</h2>
+
+
+<table>
+
+<thead>
+
+<tr>
+<th>Username</th>
+<th>Amount</th>
+</tr>
+
+</thead>
+
+
+<tbody id="doubleAccData"></tbody>
+
+
+</table>
+
+
+</div>
+
 <div id="formulaPage" style="display:none">
 
 <h2>
@@ -2951,73 +3176,129 @@ location.reload();
 
 
 
-function showDeposit(){
+function showDepositPga(){
 
-document.getElementById("depositPage").style.display="block";
+    document.getElementById("depositPage").style.display="none";
+    document.getElementById("withdrawPage").style.display="none";
+    document.getElementById("qrisPage").style.display="none";
+    document.getElementById("cashBackPage").style.display="none";
+    document.getElementById("doubleCashBackPage").style.display="none";
+    document.getElementById("doubleAccPage").style.display="none";
+    document.getElementById("formulaPage").style.display="none";
 
-document.getElementById("withdrawPage").style.display="none";
-
-document.getElementById("qrisPage").style.display="none";
-
-document.getElementById("cashBackPage").style.display="none";
-
-document.getElementById("formulaPage").style.display="none";
+    document.getElementById("depositPgaPage").style.display="block";
 
 }
+
+
+
+function showDeposit(){
+
+    document.getElementById("depositPgaPage").style.display="none";
+    document.getElementById("withdrawPage").style.display="none";
+    document.getElementById("qrisPage").style.display="none";
+    document.getElementById("cashBackPage").style.display="none";
+    document.getElementById("doubleCashBackPage").style.display="none";
+    document.getElementById("doubleAccPage").style.display="none";
+    document.getElementById("formulaPage").style.display="none";
+
+    document.getElementById("depositPage").style.display="block";
+
+}
+
+
 
 function showWithdraw(){
 
-document.getElementById("depositPage").style.display="none";
+    document.getElementById("depositPgaPage").style.display="none";
+    document.getElementById("depositPage").style.display="none";
+    document.getElementById("qrisPage").style.display="none";
+    document.getElementById("cashBackPage").style.display="none";
+    document.getElementById("doubleCashBackPage").style.display="none";
+    document.getElementById("doubleAccPage").style.display="none";
+    document.getElementById("formulaPage").style.display="none";
 
-document.getElementById("withdrawPage").style.display="block";
-
-document.getElementById("qrisPage").style.display="none";
-
-document.getElementById("cashBackPage").style.display="none";
-
-document.getElementById("formulaPage").style.display="none";
+    document.getElementById("withdrawPage").style.display="block";
 
 }
+
+
 
 function showQris(){
 
-document.getElementById("depositPage").style.display="none";
+    document.getElementById("depositPgaPage").style.display="none";
+    document.getElementById("depositPage").style.display="none";
+    document.getElementById("withdrawPage").style.display="none";
+    document.getElementById("cashBackPage").style.display="none";
+    document.getElementById("doubleCashBackPage").style.display="none";
+    document.getElementById("doubleAccPage").style.display="none";
+    document.getElementById("formulaPage").style.display="none";
 
-document.getElementById("withdrawPage").style.display="none";
-
-document.getElementById("qrisPage").style.display="block";
-
-document.getElementById("cashBackPage").style.display="none";
-
-document.getElementById("formulaPage").style.display="none";
+    document.getElementById("qrisPage").style.display="block";
 
 }
+
+
 
 function showCashBack(){
 
-document.getElementById("depositPage").style.display="none";
+    document.getElementById("depositPgaPage").style.display="none";
+    document.getElementById("depositPage").style.display="none";
+    document.getElementById("withdrawPage").style.display="none";
+    document.getElementById("qrisPage").style.display="none";
+    document.getElementById("doubleCashBackPage").style.display="none";
+    document.getElementById("doubleAccPage").style.display="none";
+    document.getElementById("formulaPage").style.display="none";
 
-document.getElementById("withdrawPage").style.display="none";
-
-document.getElementById("qrisPage").style.display="none";
-
-document.getElementById("cashBackPage").style.display="block";
-
-document.getElementById("formulaPage").style.display="none";
+    document.getElementById("cashBackPage").style.display="block";
 
 }
 
+
+
+function showDoubleCashBack(){
+
+    document.getElementById("depositPgaPage").style.display="none";
+    document.getElementById("depositPage").style.display="none";
+    document.getElementById("withdrawPage").style.display="none";
+    document.getElementById("qrisPage").style.display="none";
+    document.getElementById("cashBackPage").style.display="none";
+    document.getElementById("doubleAccPage").style.display="none";
+    document.getElementById("formulaPage").style.display="none";
+
+    document.getElementById("doubleCashBackPage").style.display="block";
+
+}
+
+
+
+function showDoubleAcc(){
+
+    document.getElementById("depositPgaPage").style.display="none";
+    document.getElementById("depositPage").style.display="none";
+    document.getElementById("withdrawPage").style.display="none";
+    document.getElementById("qrisPage").style.display="none";
+    document.getElementById("cashBackPage").style.display="none";
+    document.getElementById("doubleCashBackPage").style.display="none";
+    document.getElementById("formulaPage").style.display="none";
+
+    document.getElementById("doubleAccPage").style.display="block";
+
+}
+
+
+
 function showFormula(){
 
-document.getElementById("depositPage").style.display="none";
+    document.getElementById("depositPgaPage").style.display="none";
+    document.getElementById("depositPage").style.display="none";
+    document.getElementById("withdrawPage").style.display="none";
+    document.getElementById("qrisPage").style.display="none";
+    document.getElementById("cashBackPage").style.display="none";
+    document.getElementById("doubleCashBackPage").style.display="none";
+    document.getElementById("doubleAccPage").style.display="none";
 
-document.getElementById("withdrawPage").style.display="none";
-
-document.getElementById("qrisPage").style.display="none";
-
-document.getElementById("cashBackPage").style.display="none";
-
-document.getElementById("formulaPage").style.display="block";
+    document.getElementById("formulaPage").style.display="block";
 
 }
 
@@ -3090,6 +3371,10 @@ function openMenu(){
 
 
 function toggleMenu(){
+
+document.getElementById("btnDepositPga").style.display =
+document.getElementById("checkDepositPga").checked ? "block" : "none";
+
 document.getElementById("btnDeposit").style.display =
 document.getElementById("checkDeposit").checked ? "block" : "none";
 
@@ -3104,6 +3389,11 @@ document.getElementById("checkQris").checked ? "block" : "none";
 document.getElementById("btnCashBack").style.display =
 document.getElementById("checkCashBack").checked ? "block" : "none";
 
+document.getElementById("btnDoubleCashBack").style.display =
+document.getElementById("checkDoubleCashBack").checked ? "block" : "none";
+
+document.getElementById("btnDoubleAcc").style.display =
+document.getElementById("checkDoubleAcc").checked ? "block" : "none";
 }
 
 
@@ -4389,6 +4679,549 @@ document.getElementById("difference").innerHTML="";
 
 
 alert("Deposit CLEAR ALL");
+
+
+}
+
+// =======================
+// DOUBLE CASH BACK ONLY
+// =======================
+
+let doubleCashBackResult=[];
+
+
+async function processDoubleCashBack(){
+
+const file=document.getElementById("doubleCashBackCsv").files[0];
+
+
+if(!file){
+
+alert("Upload CSV dulu");
+
+return;
+
+}
+
+
+let csvText=await file.text();
+
+let rows=csvText.split(/\r?\n/);
+
+
+let userList={};
+
+
+
+rows.forEach((line,index)=>{
+
+
+if(index===0) return;
+
+
+let col=line.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g);
+
+
+if(!col || col.length<5){
+
+return;
+
+}
+
+
+col=col.map(x=>x.replace(/^"|"$/g,"").trim());
+
+
+
+let username=col[2]
+.toLowerCase()
+.trim();
+
+
+let by=col[3]
+.toLowerCase()
+.trim();
+
+
+let amount=Number(
+col[4].replace(/,/g,"")
+);
+
+
+
+if(!username || isNaN(amount)){
+
+return;
+
+}
+
+
+
+// ambil hanya cashback
+if(!by.startsWith("vjgaacb")){
+
+return;
+
+}
+
+
+
+if(!userList[username]){
+
+userList[username]=[];
+
+}
+
+
+
+userList[username].push(amount);
+
+
+
+});
+
+
+
+
+
+doubleCashBackResult=[];
+
+
+
+Object.keys(userList).forEach(username=>{
+
+
+// HANYA USER YANG DOUBLE
+
+if(userList[username].length > 1){
+
+
+doubleCashBackResult.push({
+
+username:username,
+
+amount:userList[username].reduce(
+(a,b)=>a+b,0
+)
+
+});
+
+
+}
+
+
+
+});
+
+
+
+
+
+document.getElementById("doubleCashBackResult").innerHTML =
+
+doubleCashBackResult.map(row=>`
+
+<tr>
+
+<td>${row.username}</td>
+
+<td>${row.amount.toLocaleString()}</td>
+
+</tr>
+
+`).join("");
+
+
+
+alert(
+"Double Cash Back ditemukan : "
++doubleCashBackResult.length
++" user"
+);
+
+
+}
+
+// =======================
+// DOUBLE CASH BACK COPY + CLEAR
+// =======================
+
+function copyDoubleCashBack(){
+
+let rows = document.querySelectorAll("#doubleCashBackResult tr");
+
+
+if(rows.length === 0){
+
+alert("Belum ada data Double Cash Back");
+
+return;
+
+}
+
+
+let text=[];
+
+
+rows.forEach(row=>{
+
+let col=row.querySelectorAll("td");
+
+
+if(col.length >= 2){
+
+text.push(
+col[0].innerText.trim()
++
+"\t"
++
+col[1].innerText.trim()
+);
+
+}
+
+});
+
+
+navigator.clipboard.writeText(text.join("\n"))
+.then(()=>{
+
+alert("✅ Username + Amount Double Cash Back berhasil di copy");
+
+});
+
+
+}
+
+
+
+
+function processDepositPga(){
+
+    let file = document.getElementById("depositPgaCsv").files[0];
+
+    if(!file){
+        alert("Upload CSV PGA dulu");
+        return;
+    }
+
+
+    let reader = new FileReader();
+
+
+    reader.onload = function(e){
+
+        let text = e.target.result;
+
+        let rows = text.split(/\r?\n/);
+
+
+        let html = "";
+
+        let totalDepositPga = 0;
+
+        let totalAmountPga = 0;
+
+
+
+        for(let i = 1; i < rows.length; i++){
+
+            let row = rows[i].match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g);
+
+
+            if(!row || row.length < 8){
+                continue;
+            }
+
+
+
+            let id = row[0]
+                .replace(/"/g,"")
+                .trim();
+
+
+
+            let ref = row[1]
+                .replace(/"/g,"")
+                .trim();
+
+
+
+            let amount = row[7]
+                .replace(/"/g,"")
+                .trim();
+
+
+
+            let amountNumber = Number(
+                amount.replace(/,/g,"")
+            ) || 0;
+
+
+
+            totalDepositPga++;
+
+            totalAmountPga += amountNumber;
+
+
+
+            html += `
+            <tr>
+                <td>${id}</td>
+                <td>${amount}</td>
+                <td>${ref}</td>
+            </tr>
+            `;
+
+        }
+
+
+
+        document.getElementById("depositPgaData").innerHTML = html;
+
+
+
+        document.getElementById("totalDepositPga").innerHTML =
+        totalDepositPga;
+
+
+
+        document.getElementById("totalAmountPga").innerHTML =
+        "Rp " + totalAmountPga.toLocaleString("en-US");
+
+
+    };
+
+
+    reader.readAsText(file);
+
+}
+
+function copyDepositPga(){
+
+let rows=document.querySelectorAll("#depositPgaData tr");
+
+if(rows.length===0){
+alert("Belum ada data Deposit PGA");
+return;
+}
+
+let text=[];
+
+rows.forEach(row=>{
+
+let col=row.querySelectorAll("td");
+
+if(col.length>=3){
+
+let id = col[0].innerText.trim();
+
+
+let amount = Number(
+    col[1].innerText
+    .replace(/,/g,"")
+    .trim()
+);
+
+
+let ref = col[2].innerText.trim();
+
+
+text.push(
+id+"\t"+amount.toLocaleString("en-US")+"\t"+ref
+);
+
+}
+
+});
+
+
+navigator.clipboard.writeText(text.join("\n"));
+
+alert("✅ ID + AMOUNT + REFF NUMBER berhasil di copy");
+
+}
+
+
+
+function clearDepositPga(){
+
+document.getElementById("depositPgaCsv").value="";
+
+document.getElementById("depositPgaData").innerHTML="";
+
+document.getElementById("totalDepositPga").innerHTML="0";
+
+document.getElementById("totalAmountPga").innerHTML="Rp 0";
+
+alert("✅ Deposit PGA CLEAR ALL");
+
+}
+
+let doubleAccResult = [];
+
+
+async function processDoubleAcc(){
+
+const file = document.getElementById("doubleAccCsv").files[0];
+
+if(!file){
+alert("Upload CSV dulu");
+return;
+}
+
+
+const text = await file.text();
+
+
+const rows = text
+.split("\n")
+.slice(1)
+.map(row => row.replace(/"/g,"").split(","))
+.filter(row => row.length >= 5);
+
+
+
+let data = [];
+
+
+rows.forEach(row=>{
+
+let date = row[0]?.trim();
+let info = row[1]?.trim();
+let username = row[2]?.trim();
+let by = row[3]?.trim();
+let coin = Number(row[4]?.replace(/,/g,""));
+
+
+if(
+info === "Deposit" &&
+by.toLowerCase() !== "vjgaacb" &&
+username &&
+coin
+){
+
+data.push({
+
+username,
+coin,
+time:new Date(
+date.replace(
+/(\d{2})-(\d{2})-(\d{4})/,
+"$3-$2-$1"
+)
+).getTime()
+
+});
+
+}
+
+});
+
+
+
+doubleAccResult = [];
+
+
+
+for(let i=0;i<data.length;i++){
+
+for(let j=i+1;j<data.length;j++){
+
+
+let a=data[i];
+let b=data[j];
+
+
+let diff=Math.abs(a.time-b.time)/1000;
+
+
+if(
+a.username === b.username &&
+a.coin === b.coin &&
+diff <= 1
+){
+
+
+let exist = doubleAccResult.some(x=>
+x.username === a.username &&
+x.coin === a.coin
+);
+
+
+if(!exist){
+
+doubleAccResult.push({
+
+username:a.username,
+coin:a.coin,
+information:"DOUBLE ACC"
+
+});
+
+}
+
+
+}
+
+}
+
+}
+
+
+
+document.getElementById("doubleAccData").innerHTML =
+
+doubleAccResult.map(row=>`
+
+<tr>
+
+<td>${row.username}</td>
+
+<td>${Number(row.coin).toLocaleString("en-US")}</td>
+
+<td>${row.information}</td>
+
+</tr>
+
+`).join("");
+
+
+
+}
+
+
+
+function copyDoubleAcc(){
+
+
+let text = doubleAccResult.map(row=>
+
+`${row.username}\t${Number(row.coin).toLocaleString("en-US")}`
+
+).join("\n");
+
+
+navigator.clipboard.writeText(text);
+
+
+alert("COPY DOUBLE ACC BERHASIL");
+
+
+}
+
+
+
+function clearDoubleAcc(){
+
+
+doubleAccResult = [];
+
+
+document.getElementById("doubleAccData").innerHTML = "";
+
+
+document.getElementById("doubleAccCsv").value = "";
 
 
 }
