@@ -5602,10 +5602,6 @@ function copyCashBackPage(){
         d.username +
         "\t" +
         d.kalah.toLocaleString("en-US") +
-        "\t" +
-        d.persen + "%" +
-        "\t" +
-        d.bonus.toLocaleString("en-US") +
         "\n";
 
     });
@@ -5633,10 +5629,6 @@ function copyAllCashBack(){
         d.username +
         "\t" +
         d.kalah.toLocaleString("en-US") +
-        "\t" +
-        d.persen + "%" +
-        "\t" +
-        d.bonus.toLocaleString("en-US") +
         "\n";
 
     });
@@ -5646,30 +5638,6 @@ function copyAllCashBack(){
 
 
     alert("COPY semua data berhasil");
-
-}
-
-
-function copyUsernameBonus(){
-
-    let text = "";
-
-
-    cashBackData.forEach(function(d){
-
-        text +=
-        d.username +
-        "\t" +
-        d.bonus.toLocaleString("en-US") +
-        "\n";
-
-    });
-
-
-    navigator.clipboard.writeText(text);
-
-
-    alert("COPY USERNAME + BONUS berhasil");
 
 }
 
