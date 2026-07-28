@@ -2351,6 +2351,16 @@ QRIS Cepat
 </label>
 
 <label>
+<input type="checkbox" id="checkQris" checked onchange="toggleMenu()">
+QRIS Cepat
+</label>
+
+<label>
+<input type="checkbox" id="checkInputCashBack" checked onchange="toggleMenu()">
+Input Data Cash Back
+</label>
+
+<label>
 <input type="checkbox" id="checkCashBack" checked onchange="toggleMenu()">
 Coin Cash Back
 </label>
@@ -2388,6 +2398,10 @@ Double ACC
 
 <button id="btnQris" onclick="showQris()">
 ⚡ QRIS Cepat
+</button>
+
+<button id="btnInputCashBack" onclick="showInputCashBack()">
+📝 Input Data Cash Back
 </button>
 
 <button id="btnCashBack" onclick="showCashBack()">
@@ -2667,35 +2681,27 @@ Paste Data Google Sheet Withdraw
 ⚡ QRIS Cepat
 </h2>
 
-
 <h2>
 Upload History QRIS CSV
 </h2>
 
-
 <input type="file" id="qrisCsv" accept=".csv">
 
-
 <br><br>
-
 
 <button onclick="processQris()">
 ⚙️ Proses QRIS
 </button>
 
-
 <br><br>
-
 
 <button onclick="copyQrisIdAmount()">
 📋 COPY ID & AMOUNT
 </button>
 
-
 <button onclick="copyQrisTransaction()">
 📋 COPY TRANSACTION ID
 </button>
-
 
 <button onclick="clearQris()">
 🗑 CLEAR ALL
@@ -2704,16 +2710,13 @@ Upload History QRIS CSV
 
 <div class="qrisTotalBox">
 
-
 <div class="qrisCard">
 
 <h2>
 TOTAL DEPOSIT QRIS
 </h2>
 
-<span id="totalQris">
-0
-</span>
+<span id="totalQris">0</span>
 
 </div>
 
@@ -2730,35 +2733,114 @@ Rp 0
 
 </div>
 
-
 </div>
-
 
 
 <table>
 
-
 <thead>
-
 <tr>
-
 <th>ID</th>
 <th>AMOUNT</th>
 <th>TRANSACTION ID</th>
 <th>STATUS</th>
-
 </tr>
-
 </thead>
-
 
 <tbody id="qrisData"></tbody>
 
+</table>
+
+</div>
+
+
+
+<div id="inputCashBackPage" style="display:none">
+
+<h2>📝 Input Data Cash Back</h2>
+
+<h3>Upload Data Cash Back CSV</h3>
+
+<input type="file" id="cashBackFile" accept=".csv">
+
+<br><br>
+
+<button onclick="processInputCashBack()">
+⚙️ Proses Cash Back
+</button>
+
+<button onclick="copyCashBackPage()">
+📋 COPY HALAMAN INI
+</button>
+
+<button onclick="copyAllCashBack()">
+📋 COPY SEMUA DATA
+</button>
+
+<button onclick="copyUsernameBonus()">
+📋 COPY USERNAME + BONUS
+</button>
+
+<button onclick="clearCashBack()">
+🗑 CLEAR ALL
+</button>
+
+
+<hr>
+
+
+<h2>Data Cash Back</h2>
+
+
+<div style="display:flex; gap:80px; font-size:18px;">
+
+<div>
+Jumlah Data :
+<b id="jumlahCashBack">0</b>
+</div>
+
+<div>
+TOTAL CASH BACK :
+<b id="totalCashBack">0</b>
+</div>
+
+</div>
+
+
+<br>
+
+
+<table>
+
+<thead>
+<tr>
+<th>NO</th>
+<th>USERNAME</th>
+<th>TOTAL KEKALAHAN</th>
+<th>PERSEN</th>
+<th>BONUS</th>
+</tr>
+</thead>
+
+<tbody id="dataInputCashBack"></tbody>
 
 </table>
 
 
+<br>
+
+<div id="pageInfo">
+Data 0 - 0
 </div>
+
+<br>
+
+<div id="cashBackPages"></div>
+
+
+</div>
+
+
 
 <div id="cashBackPage" style="display:none">
 
@@ -2803,22 +2885,20 @@ Difference Cash Back
 
 <thead>
 <tr>
-
 <th>Username</th>
 <th>Administration</th>
 <th>Google Sheet</th>
 <th>Selisih</th>
-
 </tr>
 </thead>
 
-
 <tbody id="cashBackDifference"></tbody>
-
 
 </table>
 
 </div>
+
+
 
 <div id="doubleCashBackPage" style="display:none">
 
@@ -2826,27 +2906,21 @@ Difference Cash Back
 💎 Double Cash Back
 </h2>
 
-
 <h2>
 Upload History Cash Back CSV
 </h2>
 
-
 <input type="file" id="doubleCashBackCsv" accept=".csv">
 
-
 <br><br>
-
 
 <button onclick="processDoubleCashBack()">
 ⚙️ Proses Double Cash Back
 </button>
 
-
 <button onclick="copyDoubleCashBack()">
 📋 COPY USERNAME + AMOUNT
 </button>
-
 
 <button onclick="clearDoubleCashBack()">
 🗑 CLEAR ALL
@@ -2857,26 +2931,22 @@ Upload History Cash Back CSV
 Hasil Double Cash Back
 </h2>
 
-
 <table>
 
 <thead>
-
 <tr>
 <th>Username</th>
 <th>Amount</th>
 </tr>
-
 </thead>
-
 
 <tbody id="doubleCashBackResult"></tbody>
 
-
 </table>
 
-
 </div>
+
+
 
 <div id="doubleAccPage" style="display:none">
 
@@ -2913,19 +2983,17 @@ Hasil Double ACC
 <table>
 
 <thead>
-
 <tr>
 <th>Username</th>
 <th>Amount</th>
 </tr>
-
 </thead>
-
 
 <tbody id="doubleAccData"></tbody>
 
-
 </table>
+
+</div>
 
 
 </div>
@@ -3181,6 +3249,7 @@ function showDepositPga(){
     document.getElementById("depositPage").style.display="none";
     document.getElementById("withdrawPage").style.display="none";
     document.getElementById("qrisPage").style.display="none";
+    document.getElementById("inputCashBackPage").style.display="none";
     document.getElementById("cashBackPage").style.display="none";
     document.getElementById("doubleCashBackPage").style.display="none";
     document.getElementById("doubleAccPage").style.display="none";
@@ -3197,6 +3266,7 @@ function showDeposit(){
     document.getElementById("depositPgaPage").style.display="none";
     document.getElementById("withdrawPage").style.display="none";
     document.getElementById("qrisPage").style.display="none";
+    document.getElementById("inputCashBackPage").style.display="none";
     document.getElementById("cashBackPage").style.display="none";
     document.getElementById("doubleCashBackPage").style.display="none";
     document.getElementById("doubleAccPage").style.display="none";
@@ -3213,6 +3283,7 @@ function showWithdraw(){
     document.getElementById("depositPgaPage").style.display="none";
     document.getElementById("depositPage").style.display="none";
     document.getElementById("qrisPage").style.display="none";
+    document.getElementById("inputCashBackPage").style.display="none";
     document.getElementById("cashBackPage").style.display="none";
     document.getElementById("doubleCashBackPage").style.display="none";
     document.getElementById("doubleAccPage").style.display="none";
@@ -3229,6 +3300,7 @@ function showQris(){
     document.getElementById("depositPgaPage").style.display="none";
     document.getElementById("depositPage").style.display="none";
     document.getElementById("withdrawPage").style.display="none";
+    document.getElementById("inputCashBackPage").style.display="none";
     document.getElementById("cashBackPage").style.display="none";
     document.getElementById("doubleCashBackPage").style.display="none";
     document.getElementById("doubleAccPage").style.display="none";
@@ -3240,12 +3312,30 @@ function showQris(){
 
 
 
+function showInputCashBack(){
+
+    document.getElementById("depositPgaPage").style.display="none";
+    document.getElementById("depositPage").style.display="none";
+    document.getElementById("withdrawPage").style.display="none";
+    document.getElementById("qrisPage").style.display="none";
+    document.getElementById("cashBackPage").style.display="none";
+    document.getElementById("doubleCashBackPage").style.display="none";
+    document.getElementById("doubleAccPage").style.display="none";
+    document.getElementById("formulaPage").style.display="none";
+
+    document.getElementById("inputCashBackPage").style.display="block";
+
+}
+
+
+
 function showCashBack(){
 
     document.getElementById("depositPgaPage").style.display="none";
     document.getElementById("depositPage").style.display="none";
     document.getElementById("withdrawPage").style.display="none";
     document.getElementById("qrisPage").style.display="none";
+    document.getElementById("inputCashBackPage").style.display="none";
     document.getElementById("doubleCashBackPage").style.display="none";
     document.getElementById("doubleAccPage").style.display="none";
     document.getElementById("formulaPage").style.display="none";
@@ -3262,6 +3352,7 @@ function showDoubleCashBack(){
     document.getElementById("depositPage").style.display="none";
     document.getElementById("withdrawPage").style.display="none";
     document.getElementById("qrisPage").style.display="none";
+    document.getElementById("inputCashBackPage").style.display="none";
     document.getElementById("cashBackPage").style.display="none";
     document.getElementById("doubleAccPage").style.display="none";
     document.getElementById("formulaPage").style.display="none";
@@ -3278,6 +3369,7 @@ function showDoubleAcc(){
     document.getElementById("depositPage").style.display="none";
     document.getElementById("withdrawPage").style.display="none";
     document.getElementById("qrisPage").style.display="none";
+    document.getElementById("inputCashBackPage").style.display="none";
     document.getElementById("cashBackPage").style.display="none";
     document.getElementById("doubleCashBackPage").style.display="none";
     document.getElementById("formulaPage").style.display="none";
@@ -3294,6 +3386,7 @@ function showFormula(){
     document.getElementById("depositPage").style.display="none";
     document.getElementById("withdrawPage").style.display="none";
     document.getElementById("qrisPage").style.display="none";
+    document.getElementById("inputCashBackPage").style.display="none";
     document.getElementById("cashBackPage").style.display="none";
     document.getElementById("doubleCashBackPage").style.display="none";
     document.getElementById("doubleAccPage").style.display="none";
@@ -3385,6 +3478,9 @@ document.getElementById("checkWithdraw").checked ? "block" : "none";
 
 document.getElementById("btnQris").style.display =
 document.getElementById("checkQris").checked ? "block" : "none";
+
+document.getElementById("btnInputCashBack").style.display =
+document.getElementById("checkInputCashBack").checked ? "block" : "none";
 
 document.getElementById("btnCashBack").style.display =
 document.getElementById("checkCashBack").checked ? "block" : "none";
@@ -4677,204 +4773,126 @@ let doubleCashBackResult=[];
 
 async function processDoubleCashBack(){
 
-const file=document.getElementById("doubleCashBackCsv").files[0];
+    const file = document.getElementById("doubleCashBackCsv").files[0];
+
+    if(!file){
+
+        alert("Upload CSV dulu");
+        return;
+
+    }
+
+    let csvText = await file.text();
+    let rows = csvText.split(/\r?\n/);
+
+    let userList = {};
+
+    rows.forEach((line,index)=>{
+
+        if(index===0) return;
+
+        let col = line.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g);
+
+        if(!col || col.length < 5) return;
+
+        col = col.map(x => x.replace(/^"|"$/g,"").trim());
+
+        let username = col[2].toLowerCase().trim();
+
+        let by = col[3].toLowerCase().trim();
+
+        let amount = Number(
+            col[4]
+            .replace(/"/g,"")
+            .replace(/,/g,"")
+            .trim()
+        );
+
+        if(!username || isNaN(amount)) return;
+
+        if(!by.startsWith("vjgaacb")) return;
+
+        if(!userList[username]){
+
+            userList[username] = [];
+
+        }
+
+        userList[username].push(amount);
+
+    });
 
 
-if(!file){
+    doubleCashBackResult = [];
 
-alert("Upload CSV dulu");
+    Object.keys(userList).forEach(username=>{
 
-return;
+        if(userList[username].length > 1){
+
+            doubleCashBackResult.push({
+
+                username: username,
+
+                // Ambil satu nominal saja, jangan dijumlahkan
+                amount: userList[username][0]
+
+            });
+
+        }
+
+    });
+
+
+    document.getElementById("doubleCashBackResult").innerHTML =
+    doubleCashBackResult.map(row=>`
+
+        <tr>
+            <td>${row.username}</td>
+            <td>${row.amount.toLocaleString("en-US")}</td>
+        </tr>
+
+    `).join("");
+
+
+    alert(
+        "Double Cash Back ditemukan : "
+        + doubleCashBackResult.length +
+        " user"
+    );
 
 }
 
 
-let csvText=await file.text();
-
-let rows=csvText.split(/\r?\n/);
-
-
-let userList={};
-
-
-
-rows.forEach((line,index)=>{
-
-
-if(index===0) return;
-
-
-let col=line.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g);
-
-
-if(!col || col.length<5){
-
-return;
-
-}
-
-
-col=col.map(x=>x.replace(/^"|"$/g,"").trim());
-
-
-
-let username=col[2]
-.toLowerCase()
-.trim();
-
-
-let by=col[3]
-.toLowerCase()
-.trim();
-
-
-let amount=Number(
-col[4].replace(/,/g,"")
-);
-
-
-
-if(!username || isNaN(amount)){
-
-return;
-
-}
-
-
-
-// ambil hanya cashback
-if(!by.startsWith("vjgaacb")){
-
-return;
-
-}
-
-
-
-if(!userList[username]){
-
-userList[username]=[];
-
-}
-
-
-
-userList[username].push(amount);
-
-
-
-});
-
-
-
-
-
-doubleCashBackResult=[];
-
-
-
-Object.keys(userList).forEach(username=>{
-
-
-// HANYA USER YANG DOUBLE
-
-if(userList[username].length > 1){
-
-
-doubleCashBackResult.push({
-
-username:username,
-
-amount:userList[username].reduce(
-(a,b)=>a+b,0
-)
-
-});
-
-
-}
-
-
-
-});
-
-
-
-
-
-document.getElementById("doubleCashBackResult").innerHTML =
-
-doubleCashBackResult.map(row=>`
-
-<tr>
-
-<td>${row.username}</td>
-
-<td>${row.amount.toLocaleString()}</td>
-
-</tr>
-
-`).join("");
-
-
-
-alert(
-"Double Cash Back ditemukan : "
-+doubleCashBackResult.length
-+" user"
-);
-
-
-}
 
 // =======================
-// DOUBLE CASH BACK COPY + CLEAR
+// DOUBLE CASH BACK COPY
 // =======================
 
 function copyDoubleCashBack(){
 
-let rows = document.querySelectorAll("#doubleCashBackResult tr");
+    if(doubleCashBackResult.length===0){
+
+        alert("Belum ada data Double Cash Back");
+        return;
+
+    }
+
+    let text = "";
+
+    doubleCashBackResult.forEach(function(row){
+
+        text +=
+        row.username +
+        "\t" +
+        "'" + row.amount.toLocaleString("en-US") +
+        "\n";
+
+    });
 
 
-if(rows.length === 0){
+    navigator.clipboard.writeText(text);
 
-alert("Belum ada data Double Cash Back");
-
-return;
-
-}
-
-
-let text=[];
-
-
-rows.forEach(row=>{
-
-let col=row.querySelectorAll("td");
-
-
-if(col.length >= 2){
-
-text.push(
-col[0].innerText.trim()
-+
-"\t"
-+
-col[1].innerText.trim()
-);
-
-}
-
-});
-
-
-navigator.clipboard.writeText(text.join("\n"))
-.then(()=>{
-
-alert("✅ Username + Amount Double Cash Back berhasil di copy");
-
-});
-
+    alert("✅ Username + Amount Double Cash Back berhasil di copy");
 
 }
 
@@ -5210,6 +5228,372 @@ document.getElementById("doubleAccCsv").value = "";
 
 
 }
+
+
+let cashBackData = [];
+
+let currentCashBackPage = 1;
+
+let cashBackPerPage = 1000;
+
+
+
+function processInputCashBack(){
+
+    let file = document.getElementById("cashBackFile").files[0];
+
+
+    if(!file){
+
+        alert("Pilih CSV dulu");
+
+        return;
+
+    }
+
+
+
+    let reader = new FileReader();
+
+
+
+    reader.onload = function(e){
+
+
+        let rows = e.target.result.split("\n");
+
+
+        cashBackData = [];
+
+
+
+        for(let i=1;i<rows.length;i++){
+
+
+            let row = rows[i].trim();
+
+
+            if(row=="") continue;
+
+
+
+            let col = row.split(",");
+
+
+
+            let username = col[0].replace(/"/g,"").trim();
+
+
+
+let kalah = Math.round(Number(
+    col[2]
+    .replace(/"/g,"")
+));
+
+
+
+            // hanya minus 100 ribu ke bawah
+
+            if(kalah <= -100000){
+
+
+                let nilai = Math.abs(kalah);
+
+
+
+                let persen = nilai >= 100000000 ? 10 : 5;
+
+
+
+               let bonus = Number(
+                 (nilai * persen / 100).toFixed(0)
+               );
+
+                console.log(username, kalah, persen, bonus);  
+
+                cashBackData.push({
+
+                    username:username,
+
+                    kalah:kalah,
+
+                    persen:persen,
+
+                    bonus:bonus
+
+                });
+
+
+            }
+
+
+        }
+
+
+
+        currentCashBackPage = 1;
+
+
+        tampilCashBack();
+
+
+    };
+
+
+
+    reader.readAsText(file);
+
+
+}
+
+
+
+
+
+function tampilCashBack(){
+
+
+    let tbody = document.getElementById("dataInputCashBack");
+
+
+    let mulai =
+    (currentCashBackPage-1)
+    * cashBackPerPage;
+
+
+
+    let akhir =
+    mulai + cashBackPerPage;
+
+
+
+    let data =
+    cashBackData.slice(mulai,akhir);
+
+
+
+    let html="";
+
+
+
+    data.forEach(function(d,i){
+
+
+        html += `
+
+        <tr>
+
+        <td>${mulai+i+1}</td>
+
+        <td>${d.username}</td>
+
+        <td>${d.kalah.toLocaleString()}</td>
+
+        <td>${d.persen}%</td>
+
+        <td>${d.bonus.toLocaleString()}</td>
+
+        </tr>
+
+        `;
+
+
+    });
+
+
+
+    tbody.innerHTML = html;
+
+
+
+    document.getElementById("jumlahCashBack").innerHTML =
+    cashBackData.length;
+
+
+
+    let total = 0;
+
+
+
+    cashBackData.forEach(function(d){
+
+        total += d.bonus;
+
+    });
+
+
+
+    document.getElementById("totalCashBack").innerHTML =
+    total.toLocaleString();
+
+
+
+    document.getElementById("pageInfo").innerHTML =
+
+    "Data " +
+    (mulai+1) +
+    " - " +
+    Math.min(akhir,cashBackData.length);
+
+
+
+    buatPageCashBack();
+
+
+}
+
+
+
+
+function buatPageCashBack(){
+
+
+    let box =
+    document.getElementById("cashBackPages");
+
+
+
+    box.innerHTML="";
+
+
+
+    let jumlahHalaman =
+    Math.ceil(
+        cashBackData.length / cashBackPerPage
+    );
+
+
+
+    for(let i=1;i<=jumlahHalaman;i++){
+
+
+        box.innerHTML += `
+
+        <button onclick="gantiCashBackPage(${i})">
+
+        ${i}
+
+        </button>
+
+        `;
+
+
+    }
+
+
+}
+
+
+
+
+function gantiCashBackPage(no){
+
+
+    currentCashBackPage=no;
+
+
+    tampilCashBack();
+
+
+}
+
+
+
+
+
+function copyCashBackPage(){
+
+    let mulai =
+    (currentCashBackPage - 1) * cashBackPerPage;
+
+
+    let akhir =
+    mulai + cashBackPerPage;
+
+
+    let data =
+    cashBackData.slice(mulai, akhir);
+
+
+    let text = "";
+
+
+    data.forEach(function(d){
+
+        text +=
+        d.username +
+        "\t" +
+        d.kalah.toLocaleString("en-US") +
+        "\n";
+
+    });
+
+
+    navigator.clipboard.writeText(text);
+
+
+    alert("COPY halaman berhasil");
+
+}
+
+
+
+
+
+function copyAllCashBack(){
+
+    let text = "";
+
+
+    cashBackData.forEach(function(d){
+
+        text +=
+        d.username +
+        "\t" +
+        d.kalah.toLocaleString("en-US") +
+        "\n";
+
+    });
+
+
+    navigator.clipboard.writeText(text);
+
+
+    alert("COPY semua data berhasil");
+
+}
+
+
+
+
+
+function clearCashBack(){
+
+
+    cashBackData=[];
+
+
+    document.getElementById("dataInputCashBack").innerHTML="";
+
+
+    document.getElementById("jumlahCashBack").innerHTML="0";
+
+
+    document.getElementById("totalCashBack").innerHTML="0";
+
+
+    document.getElementById("pageInfo").innerHTML="Data 0 - 0";
+
+
+    document.getElementById("cashBackPages").innerHTML="";
+
+
+    document.getElementById("cashBackFile").value="";
+
+
+}
+
+
 
 </script>
 
