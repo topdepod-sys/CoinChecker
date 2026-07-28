@@ -2777,13 +2777,10 @@ Rp 0
 📋 COPY SEMUA DATA
 </button>
 
-<button onclick="copyUsernameBonus()">
-📋 COPY USERNAME + BONUS
-</button>
-
-<button onclick="clearCashBack()">
+<button onclick="clearInputCashBack()">
 🗑 CLEAR ALL
 </button>
+
 
 
 <hr>
@@ -2872,9 +2869,10 @@ Paste Data Google Sheet Cash Back
 📋 COPY USERNAME + SELISIH
 </button>
 
-<button onclick="clearCashBack()">
+<button onclick="clearCoinCashBack()">
 🗑 CLEAR ALL
 </button>
+
 
 
 <h2>
@@ -2984,8 +2982,10 @@ Hasil Double ACC
 
 <thead>
 <tr>
+<th>NO</th>
 <th>Username</th>
 <th>Amount</th>
+<th>Information</th>
 </tr>
 </thead>
 
@@ -2996,7 +2996,6 @@ Hasil Double ACC
 </div>
 
 
-</div>
 
 <div id="formulaPage" style="display:none">
 
@@ -3004,9 +3003,11 @@ Hasil Double ACC
 ⚡ EXPORT DATA CENTER
 </h2>
 
+
 <p>
 Copy Formula kemudian Paste ke Google Spreadsheet
 </p>
+
 
 
 <div class="formulaCard">
@@ -3082,14 +3083,11 @@ Export seluruh Formula Data CASH BACK
 
 </div>
 
-</div>
-
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
 <script>
-
 
 const supabaseClient = supabase.createClient(
 
@@ -5070,58 +5068,106 @@ async function processDoubleAcc(){
 
 const file = document.getElementById("doubleAccCsv").files[0];
 
+
 if(!file){
-alert("Upload CSV dulu");
-return;
+
+    alert("Upload CSV dulu");
+    return;
+
 }
+
 
 
 const text = await file.text();
 
 
+
 const rows = text
-.split("\n")
+.split(/\r?\n/)
 .slice(1)
 .map(row => row.replace(/"/g,"").split(","))
 .filter(row => row.length >= 5);
 
 
 
-let data = [];
+let check = {};
+
 
 
 rows.forEach(row=>{
 
+
 let date = row[0]?.trim();
+
 let info = row[1]?.trim();
+
 let username = row[2]?.trim();
-let by = row[3]?.trim();
-let coin = Number(row[4]?.replace(/,/g,""));
+
+let coin = Number(
+    row[4]?.replace(/,/g,"")
+);
+
+
+
+let semuaKolom = row.join(" ").toLowerCase();
+
 
 
 if(
-info === "Deposit" &&
-by.toLowerCase() !== "vjgaacb" &&
-username &&
-coin
+    info === "Deposit" &&
+    !semuaKolom.includes("vjgaacb") &&
+    username &&
+    coin
 ){
 
-data.push({
 
-username,
-coin,
-time:new Date(
-date.replace(
-/(\d{2})-(\d{2})-(\d{4})/,
-"$3-$2-$1"
-)
-).getTime()
 
-});
+let parts = date.match(
+/(\d{2})-(\d{2})-(\d{4}) (\d{2}):(\d{2}):(\d{2})/
+);
+
+
+
+if(!parts) return;
+
+
+
+let time = new Date(
+
+parts[3],
+parts[2]-1,
+parts[1],
+parts[4],
+parts[5],
+parts[6]
+
+).getTime();
+
+
+
+
+let key = username + "_" + coin;
+
+
+
+if(!check[key]){
+
+    check[key] = [];
 
 }
 
+
+
+check[key].push(time);
+
+
+
+}
+
+
 });
+
+
 
 
 
@@ -5129,57 +5175,82 @@ doubleAccResult = [];
 
 
 
-for(let i=0;i<data.length;i++){
-
-for(let j=i+1;j<data.length;j++){
+Object.keys(check).forEach(key=>{
 
 
-let a=data[i];
-let b=data[j];
+let times = check[key];
 
 
-let diff=Math.abs(a.time-b.time)/1000;
+
+times.sort((a,b)=>a-b);
 
 
-if(
-a.username === b.username &&
-a.coin === b.coin &&
-diff <= 1
-){
+
+for(let i=0;i<times.length-1;i++){
 
 
-let exist = doubleAccResult.some(x=>
-x.username === a.username &&
-x.coin === a.coin
-);
+
+let selisih =
+Math.abs(times[i+1]-times[i]) / 1000;
 
 
-if(!exist){
+
+if(selisih <= 1){
+
+
+
+let data = key.split("_");
+
+
 
 doubleAccResult.push({
 
-username:a.username,
-coin:a.coin,
+username:data[0],
+
+coin:Number(data[1]),
+
+time:times[i+1],
+
 information:"DOUBLE ACC"
 
 });
 
+
+
+break;
+
+
+
 }
 
 
 }
 
-}
 
-}
+
+});
+
+
+
+
+
+// JAM TERBARU DI ATAS
+
+doubleAccResult.sort((a,b)=>b.time-a.time);
+
+
+
 
 
 
 document.getElementById("doubleAccData").innerHTML =
 
-doubleAccResult.map(row=>`
+
+doubleAccResult.map((row,index)=>`
 
 <tr>
+
+<td>${index+1}</td>
 
 <td>${row.username}</td>
 
@@ -5193,40 +5264,81 @@ doubleAccResult.map(row=>`
 
 
 
+
+
+alert(
+"DOUBLE ACC ditemukan : "
++doubleAccResult.length
++" user"
+);
+
+
 }
 
-
+// =======================
+// COPY DOUBLE ACC
+// =======================
 
 function copyDoubleAcc(){
 
+if(doubleAccResult.length===0){
 
-let text = doubleAccResult.map(row=>
+    alert("Belum ada data Double ACC");
+    return;
 
-`${row.username}\t${Number(row.coin).toLocaleString("en-US")}`
+}
 
-).join("\n");
+
+let text = "";
+
+
+doubleAccResult.forEach(row=>{
+
+
+text +=
+
+row.username
++
+"\t"
++
+"'"
++
+Number(row.coin).toLocaleString("en-US")
++
+"\n";
+
+
+});
+
 
 
 navigator.clipboard.writeText(text);
 
 
-alert("COPY DOUBLE ACC BERHASIL");
+alert("✅ COPY USERNAME + AMOUNT BERHASIL");
 
 
 }
 
 
 
+// =======================
+// CLEAR ALL DOUBLE ACC
+// =======================
+
 function clearDoubleAcc(){
 
 
-doubleAccResult = [];
+doubleAccResult=[];
 
 
-document.getElementById("doubleAccData").innerHTML = "";
+document.getElementById("doubleAccData").innerHTML="";
 
 
-document.getElementById("doubleAccCsv").value = "";
+document.getElementById("doubleAccCsv").value="";
+
+
+alert("🗑 Double ACC berhasil dihapus");
 
 
 }
@@ -5565,6 +5677,25 @@ function copyAllCashBack(){
 
 }
 
+function clearInputCashBack(){
+
+    cashBackData = [];
+
+    document.getElementById("dataInputCashBack").innerHTML = "";
+
+    document.getElementById("jumlahCashBack").innerHTML = "0";
+
+    document.getElementById("totalCashBack").innerHTML = "0";
+
+    document.getElementById("pageInfo").innerHTML = "Data 0 - 0";
+
+    document.getElementById("cashBackPages").innerHTML = "";
+
+    document.getElementById("cashBackFile").value = "";
+
+    alert("Input Data Cash Back berhasil di CLEAR");
+
+}
 
 
 
@@ -5595,6 +5726,35 @@ function clearCashBack(){
 
 }
 
+function clearDoubleCashBack(){
+
+    doubleCashBackResult = [];
+
+
+    document.getElementById("doubleCashBackResult").innerHTML = "";
+
+
+    document.getElementById("doubleCashBackCsv").value = "";
+
+
+    alert("Double Cash Back berhasil dihapus");
+
+}
+
+function clearCoinCashBack(){
+
+    document.getElementById("cashBackDifference").innerHTML = "";
+
+
+    document.getElementById("cashBackCsv").value = "";
+
+
+    document.getElementById("cashBackSheetData").value = "";
+
+
+    alert("Coin Cash Back berhasil dihapus");
+
+}
 
 
 </script>
