@@ -2476,7 +2476,7 @@ Rp 0
 
 </div>
 
-<div id="depositPage">
+<div id="depositPage" style="display:none">
 
 <h2>History Coin</h2>
 
@@ -3454,35 +3454,67 @@ function openMenu(){
 
 function toggleMenu(){
 
-document.getElementById("btnDepositPga").style.display =
-document.getElementById("checkDepositPga").checked ? "block" : "none";
 
-document.getElementById("btnPgaDataChecking").style.display =
-document.getElementById("checkPgaDataChecking").checked ? "block" : "none";
+    let data = [
+
+        ["checkDepositPga","btnDepositPga","depositPgaPage"],
+
+        ["checkPgaChecking","btnPgaChecking","pgaCheckingPage"],
+
+        ["checkDeposit","btnDeposit","depositPage"],
+
+        ["checkWithdraw","btnWithdraw","withdrawPage"],
+
+        ["checkQris","btnQris","qrisPage"],
+
+        ["checkInputCashBack","btnInputCashBack","inputCashBackPage"],
+
+        ["checkCashBack","btnCashBack","cashBackPage"],
+
+        ["checkDoubleCashBack","btnDoubleCashBack","doubleCashBackPage"],
+
+        ["checkDoubleAcc","btnDoubleAcc","doubleAccPage"]
+
+    ];
 
 
-document.getElementById("btnDeposit").style.display =
-document.getElementById("checkDeposit").checked ? "block" : "none";
+
+    data.forEach(item=>{
 
 
-document.getElementById("btnWithdraw").style.display =
-document.getElementById("checkWithdraw").checked ? "block" : "none";
+        let checked = document.getElementById(item[0]).checked;
 
 
-document.getElementById("btnQris").style.display =
-document.getElementById("checkQris").checked ? "block" : "none";
 
-document.getElementById("btnInputCashBack").style.display =
-document.getElementById("checkInputCashBack").checked ? "block" : "none";
+        // tombol menu
 
-document.getElementById("btnCashBack").style.display =
-document.getElementById("checkCashBack").checked ? "block" : "none";
+        document.getElementById(item[1]).style.display =
 
-document.getElementById("btnDoubleCashBack").style.display =
-document.getElementById("checkDoubleCashBack").checked ? "block" : "none";
+        checked ? "block" : "none";
 
-document.getElementById("btnDoubleAcc").style.display =
-document.getElementById("checkDoubleAcc").checked ? "block" : "none";
+
+
+
+        // halaman ikut hilang kalau checkbox dilepas
+
+        if(!checked){
+
+
+            let page = document.getElementById(item[2]);
+
+
+            if(page){
+
+                page.style.display="none";
+
+            }
+
+
+        }
+
+
+    });
+
 
 }
 
