@@ -10,1505 +10,195 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
 <style>
 
-/* CLOCK CARD */
-
-#adminInfo{
-
-background:
-linear-gradient(135deg,#020617,#1e3a8a);
-
-color:white;
-
-padding:20px 35px;
-
-border-radius:25px;
-
-width:300px;
-
-text-align:center;
-
-box-shadow:
-0 20px 50px rgba(0,0,0,.35);
-
-margin-bottom:25px;
-
-}
+/* =====================================================
+   CYBER CORE ULTRA PREMIUM
+   PART 1/3
+   LOGIN SYSTEM + GLOBAL STYLE
+===================================================== */
 
 
-#serverStatus{
+/* GLOBAL RESET */
 
-font-size:14px;
-
-color:#4ade80;
-
-font-weight:bold;
-
-margin-bottom:10px;
-
-}
-
-
-#adminName{
-
-font-size:22px;
-
-font-weight:900;
-
-letter-spacing:2px;
-
-margin-bottom:15px;
-
-background:
-linear-gradient(
-90deg,
-#facc15,
-#ffffff,
-#facc15
-);
-
--webkit-background-clip:text;
-
--webkit-text-fill-color:transparent;
-
-text-shadow:
-0 0 20px rgba(250,204,21,.35);
-
-}
-
-
-#currentDate{
-
-font-size:14px;
-
-color:#e2e8f0;
-
-}
-
-
-#currentTime{
-
-font-size:42px;
-
-font-weight:900;
-
-letter-spacing:3px;
-
-margin:8px 0;
-
-text-shadow:
-0 0 20px rgba(255,255,255,.5);
-
-}
-
-
-#timezone{
-
-font-size:13px;
-
-color:#cbd5e1;
-
+*{
+    box-sizing:border-box;
 }
 
 
 body{
-    font-family:Arial,sans-serif;
-    background:linear-gradient(135deg,#dbeafe,#f8fafc);
-    padding:20px;
+
     margin:0;
-}
-
-.qrisTotalBox{
-    display:flex;
-    gap:20px;
-    margin:25px 0;
-    flex-wrap:wrap;
-}
-
-.qrisCard{
-    flex:1;
-    min-width:250px;
-    background:#ffffff;
-    border:2px solid #2563eb;
-    border-radius:15px;
     padding:20px;
-    text-align:center;
-    box-shadow:0 6px 15px rgba(37,99,235,.15);
+
+    font-family:
+    "Segoe UI",
+    Arial,
+    sans-serif;
+
+    background:
+    radial-gradient(
+        circle at 15% 20%,
+        rgba(37,99,235,.35),
+        transparent 35%
+    ),
+    radial-gradient(
+        circle at 85% 80%,
+        rgba(250,204,21,.25),
+        transparent 35%
+    ),
+    linear-gradient(
+        135deg,
+        #020617,
+        #0f172a,
+        #020617
+    );
+
+    color:#e2e8f0;
+
 }
 
-.qrisCard h2{
-    margin:0;
-    font-size:18px;
-    color:#2563eb;
-}
 
-.qrisCard span{
-    display:block;
-    margin-top:12px;
-    font-size:34px;
-    font-weight:bold;
-    color:#2563eb;
-}
+/* =========================
+   LOGIN BACKGROUND
+========================= */
+
 
 body.login-mode{
 
     min-height:100vh;
-    margin:0;
-    padding:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    overflow:hidden;
+
+}
+
+
+body.login-mode::before{
+
+    content:"";
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+
+    radial-gradient(
+        circle,
+        rgba(56,189,248,.18),
+        transparent 40%
+    );
+
+    animation:
+    cyberPulse 8s infinite;
+
+}
+
+
+@keyframes cyberPulse{
+
+    0%,100%{
+        opacity:.5;
+    }
+
+    50%{
+        opacity:1;
+    }
+
+}
+
+
+
+/* =========================
+ LOGIN BOX
+========================= */
+
+
+#loginBox{
+
+    width:430px;
+
+    padding:45px;
+
+    position:relative;
+
     overflow:hidden;
 
     background:
-    radial-gradient(circle at 20% 20%, rgba(37,99,235,.45), transparent 35%),
-    radial-gradient(circle at 80% 30%, rgba(250,204,21,.35), transparent 30%),
-    radial-gradient(circle at 50% 80%, rgba(14,165,233,.35), transparent 40%),
-    linear-gradient(135deg,#020617,#0f172a,#172554);
 
-    background-size:200% 200%;
+    rgba(15,23,42,.85);
 
-    animation:bgMove 12s ease infinite;
+    backdrop-filter:
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
-
-
-@keyframes bgMove{
-
-0%{
-background-position:0% 50%;
-}
-
-50%{
-background-position:100% 50%;
-}
-
-100%{
-background-position:0% 50%;
-}
-
-}
-
-
-/* LOGIN DESIGN ONLY */
-
-#loginBox{
-
-width:460px;
-
-padding:40px;
-
-background:rgba(12,25,48,.65);
-
-backdrop-filter:blur(20px);
-
-border:1px solid rgba(255,255,255,.15);
-
-border-radius:25px;
-
-box-shadow:
-
-0 0 40px rgba(0,170,255,.25),
-
-0 20px 60px rgba(0,0,0,.5);
-
-}
-
-
-#loginBox h2{
-
-color:#1e3a8a;
-
-font-size:26px;
-
-margin-bottom:25px;
-
-}
-
-
-
-#loginBox input{
-
-width:100%;
-
-padding:14px;
-
-margin-bottom:15px;
-
-border-radius:12px;
-
-border:1px solid #cbd5e1;
-
-font-size:15px;
-
-outline:none;
-
-transition:.3s;
-
-}
-
-
-
-#loginBox input:focus{
-
-border-color:#2563eb;
-
-box-shadow:0 0 8px rgba(37,99,235,.4);
-
-}
-
-
-
-#loginBox button{
-
-width:100%;
-
-padding:14px;
-
-border-radius:12px;
-
-font-size:16px;
-
-font-weight:bold;
-
-background:#2563eb;
-
-transition:.3s;
-
-}
-
-
-
-#loginBox button:hover{
-
-background:#1d4ed8;
-
-transform:translateY(-2px);
-
-}
-
-
-
-@keyframes loginShow{
-
-from{
-
-opacity:0;
-
-transform:translateY(-30px);
-
-}
-
-to{
-
-opacity:1;
-
-transform:translateY(0);
-
-}
-
-}
-
-
-#content{
-
-background:rgba(255,255,255,.85);
-
-backdrop-filter:blur(15px);
-
-padding:35px;
-
-border-radius:25px;
-
-box-shadow:
-0 20px 50px rgba(0,0,0,.15);
-
-border:1px solid rgba(255,255,255,.5);
-
-animation:contentShow .5s ease;
-
-}
-
-
-@keyframes contentShow{
-
-from{
-opacity:0;
-transform:translateY(20px);
-}
-
-to{
-opacity:1;
-transform:translateY(0);
-}
-
-}
-
-
-table{
-
-width:100%;
-
-border-collapse:collapse;
-
-margin-top:15px;
-
-}
-
-
-th{
-
-background:#2563eb;
-
-color:white;
-
-padding:12px;
-
-}
-
-
-td{
-
-padding:10px;
-
-border:1px solid #ddd;
-
-text-align:center;
-
-}
-
-
-.menuBox{
-display:none;
-margin-top:15px;
-}
-
-
-.menuLayout{
-display:flex;
-flex-direction:column;
-align-items:flex-start;
-gap:15px;
-width:250px;
-}
-
-.leftMenu{
-display:flex;
-flex-direction:column;
-gap:10px;
-}
-
-
-.rightMenu{
-background:#f8fafc;
-padding:15px;
-border-radius:15px;
-border:1px solid #cbd5e1;
-width:100%;
-box-sizing:border-box;
-}
-
-
-.rightMenu h3{
-margin-top:0;
-}
-
-.leftMenu button{
-width:220px;
-text-align:left;
-}
-
-
-.rightMenu input[type="checkbox"]{
-    width:18px;
-    height:18px;
-    margin:0;
-    padding:0;
-    flex:none;
-}
-
-.rightMenu label{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    height:25px;
-    margin:8px 0;
-}
-
-.logoBox{
-    text-align:center;
-    margin-bottom:25px;
-}
-
-.logoBox h1{
-    color:#fff;
-    font-size:46px;
-    margin:0;
-    font-weight:bold;
-}
-
-.gold{
-    color:#f6c343;
-}
-
-.logoBox p{
-    color:#d1d5db;
-    margin-top:10px;
-    font-size:16px;
-}
-
-#loginBox input{
-    background:rgba(255,255,255,.08);
-    border:1px solid rgba(255,255,255,.15);
-    color:#fff;
-}
-
-#loginBox input::placeholder{
-    color:#cbd5e1;
-}
-
-#loginBox button{
-    background:linear-gradient(90deg,#FFD54A,#F5B300);
-    color:#111;
-    border:none;
-    font-size:18px;
-    font-weight:bold;
-}
-
-.qrisTotalBox{
-    display:flex;
-    gap:20px;
-    margin-top:25px;
-    margin-bottom:25px;
-}
-
-.qrisCard{
-    background:#f8fafc;
-    border:2px solid #2563eb;
-    border-radius:18px;
-    padding:20px;
-    width:250px;
-    text-align:center;
-    box-shadow:0 5px 15px rgba(37,99,235,.15);
-}
-
-.qrisCard h2{
-    color:#2563eb;
-    font-size:18px;
-    margin:0 0 10px 0;
-}
-
-.qrisCard span{
-    color:#2563eb;
-    font-size:28px;
-    font-weight:bold;
-}
-
-button{
-
-background:linear-gradient(135deg,#2563eb,#1d4ed8);
-
-color:white;
-
-border:none;
-
-padding:12px 18px;
-
-border-radius:12px;
-
-font-weight:bold;
-
-cursor:pointer;
-
-transition:.3s;
-
-box-shadow:0 5px 15px rgba(37,99,235,.3);
-
-}
-
-
-button:hover{
-
-transform:translateY(-3px);
-
-box-shadow:0 10px 25px rgba(37,99,235,.4);
-
-}
-
-/* ===== INNER PAGE DESIGN ===== */
-
-#depositPage,
-#withdrawPage,
-#qrisPage,
-#cashBackPage{
-
-margin-top:25px;
-
-background:white;
-
-padding:25px;
-
-border-radius:20px;
-
-box-shadow:
-0 10px 30px rgba(0,0,0,.12);
-
-border:1px solid #e2e8f0;
-
-}
-
-
-h2{
-
-color:#1e3a8a;
-
-font-size:22px;
-
-border-left:5px solid #2563eb;
-
-padding-left:12px;
-
-}
-
-
-textarea{
-
-width:100%;
-
-border-radius:15px;
-
-border:1px solid #cbd5e1;
-
-padding:15px;
-
-font-size:14px;
-
-resize:vertical;
-
-box-sizing:border-box;
-
-background:#f8fafc;
-
-}
-
-
-input[type="file"]{
-
-background:#f8fafc;
-
-padding:12px;
-
-border-radius:12px;
-
-border:1px solid #cbd5e1;
-
-width:100%;
-
-}
-
-
-table{
-
-overflow:hidden;
-
-border-radius:15px;
-
-}
-
-
-thead th{
-
-background:linear-gradient(135deg,#2563eb,#1e40af);
-
-font-size:14px;
-
-}
-
-
-tbody tr:nth-child(even){
-
-background:#f8fafc;
-
-}
-
-
-tbody tr:hover{
-
-background:#dbeafe;
-
-transition:.2s;
-
-}
-
-
-hr{
-
-border:none;
-
-height:1px;
-
-background:#cbd5e1;
-
-margin:25px 0;
-
-}
-
-/* ===== PREMIUM DASHBOARD STYLE ===== */
-
-
-#content{
-
-max-width:1400px;
-margin:auto;
-
-}
-
-
-#content > button:first-child{
-
-background:linear-gradient(135deg,#111827,#2563eb);
-
-font-size:16px;
-
-padding:14px 25px;
-
-border-radius:15px;
-
-box-shadow:
-0 10px 25px rgba(37,99,235,.35);
-
-}
-
-
-/* MENU PREMIUM */
-
-#menuBox{
-
-background:rgba(255,255,255,.9);
-
-border-radius:20px;
-
-padding:20px;
-
-margin-top:20px;
-
-box-shadow:
-0 15px 40px rgba(0,0,0,.15);
-
-}
-
-
-.rightMenu{
-
-background:
-linear-gradient(135deg,#eff6ff,#ffffff);
-
-border:1px solid #bfdbfe;
-
-}
-
-
-.rightMenu h3{
-
-color:#1d4ed8;
-
-font-size:20px;
-
-}
-
-
-
-/* BUTTON PREMIUM */
-
-button{
-
-position:relative;
-
-overflow:hidden;
-
-}
-
-
-button:before{
-
-content:"";
-
-position:absolute;
-
-top:0;
-
-left:-100%;
-
-width:100%;
-
-height:100%;
-
-background:
-linear-gradient(
-120deg,
-transparent,
-rgba(255,255,255,.5),
-transparent
-);
-
-transition:.5s;
-
-}
-
-
-button:hover:before{
-
-left:100%;
-
-}
-
-
-/* PAGE CARD PREMIUM */
-
-
-#depositPage,
-#withdrawPage,
-#qrisPage,
-#cashBackPage{
-
-background:
-linear-gradient(
-145deg,
-#ffffff,
-#f8fafc
-);
-
-border-radius:25px;
-
-box-shadow:
-
-0 20px 50px rgba(15,23,42,.12);
-
-}
-
-
-/* TITLE PREMIUM */
-
-h2{
-
-font-weight:800;
-
-letter-spacing:.5px;
-
-color:#0f172a;
-
-}
-
-
-/* INPUT PREMIUM */
-
-textarea,
-input[type="file"]{
-
-transition:.3s;
-
-}
-
-
-textarea:focus,
-input[type="file"]:focus{
-
-outline:none;
-
-border-color:#2563eb;
-
-box-shadow:
-0 0 15px rgba(37,99,235,.25);
-
-}
-
-
-
-/* TABLE PREMIUM */
-
-
-table{
-
-border-radius:18px;
-
-overflow:hidden;
-
-}
-
-
-thead th{
-
-text-transform:uppercase;
-
-letter-spacing:.5px;
-
-font-size:13px;
-
-}
-
-
-tbody td{
-
-font-size:14px;
-
-font-weight:500;
-
-}
-
-
-tbody tr{
-
-transition:.25s;
-
-}
-
-
-tbody tr:hover{
-
-transform:scale(1.01);
-
-box-shadow:
-0 5px 15px rgba(37,99,235,.15);
-
-}
-
-
-
-/* QRIS CARD PREMIUM */
-
-
-.qrisCard{
-
-background:
-linear-gradient(
-145deg,
-#ffffff,
-#eff6ff
-);
-
-}
-
-
-.qrisCard span{
-
-font-size:35px;
-
-text-shadow:
-0 3px 10px rgba(37,99,235,.25);
-
-}
-
-
-/* LOGIN PREMIUM */
-
-
-#loginBox{
-
-animation:loginShow .7s ease;
-
-}
-
-
-.logoBox h1{
-
-text-shadow:
-
-0 5px 20px rgba(255,255,255,.3);
-
-}
-
-
-.gold{
-
-text-shadow:
-
-0 0 20px rgba(250,204,21,.7);
-
-}
-
-
-
-/* SCROLL BAR */
-
-::-webkit-scrollbar{
-
-width:10px;
-
-}
-
-
-::-webkit-scrollbar-thumb{
-
-background:
-linear-gradient(#2563eb,#1e40af);
-
-border-radius:20px;
-
-}
-
-
-/* MOBILE */
-
-@media(max-width:700px){
-
-#loginBox{
-
-width:85%;
-
-padding:25px;
-
-}
-
-
-#content{
-
-padding:15px;
-
-}
-
-
-table{
-
-font-size:12px;
+    blur(25px);
 
-}
-
-
-}
-
-/* ===== ULTRA PREMIUM ADMIN DASHBOARD ===== */
-
-
-body{
-
-background:
-radial-gradient(circle at top,#1e3a8a,#020617);
-
-}
-
-
-/* MAIN CONTAINER */
-
-#content{
-
-background:
-rgba(255,255,255,.92);
-
-border-radius:30px;
-
-padding:40px;
-
-box-shadow:
-
-0 30px 80px rgba(0,0,0,.35);
-
-}
-
-
-/* TOP MENU BUTTON */
-
-#content > button:first-child{
-
-background:
-
-linear-gradient(135deg,#facc15,#eab308,#2563eb);
-
-color:#111;
-
-font-size:17px;
-
-letter-spacing:1px;
-
-border-radius:18px;
-
-padding:15px 30px;
-
-}
-
-
-/* MENU BOX GLASS */
-
-#menuBox{
-
-background:
-
-linear-gradient(
-145deg,
-rgba(255,255,255,.95),
-rgba(239,246,255,.9)
-);
-
-border-radius:30px;
-
-border:1px solid rgba(255,255,255,.8);
-
-box-shadow:
-
-0 25px 60px rgba(15,23,42,.2);
-
-}
-
-
-/* PAGE CARD 3D */
-
-#depositPage,
-#withdrawPage,
-#qrisPage,
-#cashBackPage{
-
-position:relative;
-
-overflow:hidden;
-
-}
-
-
-#depositPage:before,
-#withdrawPage:before,
-#qrisPage:before,
-#cashBackPage:before{
-
-content:"";
-
-position:absolute;
-
-width:200px;
-
-height:200px;
-
-background:
-
-radial-gradient(
-circle,
-rgba(37,99,235,.15),
-transparent
-);
-
-top:-80px;
-
-right:-80px;
-
-}
-
-
-/* PREMIUM BUTTON */
-
-button{
-
-border-radius:18px!important;
-
-font-size:15px;
-
-letter-spacing:.3px;
-
-}
-
-
-button:active{
-
-transform:scale(.95);
-
-}
-
-
-
-/* TABLE HEADER GOLD BLUE */
-
-thead th{
-
-background:
-
-linear-gradient(
-135deg,
-#1e40af,
-#2563eb,
-#facc15
-);
-
-color:white;
-
-}
-
-
-/* TABLE MODERN */
-
-tbody tr{
-
-background:white;
-
-border-radius:15px;
-
-}
-
-
-tbody td{
-
-padding:14px;
-
-}
-
-
-/* QRIS CARD LEVEL UP */
-
-.qrisCard{
-
-border:none;
-
-background:
-
-linear-gradient(
-145deg,
-#ffffff,
-#dbeafe
-);
-
-box-shadow:
-
-0 20px 40px rgba(37,99,235,.25);
-
-transform:translateY(0);
-
-transition:.3s;
-
-}
-
-
-.qrisCard:hover{
-
-transform:translateY(-8px);
-
-}
-
-
-/* NUMBER GLOW */
-
-.qrisCard span{
-
-color:#2563eb;
-
-text-shadow:
-
-0 0 20px rgba(37,99,235,.5);
-
-}
-
-
-/* INPUT PREMIUM */
-
-textarea,
-input[type="file"]{
-
-background:white;
-
-box-shadow:
-
-inset 0 2px 8px rgba(0,0,0,.05);
-
-}
-
-
-/* LOGIN BOX MORE LUXURY */
-
-#loginBox{
-
-background:
-
-linear-gradient(
-145deg,
-rgba(255,255,255,.15),
-rgba(15,23,42,.8)
-);
-
-border:
-
-1px solid rgba(255,255,255,.3);
-
-box-shadow:
-
-0 40px 100px rgba(0,0,0,.7);
-
-}
-
-
-/* LOGO EFFECT */
-
-.logoBox h1{
-
-font-size:55px;
-
-animation:
-
-logoGlow 3s infinite;
-
-}
-
-
-@keyframes logoGlow{
-
-0%,100%{
-
-filter:
-drop-shadow(0 0 5px #facc15);
-
-}
-
-
-50%{
-
-filter:
-drop-shadow(0 0 25px #facc15);
-
-}
-
-}
-
-
-/* SMOOTH PAGE */
-
-#depositPage,
-#withdrawPage,
-#qrisPage,
-#cashBackPage{
-
-animation:
-
-pageShow .5s ease;
-
-}
-
-
-@keyframes pageShow{
-
-from{
-
-opacity:0;
-
-transform:translateY(30px);
-
-}
-
-
-to{
-
-opacity:1;
-
-transform:translateY(0);
-
-}
-
-}
-
-
-/* PREMIUM MOBILE */
-
-@media(max-width:700px){
-
-#content{
-
-border-radius:20px;
-
-padding:20px;
-
-}
-
-.logoBox h1{
 
-font-size:40px;
+    border-radius:30px;
 
-}
-
-}
-
-#adminInfo{
-
-background:
-linear-gradient(135deg,#020617,#1e3a8a);
-
-color:white;
-
-padding:20px 35px;
-
-border-radius:25px;
-
-width:max-content;
-
-min-width:280px;
-
-text-align:center;
-
-margin-bottom:25px;
-
-box-shadow:
-0 20px 50px rgba(0,0,0,.35);
-
-}
-
-
-#serverStatus{
-
-color:#4ade80;
-
-font-weight:bold;
-
-margin-bottom:10px;
-
-}
-
-
-#adminName{
-
-font-size:22px;
-
-font-weight:900;
-
-letter-spacing:1px;
-
-background:linear-gradient(
-90deg,
-#facc15,
-#fff7ae,
-#f59e0b,
-#facc15
-);
-
-background-size:200% auto;
-
--webkit-background-clip:text;
-
--webkit-text-fill-color:transparent;
-
-animation:goldMove 3s linear infinite;
 
-margin-bottom:15px;
+    border:
 
-padding-bottom:10px;
+    1px solid rgba(255,255,255,.15);
 
-border-bottom:1px solid rgba(255,255,255,.3);
 
-}
-
-
-@keyframes goldMove{
-
-0%{
-background-position:0% center;
-}
-
-100%{
-background-position:200% center;
-}
-
-}
-
-
-#currentDate{
-
-font-size:14px;
-
-opacity:.9;
-
-}
-
+    box-shadow:
 
-#currentTime{
+    0 0 60px rgba(37,99,235,.45),
 
-font-size:36px;
+    0 40px 100px rgba(0,0,0,.8);
 
-font-weight:800;
 
-letter-spacing:3px;
+    animation:
 
-margin:8px 0;
+    loginOpen .7s ease;
 
 }
 
 
-#timezone{
 
-font-size:13px;
+#loginBox::before{
 
-color:#cbd5e1;
+    content:"";
 
-}
-
-.topBar{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:20px;
-}
-
-.logoutBtn{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    padding:12px 18px;
-    border:none;
-    border-radius:16px;
-    background:linear-gradient(135deg,#ef4444,#dc2626);
-    color:white;
-    font-weight:bold;
-    font-size:15px;
-}
-
-.logoutBtn i{
-    font-size:16px;
-}
-
-/* ===== PREMIUM ADMIN LOGIN ===== */
+    position:absolute;
 
+    inset:0;
 
-#loginBox{
+    border-radius:30px;
 
-width:430px;
+    padding:2px;
 
-padding:45px;
 
-background:
-rgba(2,6,23,.75);
-
-border-radius:30px;
-
-border:1px solid rgba(250,204,21,.25);
-
-backdrop-filter:blur(25px);
-
-box-shadow:
-
-0 0 60px rgba(37,99,235,.45),
-0 30px 80px rgba(0,0,0,.7);
-
-position:relative;
-
-overflow:hidden;
-
-}
+    background:
 
+    linear-gradient(
+        90deg,
+        #2563eb,
+        #facc15,
+        #38bdf8,
+        #2563eb
+    );
 
 
-#loginBox:before{
+    background-size:300%;
 
-content:"";
 
-position:absolute;
+    animation:
 
-inset:-2px;
+    borderRun 6s linear infinite;
 
-background:
 
-linear-gradient(
-90deg,
-transparent,
-#facc15,
-transparent,
-#2563eb,
-transparent
-);
+    -webkit-mask:
 
-background-size:300%;
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
 
-animation:borderRun 6s linear infinite;
 
-z-index:-1;
+    -webkit-mask-composite:xor;
 
 }
 
@@ -1516,50 +206,86 @@ z-index:-1;
 
 @keyframes borderRun{
 
-0%{
-background-position:0%;
+    from{
+        background-position:0%;
+    }
+
+    to{
+        background-position:300%;
+    }
+
 }
 
-100%{
-background-position:300%;
-}
+
+
+@keyframes loginOpen{
+
+    from{
+
+        opacity:0;
+
+        transform:
+        translateY(-40px);
+
+    }
+
+
+    to{
+
+        opacity:1;
+
+        transform:
+        translateY(0);
+
+    }
 
 }
 
+
+
+/* =========================
+ LOGIN TEXT
+========================= */
 
 
 .premiumLogin{
 
-text-align:center;
-
-color:white;
+    text-align:center;
 
 }
 
 
-
 .premiumLogin h1{
 
-font-size:42px;
+    margin:0;
 
-letter-spacing:6px;
+    font-size:45px;
 
-margin:0;
+    letter-spacing:8px;
 
-font-weight:900;
+    font-weight:900;
 
-background:
 
-linear-gradient(
-90deg,
-#facc15,
-white,
-#facc15
-);
+    background:
 
--webkit-background-clip:text;
+    linear-gradient(
+        90deg,
+        #facc15,
+        #ffffff,
+        #facc15
+    );
 
--webkit-text-fill-color:transparent;
+
+    -webkit-background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+
+
+    filter:
+
+    drop-shadow(
+        0 0 20px #facc15
+    );
 
 }
 
@@ -1567,17 +293,15 @@ white,
 
 .premiumLogin h2{
 
-border:none;
+    margin:15px 0;
 
-padding:0;
+    color:white;
 
-margin:15px 0;
+    border:none;
 
-color:white;
+    font-size:22px;
 
-letter-spacing:3px;
-
-font-size:22px;
+    letter-spacing:4px;
 
 }
 
@@ -1585,20 +309,21 @@ font-size:22px;
 
 .line{
 
-height:2px;
+    width:80%;
 
-width:80%;
+    height:2px;
 
-margin:20px auto;
+    margin:25px auto;
 
-background:
 
-linear-gradient(
-90deg,
-transparent,
-#facc15,
-transparent
-);
+    background:
+
+    linear-gradient(
+        90deg,
+        transparent,
+        #facc15,
+        transparent
+    );
 
 }
 
@@ -1606,43 +331,50 @@ transparent
 
 .premiumLogin p{
 
-font-size:13px;
+    color:#94a3b8;
 
-color:#cbd5e1;
+    font-size:12px;
 
-letter-spacing:2px;
-
-margin-bottom:30px;
+    letter-spacing:3px;
 
 }
 
 
 
+/* =========================
+ INPUT LOGIN
+========================= */
+
+
 .premiumLogin input{
 
-width:100%;
+    width:100%;
 
-box-sizing:border-box;
+    height:55px;
 
-margin-bottom:18px;
+    margin-bottom:18px;
 
-height:52px;
+    padding:15px;
 
-border-radius:15px;
 
-padding:15px;
+    border-radius:15px;
 
-background:
 
-rgba(255,255,255,.08);
+    border:
 
-border:
+    1px solid rgba(255,255,255,.2);
 
-1px solid rgba(255,255,255,.2);
 
-color:white;
+    background:
 
-font-size:15px;
+    rgba(255,255,255,.08);
+
+
+    color:white;
+
+    font-size:15px;
+
+    transition:.3s;
 
 }
 
@@ -1650,44 +382,86 @@ font-size:15px;
 
 .premiumLogin input:focus{
 
-outline:none;
+    outline:none;
 
-border-color:#facc15;
 
-box-shadow:
+    border-color:#facc15;
 
-0 0 20px rgba(250,204,21,.4);
+
+    box-shadow:
+
+    0 0 25px rgba(250,204,21,.5);
 
 }
 
 
 
+.premiumLogin input::placeholder{
+
+    color:#94a3b8;
+
+}
+
+
+
+/* =========================
+ LOGIN BUTTON
+========================= */
+
+
 .premiumLogin button{
 
-width:100%;
+    width:100%;
 
-height:55px;
+    height:58px;
 
-border-radius:18px;
 
-background:
+    border:none;
 
-linear-gradient(
-90deg,
-#facc15,
-#f59e0b,
-#facc15
-);
+    border-radius:18px;
 
-background-size:200%;
 
-color:#111;
+    cursor:pointer;
 
-font-size:18px;
 
-font-weight:900;
+    font-size:18px;
 
-animation:goldMove 3s infinite;
+    font-weight:900;
+
+
+    color:#111827;
+
+
+    background:
+
+    linear-gradient(
+        90deg,
+        #facc15,
+        #f59e0b,
+        #facc15
+    );
+
+
+    background-size:200%;
+
+
+    animation:
+
+    goldMove 3s infinite;
+
+}
+
+
+
+@keyframes goldMove{
+
+    0%{
+        background-position:0%;
+    }
+
+    100%{
+        background-position:200%;
+    }
 
 }
 
@@ -1695,358 +469,1009 @@ animation:goldMove 3s infinite;
 
 .premiumLogin span{
 
-display:block;
+    display:block;
 
-margin-top:25px;
+    margin-top:25px;
 
-font-size:12px;
+    color:#64748b;
 
-color:#94a3b8;
+    font-size:12px;
 
-letter-spacing:2px;
-
-}
-
-
-/* ===== CYBER CORE LOGIN ULTRA PREMIUM ===== */
-
-body.login-mode{
-
-background:
-radial-gradient(circle at top left,#2563eb55,transparent 35%),
-radial-gradient(circle at bottom right,#facc1555,transparent 35%),
-linear-gradient(135deg,#020617,#0f172a,#020617);
-
-}
-
-
-/* LOGIN CARD */
-
-#loginBox{
-
-width:430px;
-
-padding:45px;
-
-background:
-rgba(15,23,42,.75);
-
-border-radius:30px;
-
-border:1px solid rgba(255,255,255,.15);
-
-backdrop-filter:blur(25px);
-
-box-shadow:
-
-0 0 40px rgba(37,99,235,.35),
-0 30px 80px rgba(0,0,0,.8);
-
-position:relative;
-
-overflow:hidden;
+    letter-spacing:3px;
 
 }
 
 
 
-/* ANIMATED BORDER */
+/* =========================
+ MOBILE LOGIN
+========================= */
 
-#loginBox::before{
-
-content:"";
-
-position:absolute;
-
-inset:0;
-
-padding:2px;
-
-border-radius:30px;
-
-background:
-linear-gradient(
-90deg,
-#2563eb,
-#facc15,
-#38bdf8,
-#2563eb
-);
-
-background-size:300%;
-
-animation:borderMove 6s linear infinite;
-
--webkit-mask:
-linear-gradient(#fff 0 0) content-box,
-linear-gradient(#fff 0 0);
-
--webkit-mask-composite:xor;
-
-mask-composite:exclude;
-
-}
-
-
-@keyframes borderMove{
-
-0%{
-background-position:0%;
-}
-
-100%{
-background-position:300%;
-}
-
-}
-
-
-
-/* LOGO */
-
-.premiumLogin h1{
-
-font-size:45px;
-
-letter-spacing:8px;
-
-margin-bottom:10px;
-
-font-weight:900;
-
-background:
-
-linear-gradient(
-90deg,
-#facc15,
-#ffffff,
-#facc15
-);
-
--webkit-background-clip:text;
-
--webkit-text-fill-color:transparent;
-
-filter:
-drop-shadow(0 0 15px #facc15);
-
-}
-
-
-
-/* SUB TITLE */
-
-.premiumLogin h2{
-
-font-size:22px;
-
-letter-spacing:4px;
-
-color:white;
-
-margin:15px 0;
-
-border:none;
-
-}
-
-
-
-/* GARIS */
-
-.line{
-
-height:2px;
-
-width:80%;
-
-margin:25px auto;
-
-background:
-
-linear-gradient(
-90deg,
-transparent,
-#facc15,
-transparent
-);
-
-}
-
-
-
-/* TEXT */
-
-.premiumLogin p{
-
-color:#94a3b8;
-
-letter-spacing:3px;
-
-font-size:12px;
-
-}
-
-
-
-/* INPUT */
-
-.premiumLogin input{
-
-height:55px;
-
-box-sizing:border-box;
-
-background:
-
-rgba(255,255,255,.08);
-
-border:
-
-1px solid rgba(255,255,255,.2);
-
-color:white;
-
-border-radius:15px;
-
-padding:15px;
-
-font-size:15px;
-
-transition:.3s;
-
-}
-
-
-.premiumLogin input:focus{
-
-border-color:#facc15;
-
-box-shadow:
-
-0 0 20px rgba(250,204,21,.5);
-
-}
-
-
-
-/* BUTTON LOGIN */
-
-.premiumLogin button{
-
-height:58px;
-
-margin-top:10px;
-
-border-radius:18px;
-
-background:
-
-linear-gradient(
-90deg,
-#facc15,
-#f59e0b,
-#facc15
-);
-
-background-size:200%;
-
-color:#111;
-
-font-size:18px;
-
-font-weight:900;
-
-animation:
-
-goldButton 3s infinite;
-
-}
-
-
-
-@keyframes goldButton{
-
-0%{
-background-position:0%;
-}
-
-100%{
-background-position:200%;
-}
-
-}
-
-
-
-/* FOOTER */
-
-.premiumLogin span{
-
-display:block;
-
-margin-top:25px;
-
-font-size:12px;
-
-color:#64748b;
-
-letter-spacing:3px;
-
-}
-
-
-
-/* MOBILE */
 
 @media(max-width:600px){
 
-#loginBox{
+    body{
 
-width:85%;
+        padding:10px;
 
-padding:30px;
+    }
+
+
+    #loginBox{
+
+        width:90%;
+
+        padding:30px;
+
+    }
+
+
+    .premiumLogin h1{
+
+        font-size:35px;
+
+        letter-spacing:5px;
+
+    }
+
+}
+
+/* =====================================================
+   CYBER CORE ULTRA PREMIUM
+   PART 2/3
+   DASHBOARD + MENU + CARD SYSTEM
+===================================================== */
+
+
+/* =========================
+   ADMIN INFO CLOCK
+========================= */
+
+
+#adminInfo{
+
+    width:max-content;
+
+    min-width:300px;
+
+    padding:22px 35px;
+
+    margin-bottom:25px;
+
+    text-align:center;
+
+    border-radius:28px;
+
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #020617,
+        #1e3a8a
+    );
+
+
+    box-shadow:
+
+    0 25px 60px rgba(0,0,0,.45);
 
 }
 
 
-.premiumLogin h1{
 
-font-size:35px;
+#serverStatus{
+
+    color:#4ade80;
+
+    font-weight:900;
+
+    font-size:14px;
 
 }
 
+
+
+#adminName{
+
+    margin:15px 0;
+
+    font-size:24px;
+
+    font-weight:900;
+
+    letter-spacing:3px;
+
+
+    background:
+
+    linear-gradient(
+        90deg,
+        #facc15,
+        #ffffff,
+        #facc15
+    );
+
+
+    -webkit-background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+
 }
 
-</style>
 
-<style>
+
+#currentDate{
+
+    color:#cbd5e1;
+
+    font-size:14px;
+
+}
+
+
+
+#currentTime{
+
+    margin:10px 0;
+
+    font-size:40px;
+
+    font-weight:900;
+
+    letter-spacing:4px;
+
+    color:white;
+
+    text-shadow:
+
+    0 0 20px rgba(255,255,255,.5);
+
+}
+
+
+
+#timezone{
+
+    color:#94a3b8;
+
+    font-size:13px;
+
+}
+
+
+
+/* =========================
+   MAIN CONTENT
+========================= */
+
+
+#content{
+
+    max-width:1450px;
+
+    margin:auto;
+
+    padding:40px;
+
+
+    background:
+
+    rgba(255,255,255,.95);
+
+
+    color:#0f172a;
+
+
+    border-radius:35px;
+
+
+    box-shadow:
+
+    0 40px 100px rgba(0,0,0,.45);
+
+
+    animation:
+
+    dashboardShow .5s ease;
+
+}
+
+
+
+@keyframes dashboardShow{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(30px);
+
+    }
+
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+
+/* =========================
+   TOP BAR
+========================= */
+
+
+.topBar{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:25px;
+
+}
+
+
+
+.logoutBtn{
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #ef4444,
+        #991b1b
+    );
+
+
+    color:white;
+
+}
+
+
+
+/* =========================
+   BUTTON SYSTEM
+========================= */
+
+
+button{
+
+    position:relative;
+
+    overflow:hidden;
+
+
+    padding:13px 22px;
+
+
+    border:none;
+
+    border-radius:18px;
+
+
+    cursor:pointer;
+
+
+    font-weight:900;
+
+    color:white;
+
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #2563eb,
+        #1e40af
+    );
+
+
+    box-shadow:
+
+    0 10px 25px rgba(37,99,235,.35);
+
+
+    transition:.3s;
+
+}
+
+
+
+button:hover{
+
+    transform:
+
+    translateY(-3px);
+
+
+    box-shadow:
+
+    0 15px 35px rgba(37,99,235,.45);
+
+}
+
+
+
+button:active{
+
+    transform:scale(.95);
+
+}
+
+
+
+button::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:-120%;
+
+
+    width:100%;
+
+    height:100%;
+
+
+    background:
+
+    linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,.45),
+        transparent
+    );
+
+
+    transition:.5s;
+
+}
+
+
+
+button:hover::before{
+
+    left:120%;
+
+}
+
+
+
+/* =========================
+   MENU BOX
+========================= */
+
+
+#menuBox{
+
+    padding:25px;
+
+    margin-top:20px;
+
+
+    border-radius:30px;
+
+
+    background:
+
+    linear-gradient(
+        145deg,
+        #ffffff,
+        #eff6ff
+    );
+
+
+    border:
+
+    1px solid #bfdbfe;
+
+
+    box-shadow:
+
+    0 25px 60px rgba(15,23,42,.2);
+
+}
+
+
+
+.menuLayout{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+
+}
+
+
+
+.rightMenu{
+
+    padding:25px;
+
+
+    border-radius:25px;
+
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #eff6ff,
+        white
+    );
+
+
+    border:
+
+    1px solid #bfdbfe;
+
+}
+
+
+
+.rightMenu h3{
+
+    color:#1d4ed8;
+
+    font-size:20px;
+
+}
+
+
+
+.rightMenu label{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+
+    padding:8px;
+
+    border-radius:10px;
+
+    transition:.2s;
+
+}
+
+
+
+.rightMenu label:hover{
+
+    background:#dbeafe;
+
+}
+
+
+
+.rightMenu input{
+
+    width:18px;
+
+    height:18px;
+
+}
+
+
+
+.leftMenu{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+
+}
+
+
+
+.leftMenu button{
+
+    width:240px;
+
+    text-align:left;
+
+}
+
+
+
+/* =========================
+   QRIS TOTAL CARD
+========================= */
+
+
+.qrisTotalBox{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:25px;
+
+    margin:25px 0;
+
+}
+
+
+
+.qrisCard{
+
+    flex:1;
+
+    min-width:260px;
+
+
+    padding:30px;
+
+
+    text-align:center;
+
+
+    border-radius:25px;
+
+
+    background:
+
+    linear-gradient(
+        145deg,
+        #ffffff,
+        #dbeafe
+    );
+
+
+    border:
+
+    1px solid #93c5fd;
+
+
+    box-shadow:
+
+    0 25px 50px rgba(37,99,235,.2);
+
+
+    transition:.35s;
+
+}
+
+
+
+.qrisCard:hover{
+
+    transform:
+
+    translateY(-10px);
+
+}
+
+
+
+.qrisCard h2{
+
+    border:none;
+
+    padding:0;
+
+    margin:0;
+
+
+    color:#2563eb;
+
+    font-size:18px;
+
+}
+
+
+
+.qrisCard span{
+
+    display:block;
+
+    margin-top:15px;
+
+
+    font-size:36px;
+
+    font-weight:900;
+
+
+    color:#2563eb;
+
+
+    text-shadow:
+
+    0 0 20px rgba(37,99,235,.5);
+
+}
+
+
+
+/* =========================
+   PAGE CARD
+========================= */
+
+
+#depositPage,
+#withdrawPage,
+#qrisPage,
+#cashBackPage,
+#inputCashBackPage,
+#doubleCashBackPage,
+#doubleAccPage,
+#formulaPage{
+
+
+    margin-top:25px;
+
+
+    padding:30px;
+
+
+    border-radius:30px;
+
+
+    background:
+
+    linear-gradient(
+        145deg,
+        #ffffff,
+        #f8fafc
+    );
+
+
+    border:
+
+    1px solid #e2e8f0;
+
+
+    box-shadow:
+
+    0 25px 60px rgba(15,23,42,.15);
+
+
+    animation:
+
+    pageOpen .5s ease;
+
+}
+
+
+
+@keyframes pageOpen{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+
+h2{
+
+    color:#0f172a;
+
+    font-weight:900;
+
+    border-left:
+
+    5px solid #2563eb;
+
+
+    padding-left:12px;
+
+}
+
+/* =====================================================
+   CYBER CORE ULTRA PREMIUM
+   PART 3/3
+   TABLE + FORM + FORMULA + MOBILE FINISHING
+===================================================== */
+
+
+/* =========================
+   TABLE SYSTEM
+========================= */
+
+
+table{
+
+    width:100%;
+
+    border-collapse:separate;
+
+    border-spacing:0;
+
+    margin-top:25px;
+
+    overflow:hidden;
+
+    border-radius:20px;
+
+    background:white;
+
+
+    box-shadow:
+
+    0 15px 35px rgba(15,23,42,.12);
+
+}
+
+
+
+thead th{
+
+    padding:15px 12px;
+
+
+    color:white;
+
+
+    text-transform:uppercase;
+
+
+    font-size:13px;
+
+
+    letter-spacing:1px;
+
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #020617,
+        #1e40af,
+        #2563eb
+    );
+
+
+}
+
+
+
+tbody td{
+
+    padding:14px;
+
+
+    text-align:center;
+
+
+    color:#334155;
+
+
+    font-size:14px;
+
+
+    font-weight:600;
+
+
+    border-bottom:
+
+    1px solid #e2e8f0;
+
+}
+
+
+
+tbody tr{
+
+    background:white;
+
+    transition:.25s;
+
+}
+
+
+
+tbody tr:hover{
+
+    background:#eff6ff;
+
+
+    transform:
+
+    scale(1.01);
+
+
+    box-shadow:
+
+    0 10px 25px rgba(37,99,235,.15);
+
+}
+
+
+
+tbody tr:last-child td{
+
+    border-bottom:none;
+
+}
+
+
+
+/* =========================
+   INPUT AREA
+========================= */
+
+
+textarea,
+input[type="file"]{
+
+    width:100%;
+
+
+    padding:15px;
+
+
+    border-radius:16px;
+
+
+    border:
+
+    1px solid #cbd5e1;
+
+
+    background:#f8fafc;
+
+
+    color:#0f172a;
+
+
+    font-size:14px;
+
+
+    transition:.3s;
+
+}
+
+
+
+textarea{
+
+    min-height:150px;
+
+}
+
+
+
+textarea:focus,
+input[type="file"]:focus{
+
+
+    outline:none;
+
+
+    border-color:#2563eb;
+
+
+    background:white;
+
+
+    box-shadow:
+
+    0 0 20px rgba(37,99,235,.25);
+
+}
+
+
+
+/* =========================
+   ACTION BUTTON GROUP
+========================= */
+
+
+#depositPage button,
+#withdrawPage button,
+#qrisPage button,
+#cashBackPage button,
+#inputCashBackPage button,
+#doubleCashBackPage button,
+#doubleAccPage button{
+
+
+    margin:5px;
+
+}
+
+
+
+/* =========================
+   FORMULA PAGE
+========================= */
+
 
 #formulaPage{
-    padding:30px;
-    animation: fadeIn 0.5s ease;
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #020617,
+        #0f172a
+    );
+
+
+    color:white;
+
 }
+
+
 
 #formulaPage h2{
-    font-size:32px;
+
     text-align:center;
+
+    border:none;
+
+
     color:#38bdf8;
-    text-shadow:0 0 15px #38bdf8;
-    margin-bottom:10px;
+
+
+    font-size:32px;
+
+
+    text-shadow:
+
+    0 0 20px #38bdf8;
+
 }
 
+
+
 #formulaPage p{
+
     text-align:center;
+
     color:#94a3b8;
-    font-size:16px;
-    margin-bottom:35px;
+
 }
+
 
 
 .formulaGrid{
 
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+
+
+    grid-template-columns:
+
+    repeat(
+        auto-fit,
+        minmax(280px,1fr)
+    );
+
+
     gap:25px;
 
 }
@@ -2055,26 +1480,42 @@ font-size:35px;
 
 .formulaCard{
 
-    background:
-    linear-gradient(145deg,#0f172a,#1e293b);
-
-    border:1px solid rgba(56,189,248,.3);
-
-    border-radius:20px;
-
-    padding:30px;
-
-    text-align:center;
-
-    box-shadow:
-    0 0 20px rgba(56,189,248,.15),
-    inset 0 0 20px rgba(255,255,255,.03);
-
-    transition:.35s;
 
     position:relative;
 
+
     overflow:hidden;
+
+
+    padding:30px;
+
+
+    border-radius:25px;
+
+
+    text-align:center;
+
+
+    background:
+
+    linear-gradient(
+        145deg,
+        #0f172a,
+        #1e293b
+    );
+
+
+    border:
+
+    1px solid rgba(56,189,248,.3);
+
+
+    box-shadow:
+
+    0 0 30px rgba(56,189,248,.15);
+
+
+    transition:.35s;
 
 }
 
@@ -2082,10 +1523,15 @@ font-size:35px;
 
 .formulaCard:hover{
 
-    transform:translateY(-8px);
+
+    transform:
+
+    translateY(-10px);
+
 
     box-shadow:
-    0 0 35px rgba(56,189,248,.5);
+
+    0 0 45px rgba(56,189,248,.45);
 
 }
 
@@ -2097,8 +1543,6 @@ font-size:35px;
 
     font-size:22px;
 
-    margin-bottom:15px;
-
 }
 
 
@@ -2107,36 +1551,29 @@ font-size:35px;
 
     color:#cbd5e1;
 
-    font-size:15px;
-
 }
 
 
 
 .formulaCard button{
 
+
     margin-top:20px;
+
 
     width:90%;
 
-    padding:14px;
-
-    border:none;
-
-    border-radius:12px;
 
     background:
-    linear-gradient(135deg,#facc15,#eab308);
+
+    linear-gradient(
+        135deg,
+        #facc15,
+        #eab308
+    );
+
 
     color:#111827;
-
-    font-weight:800;
-
-    font-size:15px;
-
-    cursor:pointer;
-
-    transition:.3s;
 
 }
 
@@ -2144,91 +1581,555 @@ font-size:35px;
 
 .formulaCard button:hover{
 
-    transform:scale(1.05);
 
     box-shadow:
-    0 0 20px #facc15;
+
+    0 0 25px #facc15;
 
 }
 
 
 
-.formulaCard button:active{
-
-    transform:scale(.95);
-
-}
-
+/* =========================
+   STATUS BADGE
+========================= */
 
 
 .status{
 
+
     display:inline-block;
+
 
     margin-top:15px;
 
+
     padding:8px 18px;
 
-    border-radius:20px;
 
-    background:rgba(34,197,94,.15);
+    border-radius:30px;
+
 
     color:#4ade80;
 
-    font-size:13px;
 
-    border:1px solid rgba(34,197,94,.4);
+    background:
+
+    rgba(34,197,94,.15);
+
+
+    border:
+
+    1px solid rgba(34,197,94,.4);
 
 }
 
 
 
-.formulaCard::before{
+/* =========================
+   SCROLL BAR
+========================= */
+
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+
+
+::-webkit-scrollbar-track{
+
+    background:#020617;
+
+}
+
+
+
+::-webkit-scrollbar-thumb{
+
+
+    background:
+
+    linear-gradient(
+        #2563eb,
+        #facc15
+    );
+
+
+    border-radius:20px;
+
+}
+
+
+
+/* =========================
+   SPECIAL EFFECT
+========================= */
+
+
+::selection{
+
+    background:#facc15;
+
+    color:#020617;
+
+}
+
+
+
+hr{
+
+    border:none;
+
+
+    height:1px;
+
+
+    background:#cbd5e1;
+
+
+    margin:25px 0;
+
+}
+
+
+
+/* =========================
+   MOBILE FINAL
+========================= */
+
+
+@media(max-width:700px){
+
+
+    body{
+
+        padding:10px;
+
+    }
+
+
+
+    #content{
+
+        padding:20px;
+
+        border-radius:20px;
+
+    }
+
+
+
+    #adminInfo{
+
+        width:100%;
+
+    }
+
+
+
+    .topBar{
+
+        flex-direction:column;
+
+        gap:15px;
+
+    }
+
+
+
+    .leftMenu button{
+
+        width:100%;
+
+    }
+
+
+
+    .qrisTotalBox{
+
+        flex-direction:column;
+
+    }
+
+
+
+    .qrisCard{
+
+        width:100%;
+
+    }
+
+
+
+    table{
+
+        font-size:12px;
+
+    }
+
+
+
+    th,
+    td{
+
+        padding:8px;
+
+    }
+
+
+
+    .premiumLogin h1{
+
+        font-size:32px;
+
+    }
+
+
+}
+
+
+
+/* =========================
+   FINAL CYBER CORE TOUCH
+========================= */
+
+
+.logoBox h1{
+
+
+    animation:
+
+    cyberGlow 3s infinite;
+
+}
+
+
+
+@keyframes cyberGlow{
+
+
+0%,100%{
+
+
+    filter:
+
+    drop-shadow(
+        0 0 5px #facc15
+    );
+
+
+}
+
+
+
+50%{
+
+
+    filter:
+
+    drop-shadow(
+        0 0 25px #facc15
+    );
+
+
+}
+
+
+}
+
+#loginBox::before{
+    pointer-events:none;
+}
+
+#loginBox > *{
+    position:relative;
+    z-index:5;
+}
+
+/* =========================
+   FIX MENU SELECTION SIZE
+========================= */
+
+
+#menuBox{
+
+    width:350px;
+
+    max-width:350px;
+
+    padding:15px;
+
+}
+
+
+
+.menuLayout{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+
+}
+
+
+
+.rightMenu{
+
+    width:100%;
+
+    padding:18px;
+
+}
+
+
+
+.rightMenu label{
+
+    display:flex;
+
+    width:100%;
+
+    justify-content:flex-start;
+
+    align-items:center;
+
+    gap:10px;
+
+    white-space:nowrap;
+
+}
+
+
+
+.rightMenu input{
+
+    flex:none;
+
+}
+
+
+
+/* MENU BUTTON DI BAWAH */
+
+.leftMenu{
+
+    width:100%;
+
+}
+
+
+
+.leftMenu button{
+
+    width:100%;
+
+}
+
+
+/* =========================
+   PREMIUM ADMIN INFO PANEL
+========================= */
+
+#adminInfo{
+
+    width:380px;
+
+    padding:25px 30px;
+
+    background:
+
+    linear-gradient(
+        145deg,
+        #020617,
+        #0f172a,
+        #1e3a8a
+    );
+
+
+    border-radius:25px;
+
+
+    border:
+
+    1px solid rgba(250,204,21,.35);
+
+
+    box-shadow:
+
+    0 20px 60px rgba(0,0,0,.6),
+
+    inset 0 0 30px rgba(37,99,235,.15);
+
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+
+
+#adminInfo::before{
 
     content:"";
 
     position:absolute;
 
-    width:120px;
+    inset:0;
 
-    height:120px;
+    background:
 
-    background:#38bdf8;
+    linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,.08),
+        transparent
+    );
 
-    filter:blur(80px);
 
-    opacity:.2;
+    transform:translateX(-100%);
 
-    top:-40px;
+    animation:adminShine 5s infinite;
 
-    right:-40px;
+}
+
+
+@keyframes adminShine{
+
+    50%{
+
+        transform:translateX(100%);
+
+    }
 
 }
 
 
 
-@keyframes fadeIn{
+/* SERVER STATUS */
 
-from{
+#serverStatus{
 
-opacity:0;
+    display:inline-block;
 
-transform:translateY(20px);
+    padding:6px 15px;
+
+    border-radius:20px;
+
+
+    color:#4ade80;
+
+    background:
+
+    rgba(34,197,94,.15);
+
+
+    border:
+
+    1px solid rgba(74,222,128,.4);
+
+
+    font-weight:900;
+
+    letter-spacing:1px;
 
 }
 
-to{
 
-opacity:1;
 
-transform:translateY(0);
+/* SYSTEM NAME */
+
+#adminName{
+
+    margin:18px 0;
+
+
+    font-size:26px;
+
+
+    font-weight:900;
+
+
+    letter-spacing:3px;
+
+
+    color:#facc15;
+
+
+    text-shadow:
+
+    0 0 15px rgba(250,204,21,.7);
 
 }
+
+
+
+/* DATE */
+
+#currentDate{
+
+    color:#cbd5e1;
+
+    font-size:15px;
+
+    font-weight:700;
+
+    letter-spacing:1px;
+
+}
+
+
+
+/* CLOCK */
+
+#currentTime{
+
+    margin:12px 0;
+
+
+    font-size:42px;
+
+
+    font-weight:900;
+
+
+    letter-spacing:5px;
+
+
+    color:white;
+
+
+    text-shadow:
+
+    0 0 20px #38bdf8,
+
+    0 0 40px rgba(56,189,248,.5);
+
+}
+
+
+
+/* TIMEZONE */
+
+#timezone{
+
+    color:#94a3b8;
+
+    font-size:13px;
+
+    font-weight:700;
 
 }
 
 
 </style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
 </head>
 
@@ -2336,6 +2237,11 @@ Deposit PGA
 </label>
 
 <label>
+<input type="checkbox" id="checkPgaChecking" checked onchange="toggleMenu()">
+PGA Data Checking
+</label>
+
+<label>
 <input type="checkbox" id="checkDeposit" checked onchange="toggleMenu()">
 Deposit
 </label>
@@ -2343,11 +2249,6 @@ Deposit
 <label>
 <input type="checkbox" id="checkWithdraw" checked onchange="toggleMenu()">
 Withdraw
-</label>
-
-<label>
-<input type="checkbox" id="checkQris" checked onchange="toggleMenu()">
-QRIS Cepat
 </label>
 
 <label>
@@ -2388,6 +2289,10 @@ Double ACC
 💰 Deposit PGA
 </button>
 
+<button id="btnPgaChecking" onclick="showPgaChecking()">
+🔍 PGA Data Checking
+</button>
+
 <button id="btnDeposit" onclick="showDeposit()">
 💰 Deposit
 </button>
@@ -2421,7 +2326,6 @@ Double ACC
 </button>
 
 </div>
-
 
 </div>
 
@@ -2508,6 +2412,63 @@ Rp 0
 </thead>
 
 <tbody id="depositPgaData"></tbody>
+
+
+</table>
+
+
+</div>
+
+<div id="pgaCheckingPage" style="display:none">
+
+<h2>PGA Data Checking</h2>
+
+
+<h3>Upload PGA Admin CSV</h3>
+<input type="file" id="pgaAdminFile" accept=".csv">
+
+
+<h3>Upload PGA Motion XLSX</h3>
+<input type="file" id="pgaMotionFile" accept=".xlsx" multiple>
+
+
+<br><br>
+
+
+<button onclick="processPgaChecking()">
+🚀 CHECK DATA
+</button>
+
+
+<button onclick="copyPgaResult()">
+📋 COPY RESULT
+</button>
+
+
+<button onclick="clearPgaResult()">
+🗑️ CLEAR
+</button>
+
+
+<br><br>
+
+
+<table id="pgaResultTable" border="1" style="width:100%">
+
+<thead>
+
+<tr>
+<th>ID</th>
+<th>Amount</th>
+<th>Ref Number</th>
+</tr>
+
+</thead>
+
+
+<tbody>
+
+</tbody>
 
 
 </table>
@@ -3098,6 +3059,9 @@ const supabaseClient = supabase.createClient(
 );
 
 
+let pgaAdminData = [];
+let pgaMotionData = [];
+
 
 window.onload = async function(){
 
@@ -3252,8 +3216,27 @@ function showDepositPga(){
     document.getElementById("doubleCashBackPage").style.display="none";
     document.getElementById("doubleAccPage").style.display="none";
     document.getElementById("formulaPage").style.display="none";
+    document.getElementById("pgaCheckingPage").style.display="none";
 
     document.getElementById("depositPgaPage").style.display="block";
+
+}
+
+
+
+function showPgaChecking(){
+
+    document.getElementById("depositPgaPage").style.display="none";
+    document.getElementById("depositPage").style.display="none";
+    document.getElementById("withdrawPage").style.display="none";
+    document.getElementById("qrisPage").style.display="none";
+    document.getElementById("inputCashBackPage").style.display="none";
+    document.getElementById("cashBackPage").style.display="none";
+    document.getElementById("doubleCashBackPage").style.display="none";
+    document.getElementById("doubleAccPage").style.display="none";
+    document.getElementById("formulaPage").style.display="none";
+
+    document.getElementById("pgaCheckingPage").style.display="block";
 
 }
 
@@ -3269,6 +3252,7 @@ function showDeposit(){
     document.getElementById("doubleCashBackPage").style.display="none";
     document.getElementById("doubleAccPage").style.display="none";
     document.getElementById("formulaPage").style.display="none";
+    document.getElementById("pgaCheckingPage").style.display="none";
 
     document.getElementById("depositPage").style.display="block";
 
@@ -3286,6 +3270,7 @@ function showWithdraw(){
     document.getElementById("doubleCashBackPage").style.display="none";
     document.getElementById("doubleAccPage").style.display="none";
     document.getElementById("formulaPage").style.display="none";
+    document.getElementById("pgaCheckingPage").style.display="none";
 
     document.getElementById("withdrawPage").style.display="block";
 
@@ -3303,6 +3288,7 @@ function showQris(){
     document.getElementById("doubleCashBackPage").style.display="none";
     document.getElementById("doubleAccPage").style.display="none";
     document.getElementById("formulaPage").style.display="none";
+    document.getElementById("pgaCheckingPage").style.display="none";
 
     document.getElementById("qrisPage").style.display="block";
 
@@ -3320,6 +3306,7 @@ function showInputCashBack(){
     document.getElementById("doubleCashBackPage").style.display="none";
     document.getElementById("doubleAccPage").style.display="none";
     document.getElementById("formulaPage").style.display="none";
+    document.getElementById("pgaCheckingPage").style.display="none";
 
     document.getElementById("inputCashBackPage").style.display="block";
 
@@ -3337,6 +3324,7 @@ function showCashBack(){
     document.getElementById("doubleCashBackPage").style.display="none";
     document.getElementById("doubleAccPage").style.display="none";
     document.getElementById("formulaPage").style.display="none";
+    document.getElementById("pgaCheckingPage").style.display="none";
 
     document.getElementById("cashBackPage").style.display="block";
 
@@ -3354,6 +3342,7 @@ function showDoubleCashBack(){
     document.getElementById("cashBackPage").style.display="none";
     document.getElementById("doubleAccPage").style.display="none";
     document.getElementById("formulaPage").style.display="none";
+    document.getElementById("pgaCheckingPage").style.display="none";
 
     document.getElementById("doubleCashBackPage").style.display="block";
 
@@ -3371,6 +3360,7 @@ function showDoubleAcc(){
     document.getElementById("cashBackPage").style.display="none";
     document.getElementById("doubleCashBackPage").style.display="none";
     document.getElementById("formulaPage").style.display="none";
+    document.getElementById("pgaCheckingPage").style.display="none";
 
     document.getElementById("doubleAccPage").style.display="block";
 
@@ -3388,6 +3378,7 @@ function showFormula(){
     document.getElementById("cashBackPage").style.display="none";
     document.getElementById("doubleCashBackPage").style.display="none";
     document.getElementById("doubleAccPage").style.display="none";
+    document.getElementById("pgaCheckingPage").style.display="none";
 
     document.getElementById("formulaPage").style.display="block";
 
@@ -3466,6 +3457,10 @@ function toggleMenu(){
 document.getElementById("btnDepositPga").style.display =
 document.getElementById("checkDepositPga").checked ? "block" : "none";
 
+document.getElementById("btnPgaDataChecking").style.display =
+document.getElementById("checkPgaDataChecking").checked ? "block" : "none";
+
+
 document.getElementById("btnDeposit").style.display =
 document.getElementById("checkDeposit").checked ? "block" : "none";
 
@@ -3488,6 +3483,7 @@ document.getElementById("checkDoubleCashBack").checked ? "block" : "none";
 
 document.getElementById("btnDoubleAcc").style.display =
 document.getElementById("checkDoubleAcc").checked ? "block" : "none";
+
 }
 
 
@@ -5756,7 +5752,376 @@ function clearCoinCashBack(){
 
 }
 
+// =========================
+// AUTO LOGOUT 5 MENIT
+// =========================
 
+let idleTimer;
+
+const idleLimit = 5 * 60 * 1000; // 5 menit
+
+
+function resetIdleTimer(){
+
+    clearTimeout(idleTimer);
+
+
+    idleTimer = setTimeout(()=>{
+
+        alert("Session expired. Silahkan login kembali.");
+
+        logout();
+
+    }, idleLimit);
+
+}
+
+
+// deteksi aktivitas user
+
+[
+    "mousemove",
+    "mousedown",
+    "keypress",
+    "touchstart",
+    "scroll"
+].forEach(event => {
+
+    document.addEventListener(
+        event,
+        resetIdleTimer
+    );
+
+});
+
+
+// mulai timer saat halaman aktif
+
+resetIdleTimer();
+
+function processPgaChecking(){
+
+    let adminFile = document.getElementById("pgaAdminFile").files[0];
+    let motionFiles = document.getElementById("pgaMotionFile").files;
+
+
+    if(!adminFile || motionFiles.length === 0){
+
+        alert("Upload PGA Admin CSV dan PGA Motion XLSX dulu");
+        return;
+
+    }
+
+
+
+    let reader = new FileReader();
+
+
+    reader.onload = function(e){
+
+
+        let csvText = e.target.result;
+
+
+        let rows = csvText.split("\n")
+        .map(r=>r.split(","));
+
+
+
+        pgaAdminData = [];
+
+
+
+        for(let i=1;i<rows.length;i++){
+
+
+            let row = rows[i];
+
+
+            if(row.length < 8) continue;
+
+
+
+            pgaAdminData.push({
+
+                id: row[0]?.replace(/"/g,"").trim(),
+
+                ref: row[1]?.replace(/"/g,"").trim(),
+
+                amount: row[7]?.replace(/"/g,"").replace(/,/g,"").trim()
+
+
+            });
+
+
+        }
+
+
+
+        readPgaMotionFiles(motionFiles);
+
+
+    };
+
+
+    reader.readAsText(adminFile);
+
+
+}
+
+
+
+
+
+function readPgaMotionFiles(files){
+
+
+    pgaMotionData = [];
+
+
+    let count = 0;
+
+
+
+    for(let file of files){
+
+
+        let reader = new FileReader();
+
+
+
+        reader.onload = function(e){
+
+
+
+            let data = new Uint8Array(e.target.result);
+
+
+            let workbook = XLSX.read(data,{type:"array"});
+
+
+            let sheet = workbook.Sheets[workbook.SheetNames[0]];
+
+
+            let json = XLSX.utils.sheet_to_json(sheet);
+
+
+
+            json.forEach(row=>{
+
+
+                let deskripsi = String(row["Deskripsi"] || "");
+
+
+                let userId = deskripsi
+                .replace("Deposit from ","")
+                .trim();
+
+
+
+                pgaMotionData.push({
+
+
+                    id: userId,
+
+
+                    ref: String(row["No. Ref"] || "")
+                    .replace(/'/g,"")
+                    .trim(),
+
+
+                    amount: row["Jumlah Bayar"] || ""
+
+
+                });
+
+
+
+            });
+
+
+
+            count++;
+
+
+
+            if(count === files.length){
+
+
+                comparePgaData();
+
+
+            }
+
+
+        };
+
+
+
+        reader.readAsArrayBuffer(file);
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+function comparePgaData(){
+
+    let tbody = document.querySelector("#pgaResultTable tbody");
+
+    tbody.innerHTML="";
+
+
+    let adminIndex = {};
+
+
+    pgaAdminData.forEach(admin=>{
+
+
+        let key = String(admin.ref)
+        .replace(/'/g,"")
+        .trim()
+        .toUpperCase();
+
+
+        adminIndex[key] = admin;
+
+
+    });
+
+
+
+    let totalMatch = 0;
+
+
+
+    pgaMotionData.forEach(motion=>{
+
+
+        let refKey = String(motion.ref)
+        .replace(/'/g,"")
+        .trim()
+        .toUpperCase();
+
+
+
+        let admin = adminIndex[refKey];
+
+
+
+        if(!admin){
+
+
+            let tr=document.createElement("tr");
+
+
+            tr.innerHTML=`
+
+            <td>${motion.id}</td>
+
+            <td>${Number(motion.amount).toLocaleString()}</td>
+
+            <td>${motion.ref}</td>
+
+            `;
+
+
+            tbody.appendChild(tr);
+
+
+            totalMatch++;
+
+
+        }
+
+
+
+    });
+
+
+
+    alert(
+        "PGA Checking selesai\n\nData bermasalah: "
+        + totalMatch
+        + " transaksi"
+    );
+
+
+}
+
+function copyPgaResult(){
+
+    let rows = document.querySelectorAll("#pgaResultTable tbody tr");
+
+
+    if(rows.length === 0){
+
+        alert("Belum ada hasil PGA");
+
+        return;
+
+    }
+
+
+    let text = "";
+
+
+    rows.forEach(row=>{
+
+
+        let col = row.querySelectorAll("td");
+
+
+        text +=
+        col[0].innerText + "\t" +
+        col[1].innerText + "\t" +
+        col[2].innerText + "\n";
+
+
+    });
+
+
+
+    navigator.clipboard.writeText(text)
+    .then(()=>{
+
+        alert("COPY RESULT berhasil");
+
+    })
+    .catch(()=>{
+
+        alert("COPY gagal");
+
+    });
+
+}
+
+
+
+
+
+
+
+function clearPgaResult(){
+
+
+    let tbody = document.querySelector("#pgaResultTable tbody");
+
+
+    tbody.innerHTML="";
+
+
+    alert("Data PGA sudah dihapus");
+
+
+}
 </script>
 
 
