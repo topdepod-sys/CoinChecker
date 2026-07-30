@@ -12,12 +12,12 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
 /* =====================================================
    CYBER CORE ULTRA PREMIUM
-   PART 1/3
-   LOGIN SYSTEM + GLOBAL STYLE
+   PART 1
+   RESET + LOGIN SYSTEM
 ===================================================== */
 
 
-/* GLOBAL RESET */
+/* RESET */
 
 *{
     box-sizing:border-box;
@@ -35,16 +35,19 @@ body{
     sans-serif;
 
     background:
+
     radial-gradient(
         circle at 15% 20%,
         rgba(37,99,235,.35),
         transparent 35%
     ),
+
     radial-gradient(
         circle at 85% 80%,
         rgba(250,204,21,.25),
         transparent 35%
     ),
+
     linear-gradient(
         135deg,
         #020617,
@@ -58,7 +61,7 @@ body{
 
 
 /* =========================
-   LOGIN BACKGROUND
+ LOGIN MODE
 ========================= */
 
 
@@ -77,6 +80,7 @@ body.login-mode{
 }
 
 
+
 body.login-mode::before{
 
     content:"";
@@ -84,6 +88,7 @@ body.login-mode::before{
     position:fixed;
 
     inset:0;
+
 
     background:
 
@@ -93,10 +98,12 @@ body.login-mode::before{
         transparent 40%
     );
 
+
     animation:
     cyberPulse 8s infinite;
 
 }
+
 
 
 @keyframes cyberPulse{
@@ -104,6 +111,7 @@ body.login-mode::before{
     0%,100%{
         opacity:.5;
     }
+
 
     50%{
         opacity:1;
@@ -128,12 +136,12 @@ body.login-mode::before{
 
     overflow:hidden;
 
-    background:
 
+    background:
     rgba(15,23,42,.85);
 
-    backdrop-filter:
 
+    backdrop-filter:
     blur(25px);
 
 
@@ -141,7 +149,6 @@ body.login-mode::before{
 
 
     border:
-
     1px solid rgba(255,255,255,.15);
 
 
@@ -153,7 +160,6 @@ body.login-mode::before{
 
 
     animation:
-
     loginOpen .7s ease;
 
 }
@@ -188,7 +194,6 @@ body.login-mode::before{
 
 
     animation:
-
     borderRun 6s linear infinite;
 
 
@@ -204,11 +209,30 @@ body.login-mode::before{
 
 
 
+#loginBox > *{
+
+    position:relative;
+
+    z-index:5;
+
+}
+
+
+
+#loginBox::before{
+
+    pointer-events:none;
+
+}
+
+
+
 @keyframes borderRun{
 
     from{
         background-position:0%;
     }
+
 
     to{
         background-position:300%;
@@ -253,6 +277,7 @@ body.login-mode::before{
     text-align:center;
 
 }
+
 
 
 .premiumLogin h1{
@@ -342,7 +367,7 @@ body.login-mode::before{
 
 
 /* =========================
- INPUT LOGIN
+ LOGIN INPUT
 ========================= */
 
 
@@ -446,7 +471,6 @@ body.login-mode::before{
 
 
     animation:
-
     goldMove 3s infinite;
 
 }
@@ -458,6 +482,7 @@ body.login-mode::before{
     0%{
         background-position:0%;
     }
+
 
     100%{
         background-position:200%;
@@ -483,17 +508,12 @@ body.login-mode::before{
 
 
 
-/* =========================
- MOBILE LOGIN
-========================= */
-
+/* MOBILE LOGIN */
 
 @media(max-width:600px){
 
     body{
-
         padding:10px;
-
     }
 
 
@@ -518,7 +538,7 @@ body.login-mode::before{
 
 /* =====================================================
    CYBER CORE ULTRA PREMIUM
-   PART 2/3
+   PART 2
    DASHBOARD + MENU + CARD SYSTEM
 ===================================================== */
 
@@ -622,6 +642,7 @@ body.login-mode::before{
     letter-spacing:4px;
 
     color:white;
+
 
     text-shadow:
 
@@ -731,7 +752,6 @@ body.login-mode::before{
         #991b1b
     );
 
-
     color:white;
 
 }
@@ -755,6 +775,7 @@ button{
 
     border:none;
 
+
     border-radius:18px;
 
 
@@ -762,6 +783,7 @@ button{
 
 
     font-weight:900;
+
 
     color:white;
 
@@ -789,7 +811,6 @@ button{
 button:hover{
 
     transform:
-
     translateY(-3px);
 
 
@@ -813,7 +834,9 @@ button::before{
 
     content:"";
 
+
     position:absolute;
+
 
     top:0;
 
@@ -850,18 +873,101 @@ button:hover::before{
 
 
 /* =========================
-   MENU BOX
+   MENU SYSTEM
 ========================= */
 
 
-#menuBox{
+.menuLayout{
+
+    display:flex;
+
+    flex-direction:row;
+
+    align-items:stretch;
+
+    gap:40px;
+
+}
+
+
+
+.menuLeft{
+
+    width:350px;
+
+    flex-shrink:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+
+}
+
+.leftMenu::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:-10px;
+
+    top:0;
+
+    width:3px;
+
+    height:100%;
+
+    background:
+    linear-gradient(
+        #38bdf8,
+        #facc15
+    );
+
+    border-radius:20px;
+
+    box-shadow:
+    0 0 15px #2563eb,
+    0 0 25px #facc15;
+
+}
+
+
+.leftMenu button{
+
+    width:100%;
+
+    min-height:55px;
+
+    padding:15px 20px;
+
+    font-size:15px;
+
+    font-weight:900;
+
+    border-radius:18px;
+
+    text-align:left;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+
+
+.rightMenu{
+
+    flex:1;
 
     padding:25px;
 
-    margin-top:20px;
 
-
-    border-radius:30px;
+    border-radius:25px;
 
 
     background:
@@ -880,44 +986,7 @@ button:hover::before{
 
     box-shadow:
 
-    0 25px 60px rgba(15,23,42,.2);
-
-}
-
-
-
-.menuLayout{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:20px;
-
-}
-
-
-
-.rightMenu{
-
-    padding:25px;
-
-
-    border-radius:25px;
-
-
-    background:
-
-    linear-gradient(
-        135deg,
-        #eff6ff,
-        white
-    );
-
-
-    border:
-
-    1px solid #bfdbfe;
+    0 20px 40px rgba(37,99,235,.15);
 
 }
 
@@ -925,9 +994,11 @@ button:hover::before{
 
 .rightMenu h3{
 
-    color:#1d4ed8;
+    color:#2563eb;
 
-    font-size:20px;
+    font-size:22px;
+
+    font-weight:900;
 
 }
 
@@ -939,14 +1010,26 @@ button:hover::before{
 
     align-items:center;
 
-    gap:10px;
+    gap:12px;
 
 
-    padding:8px;
+    padding:12px 15px;
 
-    border-radius:10px;
+    margin-bottom:8px;
 
-    transition:.2s;
+
+    border-radius:15px;
+
+
+    color:#0f172a;
+
+
+    font-size:16px;
+
+    font-weight:800;
+
+
+    transition:.3s;
 
 }
 
@@ -955,6 +1038,8 @@ button:hover::before{
 .rightMenu label:hover{
 
     background:#dbeafe;
+
+    transform:translateX(5px);
 
 }
 
@@ -966,34 +1051,14 @@ button:hover::before{
 
     height:18px;
 
-}
-
-
-
-.leftMenu{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:12px;
-
-}
-
-
-
-.leftMenu button{
-
-    width:240px;
-
-    text-align:left;
+    accent-color:#2563eb;
 
 }
 
 
 
 /* =========================
-   QRIS TOTAL CARD
+   QRIS CARD
 ========================= */
 
 
@@ -1055,7 +1120,6 @@ button:hover::before{
 .qrisCard:hover{
 
     transform:
-
     translateY(-10px);
 
 }
@@ -1073,9 +1137,9 @@ button:hover::before{
 
     color:#2563eb;
 
-    font-size:18px;
-
 }
+
+
 
 
 
@@ -1093,13 +1157,13 @@ button:hover::before{
 
     color:#2563eb;
 
-
-    text-shadow:
-
-    0 0 20px rgba(37,99,235,.5);
-
 }
 
+/* =====================================================
+   CYBER CORE ULTRA PREMIUM
+   PART 3
+   PAGE + TABLE + FORM + FORMULA + MONITOR + MOBILE
+===================================================== */
 
 
 /* =========================
@@ -1116,12 +1180,9 @@ button:hover::before{
 #doubleAccPage,
 #formulaPage{
 
-
     margin-top:25px;
 
-
     padding:30px;
-
 
     border-radius:30px;
 
@@ -1191,11 +1252,6 @@ h2{
 
 }
 
-/* =====================================================
-   CYBER CORE ULTRA PREMIUM
-   PART 3/3
-   TABLE + FORM + FORMULA + MOBILE FINISHING
-===================================================== */
 
 
 /* =========================
@@ -1254,7 +1310,6 @@ thead th{
         #2563eb
     );
 
-
 }
 
 
@@ -1299,14 +1354,7 @@ tbody tr:hover{
     background:#eff6ff;
 
 
-    transform:
-
-    scale(1.01);
-
-
-    box-shadow:
-
-    0 10px 25px rgba(37,99,235,.15);
+    transform:scale(1.01);
 
 }
 
@@ -1321,7 +1369,7 @@ tbody tr:last-child td{
 
 
 /* =========================
-   INPUT AREA
+   INPUT SYSTEM
 ========================= */
 
 
@@ -1368,7 +1416,6 @@ textarea{
 textarea:focus,
 input[type="file"]:focus{
 
-
     outline:none;
 
 
@@ -1386,11 +1433,6 @@ input[type="file"]:focus{
 
 
 
-/* =========================
-   ACTION BUTTON GROUP
-========================= */
-
-
 #depositPage button,
 #withdrawPage button,
 #qrisPage button,
@@ -1398,7 +1440,6 @@ input[type="file"]:focus{
 #inputCashBackPage button,
 #doubleCashBackPage button,
 #doubleAccPage button{
-
 
     margin:5px;
 
@@ -1480,13 +1521,6 @@ input[type="file"]:focus{
 
 .formulaCard{
 
-
-    position:relative;
-
-
-    overflow:hidden;
-
-
     padding:30px;
 
 
@@ -1523,9 +1557,7 @@ input[type="file"]:focus{
 
 .formulaCard:hover{
 
-
     transform:
-
     translateY(-10px);
 
 
@@ -1557,9 +1589,7 @@ input[type="file"]:focus{
 
 .formulaCard button{
 
-
     margin-top:20px;
-
 
     width:90%;
 
@@ -1577,13 +1607,11 @@ input[type="file"]:focus{
 
 }
 
-
-
 .formulaCard button:hover{
 
+    transform:translateY(-3px);
 
     box-shadow:
-
     0 0 25px #facc15;
 
 }
@@ -1591,17 +1619,205 @@ input[type="file"]:focus{
 
 
 /* =========================
-   STATUS BADGE
+   SYSTEM MONITOR
+========================= */
+
+
+.systemMonitor{
+
+    flex:1;
+
+    min-width:450px;
+
+    padding:30px;
+
+
+    border-radius:30px;
+
+
+    background:
+
+    linear-gradient(
+        145deg,
+        #ffffff,
+        #eff6ff
+    );
+
+
+    border:
+
+    1px solid #bfdbfe;
+
+
+    box-shadow:
+
+    0 25px 60px rgba(37,99,235,.18);
+
+}
+
+.systemMonitor{
+
+    animation:
+    pageOpen .5s ease;
+
+}
+
+
+
+.systemMonitor h3{
+
+    color:#2563eb;
+
+    font-size:22px;
+
+    font-weight:900;
+
+}
+
+
+
+.monitorItem{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+
+    padding:12px 0;
+
+
+    font-weight:800;
+
+}
+
+
+
+.online{
+
+    color:#16a34a;
+
+    font-weight:900;
+
+}
+
+
+
+.monitorBar{
+
+    margin-bottom:18px;
+
+}
+
+
+
+.monitorBar label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    color:#1e293b;
+
+    font-weight:900;
+
+}
+
+
+
+.bar{
+
+    height:12px;
+
+    width:100%;
+
+
+    background:#dbeafe;
+
+
+    border-radius:20px;
+
+
+    overflow:hidden;
+
+}
+
+
+
+.fill{
+
+    height:100%;
+
+    border-radius:20px;
+
+
+    background:
+
+    linear-gradient(
+        90deg,
+        #2563eb,
+        #38bdf8,
+        white,
+        #38bdf8,
+        #2563eb
+    );
+
+
+    background-size:300% 100%;
+
+
+    animation:
+
+    barMove 1.5s linear infinite;
+
+}
+
+
+
+.cpu{
+    width:92%;
+}
+
+
+.memory{
+    width:74%;
+}
+
+
+.network{
+    width:98%;
+}
+
+
+
+@keyframes barMove{
+
+    from{
+
+        background-position:100% 0;
+
+    }
+
+
+    to{
+
+        background-position:-100% 0;
+
+    }
+
+}
+
+
+
+/* =========================
+   EFFECT
 ========================= */
 
 
 .status{
 
-
     display:inline-block;
-
-
-    margin-top:15px;
 
 
     padding:8px 18px;
@@ -1626,9 +1842,14 @@ input[type="file"]:focus{
 
 
 
-/* =========================
-   SCROLL BAR
-========================= */
+::selection{
+
+    background:#facc15;
+
+    color:#020617;
+
+}
+
 
 
 ::-webkit-scrollbar{
@@ -1649,7 +1870,6 @@ input[type="file"]:focus{
 
 ::-webkit-scrollbar-thumb{
 
-
     background:
 
     linear-gradient(
@@ -1665,51 +1885,51 @@ input[type="file"]:focus{
 
 
 /* =========================
-   SPECIAL EFFECT
-========================= */
-
-
-::selection{
-
-    background:#facc15;
-
-    color:#020617;
-
-}
-
-
-
-hr{
-
-    border:none;
-
-
-    height:1px;
-
-
-    background:#cbd5e1;
-
-
-    margin:25px 0;
-
-}
-
-
-
-/* =========================
    MOBILE FINAL
 ========================= */
 
 
-@media(max-width:700px){
+@media(max-width:900px){
 
+    .menuLayout{
+
+        flex-direction:column;
+
+    }
+
+
+    .menuLeft{
+
+        width:100%;
+
+    }
+
+
+    .systemMonitor{
+
+        min-width:100%;
+
+    }
+
+}
+
+.rightMenu{
+    width:100%;
+}
+
+.menuLayout{
+    gap:20px;
+}
+
+
+
+@media(max-width:700px){
 
     body{
 
         padding:10px;
 
     }
-
 
 
     #content{
@@ -1721,13 +1941,11 @@ hr{
     }
 
 
-
     #adminInfo{
 
         width:100%;
 
     }
-
 
 
     .topBar{
@@ -1739,15 +1957,6 @@ hr{
     }
 
 
-
-    .leftMenu button{
-
-        width:100%;
-
-    }
-
-
-
     .qrisTotalBox{
 
         flex-direction:column;
@@ -1755,21 +1964,11 @@ hr{
     }
 
 
-
-    .qrisCard{
-
-        width:100%;
-
-    }
-
-
-
     table{
 
         font-size:12px;
 
     }
-
 
 
     th,
@@ -1780,93 +1979,19 @@ hr{
     }
 
 
-
     .premiumLogin h1{
 
         font-size:32px;
 
     }
 
-
-}
-
-
-
-/* =========================
-   FINAL CYBER CORE TOUCH
-========================= */
-
-
-.logoBox h1{
-
-
-    animation:
-
-    cyberGlow 3s infinite;
-
-}
-
-
-
-@keyframes cyberGlow{
-
-
-0%,100%{
-
-
-    filter:
-
-    drop-shadow(
-        0 0 5px #facc15
-    );
-
-
-}
-
-
-
-50%{
-
-
-    filter:
-
-    drop-shadow(
-        0 0 25px #facc15
-    );
-
-
-}
-
-
-}
-
-#loginBox::before{
-    pointer-events:none;
-}
-
-#loginBox > *{
-    position:relative;
-    z-index:5;
 }
 
 /* =========================
-   FIX MENU SELECTION SIZE
+   MENU SPACING FIX
 ========================= */
 
-
-#menuBox{
-
-    width:350px;
-
-    max-width:350px;
-
-    padding:15px;
-
-}
-
-
-
-.menuLayout{
+.menuLeft{
 
     display:flex;
 
@@ -1877,166 +2002,228 @@ hr{
 }
 
 
+.menuLeft button{
 
-.rightMenu{
+    min-height:50px;
 
-    width:100%;
+    padding:14px 20px;
 
-    padding:18px;
+    font-size:15px;
+
+    border-radius:16px;
+
+}
+
+
+/* SYSTEM MONITOR RAPI */
+
+.systemMonitor{
+
+    padding:35px;
+
+}
+
+
+.systemMonitor h3{
+
+    margin-bottom:25px;
+
+}
+
+
+.monitorItem{
+
+    padding:15px 0;
+
+    margin-bottom:8px;
+
+    border-bottom:
+
+    1px solid #dbeafe;
+
+}
+
+
+.monitorBar{
+
+    margin-top:20px;
+
+    margin-bottom:25px;
+
+}
+
+
+.monitorBar label{
+
+    margin-bottom:12px;
+
+    font-size:15px;
+
+}
+
+
+.bar{
+
+    height:14px;
 
 }
 
 
 
-.rightMenu label{
+/* BUILD INFO */
 
-    display:flex;
+.buildInfo{
 
-    width:100%;
+    margin-top:30px;
 
-    justify-content:flex-start;
+    padding-top:20px;
 
-    align-items:center;
+    border-top:
 
-    gap:10px;
-
-    white-space:nowrap;
+    1px solid #dbeafe;
 
 }
 
 
+.buildInfo h2{
 
-.rightMenu input{
-
-    flex:none;
-
-}
-
-
-
-/* MENU BUTTON DI BAWAH */
-
-.leftMenu{
-
-    width:100%;
+    margin-bottom:10px;
 
 }
-
-
-
-.leftMenu button{
-
-    width:100%;
-
-}
-
 
 /* =========================
-   PREMIUM ADMIN INFO PANEL
+   MENU ITEM UNIVERSAL SPACING FIX
 ========================= */
 
-#adminInfo{
+.menuLeft > *,
+.menuLeft a,
+.menuLeft div,
+.menuLeft label,
+.menuLeft button{
 
-    width:380px;
+    margin-bottom:15px !important;
 
-    padding:25px 30px;
+}
+
+
+.menuLeft{
+
+    display:flex !important;
+
+    flex-direction:column !important;
+
+    gap:15px !important;
+
+}
+
+
+.menuLeft *{
+
+    line-height:1.5;
+
+}
+
+.leftMenu button:hover{
+
+    transform:translateX(8px);
 
     background:
-
     linear-gradient(
-        145deg,
-        #020617,
-        #0f172a,
-        #1e3a8a
+        135deg,
+        #2563eb,
+        #38bdf8
     );
 
-
-    border-radius:25px;
-
-
-    border:
-
-    1px solid rgba(250,204,21,.35);
-
-
     box-shadow:
+    0 15px 35px rgba(37,99,235,.45);
 
-    0 20px 60px rgba(0,0,0,.6),
+}
 
-    inset 0 0 30px rgba(37,99,235,.15);
+/* =========================
+   LEFT MENU PREMIUM EFFECT
+========================= */
 
+.leftMenu button{
 
     position:relative;
 
     overflow:hidden;
 
+    transition:.3s;
+
 }
 
 
+.leftMenu button:hover{
 
-#adminInfo::before{
+    transform:translateX(8px);
+
+    box-shadow:
+    0 10px 30px rgba(37,99,235,.45);
+
+}
+
+
+.leftMenu button::after{
 
     content:"";
 
     position:absolute;
 
-    inset:0;
+    left:0;
+
+    top:0;
+
+    width:4px;
+
+    height:100%;
+
 
     background:
-
     linear-gradient(
-        120deg,
-        transparent,
-        rgba(255,255,255,.08),
-        transparent
+        #38bdf8,
+        #facc15
     );
 
 
-    transform:translateX(-100%);
+    opacity:0;
 
-    animation:adminShine 5s infinite;
-
-}
-
-
-@keyframes adminShine{
-
-    50%{
-
-        transform:translateX(100%);
-
-    }
+    transition:.3s;
 
 }
 
+
+.leftMenu button:hover::after{
+
+    opacity:1;
+
+}
+
+/* =========================
+   SYSTEM MONITOR HEADER PREMIUM
+========================= */
+
+.systemMonitor{
+
+    text-align:center;
+
+}
 
 
 /* SERVER STATUS */
 
-#serverStatus{
+.systemMonitor .serverTitle{
 
-    display:inline-block;
-
-    padding:6px 15px;
-
-    border-radius:20px;
-
-
-    color:#4ade80;
-
-    background:
-
-    rgba(34,197,94,.15);
-
-
-    border:
-
-    1px solid rgba(74,222,128,.4);
-
+    font-size:18px;
 
     font-weight:900;
 
-    letter-spacing:1px;
+    color:#16a34a;
+
+    text-shadow:
+    0 0 15px rgba(22,163,74,.5);
+
+    margin-bottom:15px;
 
 }
 
@@ -2044,26 +2231,27 @@ hr{
 
 /* SYSTEM NAME */
 
-#adminName{
+.systemMonitor .systemName{
 
-    margin:18px 0;
-
-
-    font-size:26px;
-
+    font-size:24px;
 
     font-weight:900;
 
-
     letter-spacing:3px;
 
+    background:
 
-    color:#facc15;
+    linear-gradient(
+        90deg,
+        #2563eb,
+        #38bdf8,
+        #facc15
+    );
 
 
-    text-shadow:
+    -webkit-background-clip:text;
 
-    0 0 15px rgba(250,204,21,.7);
+    -webkit-text-fill-color:transparent;
 
 }
 
@@ -2071,15 +2259,15 @@ hr{
 
 /* DATE */
 
-#currentDate{
+.systemMonitor .systemDate{
 
-    color:#cbd5e1;
+    margin-top:15px;
+
+    color:#64748b;
 
     font-size:15px;
 
     font-weight:700;
-
-    letter-spacing:1px;
 
 }
 
@@ -2087,42 +2275,101 @@ hr{
 
 /* CLOCK */
 
-#currentTime{
+.systemMonitor .systemClock{
 
-    margin:12px 0;
-
+    margin:8px 0;
 
     font-size:42px;
 
-
     font-weight:900;
 
+    letter-spacing:4px;
 
-    letter-spacing:5px;
-
-
-    color:white;
-
+    color:#020617;
 
     text-shadow:
 
-    0 0 20px #38bdf8,
-
-    0 0 40px rgba(56,189,248,.5);
+    0 0 15px rgba(37,99,235,.25);
 
 }
 
 
 
-/* TIMEZONE */
+/* LOCATION */
 
-#timezone{
+.systemMonitor .systemLocation{
 
-    color:#94a3b8;
+    color:#475569;
 
-    font-size:13px;
+    font-size:14px;
+
+    font-weight:800;
+
+}
+
+.welcomePanel{
+
+    margin-top:25px;
+
+    padding:25px;
+
+    border-radius:25px;
+
+    background:
+    linear-gradient(
+        145deg,
+        #020617,
+        #1e3a8a
+    );
+
+    color:white;
+
+    border:1px solid rgba(56,189,248,.4);
+
+    box-shadow:
+    0 0 30px rgba(37,99,235,.35);
+
+    text-align:center;
+
+}
+
+
+.welcomePanel h2{
+
+    color:#38bdf8;
+
+    border:none;
+
+    padding:0;
+
+    text-shadow:
+    0 0 15px #38bdf8;
+
+}
+
+
+.welcomePanel p{
+
+    color:#cbd5e1;
+
+    line-height:1.7;
 
     font-weight:700;
+
+}
+
+
+.welcomePanel span{
+
+    display:block;
+
+    margin-top:20px;
+
+    color:#facc15;
+
+    font-weight:900;
+
+    letter-spacing:2px;
 
 }
 
@@ -2227,6 +2474,11 @@ Logout
 <div class="menuLayout">
 
 
+<!-- KOLOM KIRI -->
+
+<div class="menuLeft">
+
+
 <div class="rightMenu" id="menuSetting">
 
 <h3>MENU SELECTION</h3>
@@ -2276,11 +2528,10 @@ Double Cash Back
 Double ACC
 </label>
 
-
 </div>
 
 
-<hr style="width:250px;">
+<hr>
 
 
 <div class="leftMenu">
@@ -2326,6 +2577,130 @@ Double ACC
 </button>
 
 </div>
+
+
+</div>
+
+
+
+<!-- KOLOM KANAN -->
+
+<div class="systemMonitor">
+
+<h3>⚡ SYSTEM MONITOR</h3>
+
+
+<div class="monitorItem">
+<span>🖥 SERVER</span>
+<span class="online">ONLINE</span>
+</div>
+
+
+<div class="monitorItem">
+<span>💾 DATABASE</span>
+<span class="online">CONNECTED</span>
+</div>
+
+
+<div class="monitorItem">
+<span>🔒 SECURITY</span>
+<span class="online">ACTIVE</span>
+</div>
+
+
+<div class="monitorItem">
+<span>⚡ API</span>
+<span class="online">NORMAL</span>
+</div>
+
+
+<div class="monitorItem">
+<span>⚙️ SERVICES</span>
+<span class="online">RUNNING</span>
+</div>
+
+<hr>
+
+
+<div class="monitorBar">
+
+<label>CPU</label>
+
+<div class="bar">
+<div class="fill cpu"></div>
+</div>
+
+</div>
+
+
+<div class="monitorBar">
+
+<label>MEMORY</label>
+
+<div class="bar">
+<div class="fill memory"></div>
+</div>
+
+</div>
+
+
+<div class="monitorBar">
+
+<label>NETWORK</label>
+
+<div class="bar">
+<div class="fill network"></div>
+</div>
+
+</div>
+
+
+<hr>
+
+
+<div class="buildInfo">
+
+<h2>
+BUILD V5.2
+</h2>
+
+<h3>
+CYBER CORE PREMIUM
+</h3>
+
+<div class="welcomePanel">
+
+<h2>
+WELCOME, ADMIN
+</h2>
+
+<p>
+Selamat datang di CYBER CORE.
+</p>
+
+<p>
+Pusat kontrol pencarian selisih,<br>
+validasi data, dan analisa transaksi<br>
+dengan performa sistem tinggi.
+</p>
+
+<p>
+Bekerja lebih cepat.<br>
+Menganalisa lebih akurat.<br>
+Mengontrol lebih mudah.
+</p>
+
+<span>
+SYSTEM READY<br>
+</span>
+
+</div>
+
+</div>
+
+
+</div>
+
 
 </div>
 
