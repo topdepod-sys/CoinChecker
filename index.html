@@ -7396,29 +7396,63 @@ window.addEventListener("load", async ()=>{
 // Blok klik kanan
 document.addEventListener("contextmenu", function(e) {
     e.preventDefault();
-});
+    return false;
+}, true);
 
-// Blok shortcut inspect/devtools
+
+// Blok shortcut DevTools / Inspect
 document.addEventListener("keydown", function(e) {
+
     if (
         e.key === "F12" ||
-        (e.ctrlKey && e.shiftKey && e.key === "I") ||
-        (e.ctrlKey && e.shiftKey && e.key === "J") ||
-        (e.ctrlKey && e.key === "U") ||
-        (e.metaKey && e.altKey && e.key === "I")
+
+        // Ctrl + Shift + I (Inspect)
+        (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "i") ||
+
+        // Ctrl + Shift + J (Console)
+        (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "j") ||
+
+        // Ctrl + Shift + C (Element picker)
+        (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "c") ||
+
+        // Ctrl + U (View Source)
+        (e.ctrlKey && e.key.toLowerCase() === "u") ||
+
+        // Mac Inspect
+        (e.metaKey && e.altKey && e.key.toLowerCase() === "i")
     ) {
         e.preventDefault();
+        e.stopPropagation();
         return false;
     }
-});
 
-// Blok drag gambar/text
+}, true);
+
+
+// Blok drag gambar / teks
 document.addEventListener("dragstart", function(e) {
     e.preventDefault();
-});
+    return false;
+}, true);
 
-// Deteksi DevTools terbuka (peringatan sederhana)
+
+// Blok copy teks (opsional)
+document.addEventListener("copy", function(e) {
+    e.preventDefault();
+    return false;
+}, true);
+
+
+// Blok select teks (opsional)
+document.addEventListener("selectstart", function(e) {
+    e.preventDefault();
+    return false;
+}, true);
+
+
+// Deteksi DevTools terbuka
 setInterval(function() {
+
     if (
         window.outerWidth - window.innerWidth > 200 ||
         window.outerHeight - window.innerHeight > 200
@@ -7426,6 +7460,7 @@ setInterval(function() {
         console.clear();
         console.log("Protected Page");
     }
+
 }, 1000);
 
 
