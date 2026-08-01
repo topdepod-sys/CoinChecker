@@ -4916,12 +4916,19 @@ return;
 
 
 
-let username=col[0].trim().toLowerCase();
+let username=col[0]
+.replace(/"/g,"")
+.replace(/\s+/g,"")
+.trim()
+.toLowerCase();
 
 
 
 let coin=Number(
-col[1].replace(/,/g,"").trim()
+col[1]
+.replace(/"/g,"")
+.replace(/,/g,"")
+.trim()
 );
 
 
@@ -4937,6 +4944,7 @@ googleSheet[username]+=coin;
 
 
 });
+
 
 
 
@@ -5000,6 +5008,7 @@ col[4]
 .replace(/,/g,"")
 .trim()
 );
+
 
 
 
@@ -5068,6 +5077,7 @@ administration[username]+=coin;
 
 
 
+
 // HITUNG SEMUA USER
 
 let result=[];
@@ -5126,6 +5136,7 @@ selisih
 
 
 
+
 document.getElementById("withdrawDifference").innerHTML=result.map(row=>`
 
 <tr>
@@ -5146,11 +5157,13 @@ document.getElementById("withdrawDifference").innerHTML=result.map(row=>`
 
 
 
+
 alert(
 "Withdraw selesai : "
 +result.length
 +" berbeda"
 );
+
 
 
 
