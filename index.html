@@ -7429,24 +7429,12 @@ document.addEventListener("keydown", function(e) {
 }, true);
 
 
-// Blok drag gambar / teks
+// Blok drag gambar saja (teks tetap bisa dipilih)
 document.addEventListener("dragstart", function(e) {
-    e.preventDefault();
-    return false;
-}, true);
-
-
-// Blok copy teks (opsional)
-document.addEventListener("copy", function(e) {
-    e.preventDefault();
-    return false;
-}, true);
-
-
-// Blok select teks (opsional)
-document.addEventListener("selectstart", function(e) {
-    e.preventDefault();
-    return false;
+    if (e.target.tagName === "IMG") {
+        e.preventDefault();
+        return false;
+    }
 }, true);
 
 
