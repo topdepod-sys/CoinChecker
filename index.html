@@ -10,14 +10,20 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
 <style>
 
-/* =====================================================
-   CYBER CORE HUD LOGIN
-   STEP 2
-   FUTURISTIC GLASS INTERFACE
-===================================================== */
+/* =====================================
+   CYBER CORE PREMIUM CSS
+   PART 1 - GLOBAL + LOGIN HUD
+===================================== */
 
+:root{
+    --bg:#050816;
+    --panel:rgba(8,18,35,.75);
+    --cyan:#00f6ff;
+    --purple:#7b2cff;
+    --green:#00ff99;
+    --text:#dff8ff;
+}
 
-/* GLOBAL RESET */
 
 *{
     box-sizing:border-box;
@@ -27,42 +33,28 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 body{
 
     margin:0;
-    padding:0;
-
-    font-family:
-    "Segoe UI",
-    Arial,
-    sans-serif;
-
-    background:#020617;
-
-    color:white;
-
-}
-
-
-/* ===========================
-   LOGIN BACKGROUND
-=========================== */
-
-
-body.login-mode{
-
     min-height:100vh;
 
-    display:flex;
+    font-family:
+    'Orbitron',
+    'Segoe UI',
+    sans-serif;
 
-    justify-content:center;
+    background:
+    radial-gradient(
+        circle at top,
+        #12345b,
+        var(--bg) 65%
+    );
 
-    align-items:center;
-
-    overflow:hidden;
-
+    color:white;
 }
 
 
 
-body.login-mode::before{
+/* SCANLINE EFFECT */
+
+body::after{
 
     content:"";
 
@@ -71,27 +63,28 @@ body.login-mode::before{
     inset:0;
 
     background:
-
-    radial-gradient(
-        circle at center,
-        rgba(0,180,255,.18),
-        transparent 45%
+    linear-gradient(
+        rgba(255,255,255,.03) 1px,
+        transparent 1px
     );
+
+    background-size:
+    100% 5px;
+
+    pointer-events:none;
+
+    z-index:999;
 
 }
 
 
 
-/* ===========================
-   MAIN LOGIN HUD
-=========================== */
+/* =========================
+ LOGIN AREA
+========================= */
 
 
-#loginBox{
-
-    position:fixed;
-
-    inset:0;
+.login-mode{
 
     display:flex;
 
@@ -99,57 +92,46 @@ body.login-mode::before{
 
     align-items:center;
 
-
-    background:
-
-    radial-gradient(
-        circle at top,
-        #103b74 0%,
-        #07101c 35%,
-        #02060d 100%
-    );
-
-
     overflow:hidden;
 
 }
 
 
 
-/* ===========================
-   HUD GRID
-=========================== */
+.hud-container{
+
+    width:100%;
+
+}
+
 
 
 .hud-login{
 
-    width:1500px;
+    width:min(1500px,95vw);
 
-    height:820px;
+    min-height:820px;
 
+    margin:auto;
 
     display:grid;
-
 
     grid-template-columns:
     280px
     1fr
     280px;
 
-
-    gap:35px;
-
+    gap:30px;
 
     padding:35px;
+
+    position:relative;
 
 }
 
 
 
-/* ===========================
-   PANELS
-=========================== */
-
+/* PANEL BASIC */
 
 .left-panel,
 .right-panel,
@@ -158,23 +140,20 @@ body.login-mode::before{
 
     position:relative;
 
+    background:
+    var(--panel);
+
 
     border:
 
-    1px solid rgba(0,180,255,.45);
-
-
-    background:
-
-    rgba(4,12,22,.82);
+    1px solid rgba(0,246,255,.25);
 
 
     backdrop-filter:
+    blur(20px);
 
-    blur(18px);
 
-
-    border-radius:18px;
+    border-radius:20px;
 
 
     overflow:hidden;
@@ -182,484 +161,13 @@ body.login-mode::before{
 
     box-shadow:
 
-    0 0 35px rgba(0,180,255,.15);
+    0 0 35px rgba(0,246,255,.15);
 
 }
 
 
 
-/* ===========================
-   PANEL HEADER
-=========================== */
-
-
-.panel-header{
-
-
-    height:60px;
-
-
-    display:flex;
-
-
-    align-items:center;
-
-
-    justify-content:center;
-
-
-    letter-spacing:4px;
-
-
-    color:#6bd5ff;
-
-
-    border-bottom:
-
-    1px solid rgba(0,180,255,.25);
-
-
-    font-size:13px;
-
-
-}
-
-
-
-/* PANEL CONTENT */
-
-
-.panel-content{
-
-    padding:25px;
-
-}
-
-
-
-.status-row{
-
-
-    display:flex;
-
-    justify-content:space-between;
-
-
-    margin-bottom:18px;
-
-
-    color:#cdefff;
-
-
-    font-size:13px;
-
-
-}
-
-
-
-.online{
-
-    color:#48ff92;
-
-}
-
-
-
-.log-item{
-
-
-    color:#9ad7ff;
-
-
-    margin-bottom:18px;
-
-
-    font-size:13px;
-
-}
-
-
-
-/* ===========================
-   LOGIN CENTER
-=========================== */
-
-
-.login-panel{
-
-
-    display:flex;
-
-    flex-direction:column;
-
-
-    justify-content:center;
-
-
-    align-items:center;
-
-
-}
-
-
-
-.login-header{
-
-
-    text-align:center;
-
-
-    margin-bottom:40px;
-
-
-}
-
-
-
-.login-header h1{
-
-
-    margin:0;
-
-
-    font-size:52px;
-
-
-    font-weight:300;
-
-
-    color:white;
-
-
-    letter-spacing:8px;
-
-
-    text-shadow:
-
-    0 0 25px rgba(0,180,255,.8);
-
-
-}
-
-
-
-.login-header span{
-
-
-    color:#7fcfff;
-
-
-    letter-spacing:4px;
-
-
-}
-
-
-
-/* ===========================
-   FORM
-=========================== */
-
-
-.login-form{
-
-
-    width:420px;
-
-}
-
-
-
-.login-form input{
-
-
-    width:100%;
-
-
-    height:58px;
-
-
-    margin-bottom:22px;
-
-
-    padding:0 22px;
-
-
-    border:
-
-    1px solid rgba(0,170,255,.35);
-
-
-    background:#07121e;
-
-
-    color:white;
-
-
-    border-radius:10px;
-
-
-    font-size:15px;
-
-
-}
-
-
-
-.login-form input:focus{
-
-
-    outline:none;
-
-
-    border-color:#33c7ff;
-
-
-    box-shadow:
-
-    0 0 15px rgba(0,180,255,.45);
-
-
-}
-
-
-
-.login-form button{
-
-
-    width:100%;
-
-
-    height:58px;
-
-
-    border:none;
-
-
-    background:#1386ff;
-
-
-    color:white;
-
-
-    font-size:16px;
-
-
-    letter-spacing:3px;
-
-
-    border-radius:10px;
-
-
-    cursor:pointer;
-
-
-    transition:.3s;
-
-
-}
-
-
-
-.login-form button:hover{
-
-
-    background:#1ca2ff;
-
-
-    transform:
-
-    translateY(-2px);
-
-
-}
-
-
-
-/* ===========================
-   MOBILE
-=========================== */
-
-
-@media(max-width:900px){
-
-
-    .hud-login{
-
-
-        width:95%;
-
-        height:auto;
-
-
-        grid-template-columns:1fr;
-
-
-    }
-
-
-    .left-panel,
-    .right-panel{
-
-
-        display:none;
-
-    }
-
-
-    .login-form{
-
-        width:90%;
-
-    }
-
-
-}
-
-
-
-/* MOBILE LOGIN */
-
-@media(max-width:600px){
-
-    body{
-        padding:10px;
-    }
-
-
-    #loginBox{
-
-        width:90%;
-
-        padding:30px;
-
-    }
-
-
-    .premiumLogin h1{
-
-        font-size:35px;
-
-        letter-spacing:5px;
-
-    }
-
-}
-
-/* =====================================================
-   STEP 3
-   CYBER HUD DECORATION
-===================================================== */
-
-
-/* ===========================
-   BACKGROUND GRID
-=========================== */
-
-#loginBox::after{
-
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-
-    background-image:
-
-    linear-gradient(
-        rgba(0,180,255,.08) 1px,
-        transparent 1px
-    ),
-
-    linear-gradient(
-        90deg,
-        rgba(0,180,255,.08) 1px,
-        transparent 1px
-    );
-
-
-    background-size:
-
-    45px 45px;
-
-
-    pointer-events:none;
-
-
-    opacity:.35;
-
-}
-
-
-
-/* ===========================
-   HUD CORNER FRAME
-=========================== */
-
-
-.hud-login::before,
-.hud-login::after{
-
-
-    content:"";
-
-    position:absolute;
-
-
-    width:90px;
-
-    height:90px;
-
-
-    border-color:#29c9ff;
-
-    opacity:.8;
-
-
-}
-
-
-
-.hud-login::before{
-
-
-    top:15px;
-
-    left:15px;
-
-
-    border-top:2px solid;
-
-    border-left:2px solid;
-
-
-}
-
-
-
-.hud-login::after{
-
-
-    right:15px;
-
-    bottom:15px;
-
-
-    border-right:2px solid;
-
-    border-bottom:2px solid;
-
-
-}
-
-
-
-/* ===========================
-   PANEL LIGHT EDGE
-=========================== */
-
+/* PANEL LIGHT */
 
 .left-panel::before,
 .right-panel::before,
@@ -674,7 +182,7 @@ body.login-mode::before{
 
     top:0;
 
-    left:0;
+    left:-100%;
 
 
     width:100%;
@@ -687,1202 +195,218 @@ body.login-mode::before{
     linear-gradient(
         90deg,
         transparent,
-        #00c8ff,
+        var(--cyan),
         transparent
     );
 
 
     animation:
-
-    hudMove 4s linear infinite;
-
+    scanPanel 4s linear infinite;
 
 }
 
 
 
-@keyframes hudMove{
-
-
-    from{
-
-        transform:translateX(-100%);
-
-    }
-
+@keyframes scanPanel{
 
     to{
-
-        transform:translateX(100%);
-
+        left:100%;
     }
 
 }
 
 
 
-/* ===========================
-   SCAN LINE
-=========================== */
+/* PANEL HEADER */
 
 
-.login-panel::after{
+.panel-header{
 
 
-    content:"";
+    padding:20px;
 
 
-    position:absolute;
+    text-align:center;
 
 
-    left:0;
-
-    right:0;
+    letter-spacing:4px;
 
 
-    height:2px;
+    color:var(--cyan);
 
 
-    background:
+    border-bottom:
 
-    rgba(0,200,255,.35);
+    1px solid rgba(0,246,255,.2);
+
+
+    font-size:13px;
+
+}
+
+
+
+.panel-content{
+
+    padding:25px;
+
+}
+
+
+
+/* STATUS */
+
+
+.status-row{
+
+
+    display:flex;
+
+    justify-content:space-between;
+
+
+    margin-bottom:20px;
+
+
+    color:var(--text);
+
+
+    font-size:13px;
+
+}
+
+
+
+.online{
+
+
+    color:var(--green);
+
+
+    text-shadow:
+
+    0 0 15px var(--green);
+
+}
+
+
+
+.log-item{
+
+    color:#8fdfff;
+
+    margin-bottom:15px;
+
+    font-family:
+    monospace;
+
+}
+
+
+
+/* =========================
+ CENTER LOGIN
+========================= */
+
+
+.login-panel{
+
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-direction:column;
 
 
     animation:
-
-    scanMove 5s linear infinite;
-
+    appear 1s ease;
 
 }
 
 
 
-@keyframes scanMove{
+@keyframes appear{
 
+from{
 
-    0%{
+opacity:0;
 
-        top:0;
+transform:scale(.9);
 
-    }
+}
 
+to{
 
-    100%{
+opacity:1;
 
-        top:100%;
+transform:scale(1);
 
-    }
+}
 
 }
 
 
 
-/* ===========================
-   BLUE GLOW
-=========================== */
+.login-header{
 
+    text-align:center;
 
-.login-panel,
-.left-panel,
-.right-panel{
-
-
-    box-shadow:
-
-
-    inset 0 0 35px rgba(0,180,255,.08),
-
-    0 0 35px rgba(0,180,255,.18);
-
+    margin-bottom:40px;
 
 }
 
-
-
-/* ===========================
-   FUTURE TITLE EFFECT
-=========================== */
 
 
 .login-header h1{
 
 
-    animation:
-
-    titlePulse 3s infinite;
+    margin:20px 0 10px;
 
 
-}
+    font-size:60px;
 
 
-
-@keyframes titlePulse{
-
-
-    0%,100%{
-
-        text-shadow:
-
-        0 0 15px #00bfff;
-
-    }
+    letter-spacing:12px;
 
 
-    50%{
-
-        text-shadow:
-
-        0 0 35px #00bfff;
-
-    }
+    color:white;
 
 
-}
+    text-shadow:
 
-/* =====================================================
-   STEP 4
-   ADVANCED HUD ELEMENTS
-===================================================== */
-
-
-/* ===========================
-   ANGULAR PANEL CORNER
-=========================== */
-
-
-.left-panel,
-.right-panel,
-.login-panel{
-
-    clip-path:
-
-    polygon(
-        0 18px,
-        18px 0,
-        calc(100% - 18px) 0,
-        100% 18px,
-        100% calc(100% - 18px),
-        calc(100% - 18px) 100%,
-        18px 100%,
-        0 calc(100% - 18px)
-    );
-
-}
-
-
-
-/* ===========================
-   CORNER MARKS
-=========================== */
-
-
-.left-panel::after,
-.right-panel::after,
-.login-panel::after{
-
-
-    content:"";
-
-
-    position:absolute;
-
-
-    width:35px;
-
-    height:35px;
-
-
-    right:0;
-
-    top:0;
-
-
-    border-top:
-
-    2px solid #00c8ff;
-
-
-    border-right:
-
-    2px solid #00c8ff;
+    0 0 30px var(--cyan);
 
 
 }
 
 
 
-/* ===========================
-   HOLOGRAM CIRCLE
-=========================== */
+.login-header span{
 
 
-.login-panel::marker{
+    color:var(--cyan);
 
-    display:none;
+
+    letter-spacing:5px;
 
 }
 
 
-.login-panel .login-header::before{
+
+/* AI CORE */
 
 
-    content:"";
-
-
-    display:block;
+.ai-core{
 
 
     width:130px;
 
     height:130px;
 
-
-    margin:
-
-    0 auto 25px;
-
-
-    border-radius:50%;
-
-
-    border:
-
-    1px solid rgba(0,200,255,.5);
-
-
-    box-shadow:
-
-
-    0 0 25px rgba(0,200,255,.5),
-
-    inset 0 0 30px rgba(0,200,255,.25);
-
-
-    animation:
-
-    hologramSpin 8s linear infinite;
-
-
-}
-
-
-
-@keyframes hologramSpin{
-
-
-    from{
-
-        transform:rotate(0deg);
-
-    }
-
-
-    to{
-
-        transform:rotate(360deg);
-
-    }
-
-}
-
-
-
-/* ===========================
-   DATA LINES
-=========================== */
-
-
-.panel-content::after{
-
-
-    content:
-
-    "SYS ONLINE // DATA STREAM // CONNECTED";
-
-
-    display:block;
-
-
-    margin-top:40px;
-
-
-    color:
-
-    rgba(0,200,255,.45);
-
-
-    font-size:10px;
-
-
-    letter-spacing:3px;
-
-
-    animation:
-
-    dataBlink 2s infinite;
-
-
-}
-
-
-
-@keyframes dataBlink{
-
-
-    0%,100%{
-
-        opacity:.3;
-
-    }
-
-
-    50%{
-
-        opacity:1;
-
-    }
-
-}
-
-
-
-/* ===========================
-   RADAR LEFT PANEL
-=========================== */
-
-
-.left-panel::before{
-
-
-    content:"";
-
-
-    position:absolute;
-
-
-    width:140px;
-
-    height:140px;
-
-
-    left:50%;
-
-    top:130px;
-
-
-    transform:translateX(-50%);
-
-
-    border-radius:50%;
-
-
-    border:
-
-    1px solid rgba(0,200,255,.5);
-
-
-    box-shadow:
-
-
-    0 0 25px rgba(0,200,255,.25);
-
-
-    background:
-
-
-    repeating-radial-gradient(
-
-        circle,
-
-        transparent 0 18px,
-
-        rgba(0,200,255,.15) 19px
-
-    );
-
-
-}
-
-
-
-.left-panel .panel-content::before{
-
-
-    content:"";
-
-
-    position:absolute;
-
-
-    width:70px;
-
-    height:70px;
-
-
-    left:50%;
-
-    top:165px;
-
-
-    transform:translateX(-50%);
-
-
-    border-radius:50%;
-
-
-    background:
-
-    radial-gradient(
-
-        circle,
-
-        #00c8ff,
-
-        transparent 60%
-
-    );
-
-
-    animation:
-
-    radarPulse 2s infinite;
-
-
-}
-
-
-
-@keyframes radarPulse{
-
-
-    0%{
-
-        opacity:.3;
-
-        transform:
-
-        translateX(-50%)
-
-        scale(.8);
-
-    }
-
-
-    50%{
-
-        opacity:1;
-
-    }
-
-
-    100%{
-
-        opacity:.3;
-
-        transform:
-
-        translateX(-50%)
-
-        scale(1.2);
-
-    }
-
-}
-
-/* =====================================================
-   STEP 5
-   FINAL CYBER HUD POLISH
-===================================================== */
-
-
-/* ===========================
-   MOVING FRAME LIGHT
-=========================== */
-
-
-.hud-login{
-
-    position:relative;
-
-}
-
-
-
-.hud-login::after{
-
-
-    content:"";
-
-
-    position:absolute;
-
-
-    inset:0;
-
-
-    border:
-
-    1px solid rgba(0,200,255,.25);
-
-
-    pointer-events:none;
-
-
-    animation:
-
-    framePulse 3s infinite;
-
-
-}
-
-
-
-@keyframes framePulse{
-
-
-    0%,100%{
-
-        opacity:.3;
-
-    }
-
-
-    50%{
-
-        opacity:1;
-
-    }
-
-}
-
-
-
-/* ===========================
-   PANEL TECH LINES
-=========================== */
-
-
-.left-panel,
-.right-panel,
-.login-panel{
-
-
-    background:
-
-
-    linear-gradient(
-
-        135deg,
-
-        rgba(0,180,255,.08),
-
-        transparent 35%
-
-    ),
-
-    rgba(4,12,22,.85);
-
-
-}
-
-
-
-/* ===========================
-   INPUT HOLOGRAM STYLE
-=========================== */
-
-
-.login-form input{
-
-
-    border-radius:4px;
-
-
-    background:
-
-    linear-gradient(
-
-        90deg,
-
-        rgba(0,180,255,.08),
-
-        rgba(0,0,0,.35)
-
-    );
-
-
-}
-
-
-
-.login-form input:hover{
-
-
-    border-color:#00c8ff;
-
-
-}
-
-
-
-/* ===========================
-   HOLOGRAM BUTTON
-=========================== */
-
-
-.login-form button{
-
-
-    position:relative;
-
-
-    overflow:hidden;
-
-
-    background:
-
-
-    linear-gradient(
-
-        90deg,
-
-        #006eff,
-
-        #00c8ff,
-
-        #006eff
-
-    );
-
-
-    background-size:200%;
-
-
-    animation:
-
-    buttonFlow 3s linear infinite;
-
-
-}
-
-
-
-.login-form button::before{
-
-
-    content:"";
-
-
-    position:absolute;
-
-
-    top:0;
-
-
-    left:-100%;
-
-
-    width:100%;
-
-
-    height:100%;
-
-
-    background:
-
-
-    linear-gradient(
-
-        90deg,
-
-        transparent,
-
-        rgba(255,255,255,.45),
-
-        transparent
-
-    );
-
-
-    animation:
-
-    buttonScan 2.5s infinite;
-
-
-}
-
-
-
-@keyframes buttonFlow{
-
-
-    from{
-
-        background-position:0%;
-
-    }
-
-
-    to{
-
-        background-position:200%;
-
-    }
-
-}
-
-
-
-@keyframes buttonScan{
-
-
-    0%{
-
-        left:-100%;
-
-    }
-
-
-    100%{
-
-        left:100%;
-
-    }
-
-}
-
-
-
-/* ===========================
-   DIGITAL TEXT EFFECT
-=========================== */
-
-
-.login-header span{
-
-
-    animation:
-
-    textGlow 2s infinite;
-
-
-}
-
-
-
-@keyframes textGlow{
-
-
-    0%,100%{
-
-        opacity:.6;
-
-    }
-
-
-    50%{
-
-        opacity:1;
-
-    }
-
-}
-
-
-
-/* ===========================
-   FLOATING HUD PARTICLES
-=========================== */
-
-
-#loginBox::before{
-
-
-    content:"";
-
-
-    position:absolute;
-
-
-    width:3px;
-
-    height:3px;
-
-
-    background:#00c8ff;
-
-
-    box-shadow:
-
-
-    120px 80px #00c8ff,
-
-    340px 220px #00c8ff,
-
-    720px 120px #00c8ff,
-
-    950px 500px #00c8ff,
-
-    400px 700px #00c8ff,
-
-    1100px 300px #00c8ff;
-
-
-    animation:
-
-    particleFloat 8s infinite;
-
-
-}
-
-
-
-@keyframes particleFloat{
-
-
-    0%,100%{
-
-        opacity:.3;
-
-    }
-
-
-    50%{
-
-        opacity:1;
-
-    }
-
-}
-
-/* =====================================================
-   STEP 6
-   AI CORE FINAL TUNING
-===================================================== */
-
-
-/* ===========================
-   CENTER CORE EFFECT
-=========================== */
-
-
-.login-panel{
-
-
-    isolation:isolate;
-
-
-}
-
-
-
-.login-panel::before{
-
-
-    height:100%;
-
-
-    width:2px;
-
-
-    top:0;
-
-    left:50%;
-
-
-    background:
-
-
-    linear-gradient(
-
-        transparent,
-
-        #00c8ff,
-
-        transparent
-
-    );
-
-
-    opacity:.15;
-
-
-    animation:none;
-
-
-}
-
-
-
-/* ===========================
-   TITLE CORE
-=========================== */
-
-
-.login-header h1{
-
-
-    position:relative;
-
-
-}
-
-
-
-.login-header h1::after{
-
-
-    content:"";
-
-
-    position:absolute;
-
-
-    left:50%;
-
-    bottom:-18px;
-
-
-    width:160px;
-
-    height:1px;
-
-
-    transform:translateX(-50%);
-
-
-    background:
-
-
-    linear-gradient(
-
-        90deg,
-
-        transparent,
-
-        #00c8ff,
-
-        transparent
-
-    );
-
-
-}
-
-
-
-/* ===========================
-   SYSTEM LABELS
-=========================== */
-
-
-.left-panel::after{
-
-
-    content:
-
-    "RADAR // ACTIVE";
-
-
-    position:absolute;
-
-
-    bottom:20px;
-
-    left:25px;
-
-
-    color:#00c8ff;
-
-
-    font-size:10px;
-
-
-    letter-spacing:4px;
-
-
-}
-
-
-
-.right-panel::after{
-
-
-    content:
-
-    "SECURE CHANNEL";
-
-
-    position:absolute;
-
-
-    bottom:20px;
-
-    right:25px;
-
-
-    color:#00c8ff;
-
-
-    font-size:10px;
-
-
-    letter-spacing:4px;
-
-
-}
-
-
-
-/* ===========================
-   STATUS LIGHT
-=========================== */
-
-
-.status-row span:first-child::before{
-
-
-    content:"";
-
-
-    display:inline-block;
-
-
-    width:6px;
-
-    height:6px;
-
-
-    margin-right:8px;
-
-
-    border-radius:50%;
-
-
-    background:#00ff99;
-
-
-    box-shadow:
-
-
-    0 0 12px #00ff99;
-
-
-}
-
-
-
-/* ===========================
-   FUTURE SCAN OVERLAY
-=========================== */
-
-
-#loginBox{
-
-
-    background:
-
-
-    radial-gradient(
-
-        circle at center,
-
-        rgba(0,200,255,.15),
-
-        transparent 45%
-
-    ),
-
-    linear-gradient(
-
-        135deg,
-
-        #020617,
-
-        #07192f,
-
-        #020617
-
-    );
-
-
-}
-
-
-
-/* ===========================
-   LOGIN ENTRY ANIMATION
-=========================== */
-
-
-.login-panel{
-
-
-    animation:
-
-    coreAppear 1s ease;
-
-
-}
-
-
-
-@keyframes coreAppear{
-
-
-    from{
-
-
-        opacity:0;
-
-
-        transform:
-
-        scale(.92);
-
-
-        filter:
-
-        blur(10px);
-
-
-    }
-
-
-    to{
-
-
-        opacity:1;
-
-
-        transform:
-
-        scale(1);
-
-
-        filter:
-
-        blur(0);
-
-
-    }
-
-}
-
-/* ===========================
-   AI CORE
-=========================== */
-
-
-.ai-core{
-
-    width:120px;
-
-    height:120px;
-
-    margin:0 auto 25px;
-
-    position:relative;
+    margin:auto;
 
 }
 
@@ -1901,21 +425,22 @@ body.login-mode::before{
 
     border:
 
-    2px solid #00c8ff;
+    2px solid var(--cyan);
 
 
     box-shadow:
 
+    0 0 30px var(--cyan),
 
-    0 0 25px #00c8ff,
-
-    inset 0 0 25px rgba(0,200,255,.5);
+    inset 0 0 25px var(--cyan);
 
 
     animation:
 
-    coreSpin 6s linear infinite;
+    rotateCore 6s linear infinite;
 
+
+    position:relative;
 
 }
 
@@ -1938,8 +463,7 @@ body.login-mode::before{
 
     border:
 
-    1px dashed #7feaff;
-
+    1px dashed white;
 
 }
 
@@ -1954,9 +478,9 @@ body.login-mode::before{
     position:absolute;
 
 
-    width:12px;
+    width:15px;
 
-    height:12px;
+    height:15px;
 
 
     left:50%;
@@ -1965,508 +489,232 @@ body.login-mode::before{
 
 
     transform:
-
     translate(-50%,-50%);
+
+
+    background:var(--cyan);
 
 
     border-radius:50%;
 
 
-    background:#00c8ff;
+    box-shadow:
+
+    0 0 25px var(--cyan);
+
+}
+
+
+
+@keyframes rotateCore{
+
+from{
+transform:rotate(0);
+}
+
+to{
+transform:rotate(360deg);
+}
+
+}
+
+
+
+/* FORM */
+
+
+.login-form{
+
+    width:420px;
+
+}
+
+
+
+.login-form input{
+
+
+    width:100%;
+
+
+    height:55px;
+
+
+    margin-bottom:20px;
+
+
+    padding:0 20px;
+
+
+    background:
+
+    rgba(0,0,0,.35);
+
+
+    color:white;
+
+
+    border:
+
+    1px solid rgba(0,246,255,.3);
+
+
+    border-radius:10px;
+
+
+}
+
+
+
+.login-form input:focus{
+
+
+    outline:none;
+
+
+    border-color:var(--cyan);
 
 
     box-shadow:
 
-    0 0 25px #00c8ff;
-
-
-}
-
-
-
-@keyframes coreSpin{
-
-
-    from{
-
-        transform:rotate(0deg);
-
-    }
-
-
-    to{
-
-        transform:rotate(360deg);
-
-    }
-
-}
-
-
-/* =====================================================
-   STEP 8
-   CYBER BOOT SEQUENCE
-===================================================== */
-
-
-/* ===========================
-   BOOT SCREEN
-=========================== */
-
-
-.boot-screen{
-
-
-    position:absolute;
-
-
-    inset:0;
-
-
-    z-index:50;
-
-
-    display:flex;
-
-
-    flex-direction:column;
-
-
-    justify-content:center;
-
-
-    align-items:center;
-
-
-    background:
-
-
-    #020617;
-
-
-    animation:
-
-    bootFade 4s forwards;
-
+    0 0 20px rgba(0,246,255,.5);
 
 }
 
 
 
-.boot-title{
+.login-form button{
 
 
-    color:#00c8ff;
+    width:100%;
 
 
-    font-size:28px;
+    height:55px;
 
 
-    letter-spacing:8px;
+    border:none;
 
 
-    text-shadow:
+    cursor:pointer;
 
 
-    0 0 25px #00c8ff;
+    color:white;
 
 
-    animation:
-
-    textLoading 1.5s infinite;
-
-
-}
-
-
-
-.boot-status{
-
-
-    margin-top:20px;
-
-
-    color:#7ddcff;
-
-
-    font-size:12px;
-
-
-    letter-spacing:4px;
-
-
-}
-
-
-
-/* ===========================
-   LOADING BAR
-=========================== */
-
-
-.boot-bar{
-
-
-    width:420px;
-
-
-    height:6px;
-
-
-    margin-top:35px;
-
-
-    background:
-
-    rgba(0,200,255,.15);
-
-
-    overflow:hidden;
-
-
-}
-
-
-
-.boot-progress{
-
-
-    height:100%;
-
-
-    width:0;
-
-
-    background:
-
-
-    linear-gradient(
-
-        90deg,
-
-        transparent,
-
-        #00c8ff,
-
-        white
-
-    );
-
-
-    animation:
-
-    bootProgress 3.5s forwards;
-
-
-}
-
-
-
-
-@keyframes bootProgress{
-
-
-    from{
-
-        width:0;
-
-    }
-
-
-    to{
-
-        width:100%;
-
-    }
-
-}
-
-
-
-@keyframes bootFade{
-
-
-    0%{
-
-        opacity:1;
-
-        visibility:visible;
-
-    }
-
-
-    85%{
-
-        opacity:1;
-
-    }
-
-
-    100%{
-
-
-        opacity:0;
-
-
-        visibility:hidden;
-
-
-    }
-
-}
-
-
-
-@keyframes textLoading{
-
-
-    0%,100%{
-
-        opacity:.5;
-
-    }
-
-
-    50%{
-
-        opacity:1;
-
-    }
-
-}
-
-/* =====================================================
-   STEP 9
-   HUD INFORMATION DISPLAY
-===================================================== */
-
-
-/* ===========================
-   HUD TEXT LABEL
-=========================== */
-
-
-.hud-info{
-
-
-    position:absolute;
-
-
-    color:
-
-    rgba(120,220,255,.75);
-
-
-    font-size:10px;
+    font-weight:bold;
 
 
     letter-spacing:3px;
 
 
-    font-family:
+    border-radius:10px;
 
-    "Courier New",
-    monospace;
 
+    background:
 
-    text-shadow:
-
-    0 0 10px #00c8ff;
-
-
-}
-
-
-
-/* POSITION */
-
-
-.top-left{
-
-    top:12px;
-
-    left:35px;
-
-}
-
-
-
-.top-right{
-
-    top:12px;
-
-    right:35px;
-
-}
-
-
-
-.bottom-left{
-
-    bottom:12px;
-
-    left:35px;
-
-}
-
-
-
-.bottom-right{
-
-    bottom:12px;
-
-    right:35px;
-
-}
-
-
-
-/* ===========================
-   DIGITAL BLINK
-=========================== */
-
-
-.hud-info{
-
-
-    animation:
-
-    hudBlink 3s infinite;
-
-
-}
-
-
-
-@keyframes hudBlink{
-
-
-    0%,100%{
-
-        opacity:.45;
-
-    }
-
-
-    50%{
-
-        opacity:1;
-
-    }
-
-}
-
-
-
-/* ===========================
-   CORNER TECH MARKS
-=========================== */
-
-
-.hud-login::before{
-
-
-    content:"";
-
-
-    position:absolute;
-
-
-    top:35px;
-
-    left:35px;
-
-
-    width:25px;
-
-    height:2px;
-
-
-    background:#00c8ff;
+    linear-gradient(
+        90deg,
+        var(--purple),
+        var(--cyan)
+    );
 
 
     box-shadow:
 
-
-    0 8px #00c8ff;
-
+    0 0 25px rgba(0,246,255,.4);
 
 }
 
 
 
-.hud-login::after{
+.login-form button:hover{
 
 
-    content:"";
-
-
-    position:absolute;
-
-
-    bottom:35px;
-
-    right:35px;
-
-
-    width:25px;
-
-    height:2px;
-
-
-    background:#00c8ff;
-
-
-    box-shadow:
-
-
-    0 -8px #00c8ff;
+    transform:
+    translateY(-3px);
 
 
 }
 
-
-
-
-/* =====================================================
-   CYBER CORE ULTRA PREMIUM
-   PART 2
-   DASHBOARD + MENU + CARD SYSTEM
-===================================================== */
+/* =====================================
+   CYBER CORE PREMIUM CSS
+   PART 2 - DASHBOARD SYSTEM
+===================================== */
 
 
 /* =========================
-   ADMIN INFO CLOCK
+ MAIN DASHBOARD
+========================= */
+
+
+#content{
+
+    width:min(1500px,95vw);
+
+    margin:30px auto;
+
+
+    padding:35px;
+
+
+    background:
+
+    rgba(5,15,30,.75);
+
+
+    backdrop-filter:
+    blur(20px);
+
+
+    border:
+
+    1px solid rgba(0,246,255,.25);
+
+
+    border-radius:25px;
+
+
+    box-shadow:
+
+    0 0 50px rgba(0,246,255,.15);
+
+}
+
+
+
+/* =========================
+ ADMIN INFO
 ========================= */
 
 
 #adminInfo{
 
-    width:max-content;
-
-    min-width:300px;
-
-    padding:22px 35px;
-
-    margin-bottom:25px;
 
     text-align:center;
 
-    border-radius:28px;
+
+    padding:25px;
+
+
+    margin-bottom:25px;
 
 
     background:
 
     linear-gradient(
         135deg,
-        #020617,
-        #1e3a8a
+        rgba(0,246,255,.12),
+        rgba(123,44,255,.15)
     );
 
 
-    box-shadow:
+    border:
 
-    0 25px 60px rgba(0,0,0,.45);
+    1px solid rgba(0,246,255,.25);
+
+
+    border-radius:20px;
+
 
 }
 
@@ -2474,11 +722,12 @@ body.login-mode::before{
 
 #serverStatus{
 
-    color:#4ade80;
 
-    font-weight:900;
+    color:#00ff99;
 
-    font-size:14px;
+
+    font-weight:bold;
+
 
 }
 
@@ -2486,38 +735,22 @@ body.login-mode::before{
 
 #adminName{
 
-    margin:15px 0;
 
-    font-size:24px;
-
-    font-weight:900;
-
-    letter-spacing:3px;
+    margin:15px;
 
 
-    background:
-
-    linear-gradient(
-        90deg,
-        #facc15,
-        #ffffff,
-        #facc15
-    );
+    font-size:28px;
 
 
-    -webkit-background-clip:text;
-
-    -webkit-text-fill-color:transparent;
-
-}
+    letter-spacing:5px;
 
 
+    color:var(--cyan);
 
-#currentDate{
 
-    color:#cbd5e1;
+    text-shadow:
 
-    font-size:14px;
+    0 0 20px var(--cyan);
 
 }
 
@@ -2525,20 +758,14 @@ body.login-mode::before{
 
 #currentTime{
 
-    margin:10px 0;
 
-    font-size:40px;
+    font-size:45px;
+
 
     font-weight:900;
 
-    letter-spacing:4px;
 
-    color:white;
-
-
-    text-shadow:
-
-    0 0 20px rgba(255,255,255,.5);
+    letter-spacing:5px;
 
 }
 
@@ -2548,85 +775,23 @@ body.login-mode::before{
 
     color:#94a3b8;
 
-    font-size:13px;
-
 }
 
 
 
 /* =========================
-   MAIN CONTENT
-========================= */
-
-
-#content{
-
-    max-width:1450px;
-
-    margin:auto;
-
-    padding:40px;
-
-
-    background:
-
-    rgba(255,255,255,.95);
-
-
-    color:#0f172a;
-
-
-    border-radius:35px;
-
-
-    box-shadow:
-
-    0 40px 100px rgba(0,0,0,.45);
-
-
-    animation:
-
-    dashboardShow .5s ease;
-
-}
-
-
-
-@keyframes dashboardShow{
-
-    from{
-
-        opacity:0;
-
-        transform:translateY(30px);
-
-    }
-
-
-    to{
-
-        opacity:1;
-
-        transform:translateY(0);
-
-    }
-
-}
-
-
-
-/* =========================
-   TOP BAR
+ TOP BUTTON
 ========================= */
 
 
 .topBar{
 
+
     display:flex;
+
 
     justify-content:space-between;
 
-    align-items:center;
 
     margin-bottom:25px;
 
@@ -2634,67 +799,46 @@ body.login-mode::before{
 
 
 
-.logoutBtn{
+button{
+
+
+    position:relative;
+
+
+    overflow:hidden;
+
+
+    padding:14px 25px;
+
+
+    border-radius:12px;
+
+
+    border:
+
+    1px solid rgba(0,246,255,.35);
+
 
     background:
 
     linear-gradient(
         135deg,
-        #ef4444,
-        #991b1b
+        #073b66,
+        #2563eb
     );
 
+
     color:white;
-
-}
-
-
-
-/* =========================
-   BUTTON SYSTEM
-========================= */
-
-
-button{
-
-    position:relative;
-
-    overflow:hidden;
-
-
-    padding:13px 22px;
-
-
-    border:none;
-
-
-    border-radius:18px;
 
 
     cursor:pointer;
 
 
-    font-weight:900;
-
-
-    color:white;
-
-
-    background:
-
-    linear-gradient(
-        135deg,
-        #2563eb,
-        #1e40af
-    );
-
-
-    box-shadow:
-
-    0 10px 25px rgba(37,99,235,.35);
+    font-weight:800;
 
 
     transition:.3s;
+
 
 }
 
@@ -2702,183 +846,167 @@ button{
 
 button:hover{
 
+
     transform:
     translateY(-3px);
 
 
     box-shadow:
 
-    0 15px 35px rgba(37,99,235,.45);
+    0 0 25px rgba(0,246,255,.45);
 
 }
 
 
 
-button:active{
-
-    transform:scale(.95);
-
-}
-
-
-
-button::before{
-
-    content:"";
-
-
-    position:absolute;
-
-
-    top:0;
-
-    left:-120%;
-
-
-    width:100%;
-
-    height:100%;
+.logoutBtn{
 
 
     background:
 
     linear-gradient(
-        120deg,
-        transparent,
-        rgba(255,255,255,.45),
-        transparent
+        135deg,
+        #991b1b,
+        #ef4444
     );
-
-
-    transition:.5s;
-
-}
-
-
-
-button:hover::before{
-
-    left:120%;
 
 }
 
 
 
 /* =========================
-   MENU SYSTEM
+ MENU LAYOUT
 ========================= */
 
 
 .menuLayout{
 
-    display:flex;
 
-    flex-direction:row;
+    display:grid;
 
-    align-items:stretch;
 
-    gap:40px;
+    grid-template-columns:
+
+    350px
+    1fr;
+
+
+    gap:25px;
 
 }
 
+
+
+/* =========================
+ LEFT MENU
+========================= */
 
 
 .menuLeft{
 
-    width:350px;
 
-    flex-shrink:0;
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:12px;
-
-}
-
-.leftMenu::before{
-
-    content:"";
-
-    position:absolute;
-
-    left:-10px;
-
-    top:0;
-
-    width:3px;
-
-    height:100%;
-
-    background:
-    linear-gradient(
-        #38bdf8,
-        #facc15
-    );
-
-    border-radius:20px;
-
-    box-shadow:
-    0 0 15px #2563eb,
-    0 0 25px #facc15;
-
-}
-
-
-.leftMenu button{
-
-    width:100%;
-
-    min-height:55px;
-
-    padding:15px 20px;
-
-    font-size:15px;
-
-    font-weight:900;
-
-    border-radius:18px;
-
-    text-align:left;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
-
-}
-
-
-
-.rightMenu{
-
-    flex:1;
-
-    padding:25px;
-
-
-    border-radius:25px;
+    padding:20px;
 
 
     background:
 
-    linear-gradient(
-        145deg,
-        #ffffff,
-        #eff6ff
-    );
+    rgba(8,18,35,.8);
 
 
     border:
 
-    1px solid #bfdbfe;
+    1px solid rgba(0,246,255,.2);
 
 
-    box-shadow:
+    border-radius:20px;
 
-    0 20px 40px rgba(37,99,235,.15);
+}
+
+
+
+.leftMenu{
+
+
+    display:flex;
+
+
+    flex-direction:column;
+
+
+    gap:12px;
+
+}
+
+
+
+.leftMenu button{
+
+
+    width:100%;
+
+
+    text-align:left;
+
+
+    display:flex;
+
+
+    align-items:center;
+
+
+    gap:12px;
+
+
+    background:
+
+    rgba(15,35,60,.8);
+
+
+}
+
+
+
+.leftMenu button:hover{
+
+
+    background:
+
+    linear-gradient(
+        90deg,
+        #2563eb,
+        #00f6ff
+    );
+
+
+}
+
+
+
+/* =========================
+ SETTING PANEL
+========================= */
+
+
+.rightMenu{
+
+
+    margin-bottom:20px;
+
+
+    padding:20px;
+
+
+    border-radius:18px;
+
+
+    background:
+
+    rgba(15,23,42,.8);
+
+
+    border:
+
+    1px solid rgba(0,246,255,.2);
 
 }
 
@@ -2886,11 +1014,8 @@ button:hover::before{
 
 .rightMenu h3{
 
-    color:#2563eb;
 
-    font-size:22px;
-
-    font-weight:900;
+    color:var(--cyan);
 
 }
 
@@ -2898,40 +1023,15 @@ button:hover::before{
 
 .rightMenu label{
 
-    display:flex;
 
-    align-items:center;
-
-    gap:12px;
+    display:block;
 
 
-    padding:12px 15px;
-
-    margin-bottom:8px;
+    padding:10px;
 
 
-    border-radius:15px;
+    color:#dff8ff;
 
-
-    color:#0f172a;
-
-
-    font-size:16px;
-
-    font-weight:800;
-
-
-    transition:.3s;
-
-}
-
-
-
-.rightMenu label:hover{
-
-    background:#dbeafe;
-
-    transform:translateX(5px);
 
 }
 
@@ -2939,618 +1039,36 @@ button:hover::before{
 
 .rightMenu input{
 
-    width:18px;
 
-    height:18px;
-
-    accent-color:#2563eb;
+    accent-color:#00f6ff;
 
 }
 
 
 
 /* =========================
-   QRIS CARD
-========================= */
-
-
-.qrisTotalBox{
-
-    display:flex;
-
-    flex-wrap:wrap;
-
-    gap:25px;
-
-    margin:25px 0;
-
-}
-
-
-
-.qrisCard{
-
-    flex:1;
-
-    min-width:260px;
-
-
-    padding:30px;
-
-
-    text-align:center;
-
-
-    border-radius:25px;
-
-
-    background:
-
-    linear-gradient(
-        145deg,
-        #ffffff,
-        #dbeafe
-    );
-
-
-    border:
-
-    1px solid #93c5fd;
-
-
-    box-shadow:
-
-    0 25px 50px rgba(37,99,235,.2);
-
-
-    transition:.35s;
-
-}
-
-
-
-.qrisCard:hover{
-
-    transform:
-    translateY(-10px);
-
-}
-
-
-
-.qrisCard h2{
-
-    border:none;
-
-    padding:0;
-
-    margin:0;
-
-
-    color:#2563eb;
-
-}
-
-
-
-
-
-.qrisCard span{
-
-    display:block;
-
-    margin-top:15px;
-
-
-    font-size:36px;
-
-    font-weight:900;
-
-
-    color:#2563eb;
-
-}
-
-/* =====================================================
-   CYBER CORE ULTRA PREMIUM
-   PART 3
-   PAGE + TABLE + FORM + FORMULA + MONITOR + MOBILE
-===================================================== */
-
-
-/* =========================
-   PAGE CARD
-========================= */
-
-
-#depositPage,
-#withdrawPage,
-#qrisPage,
-#cashBackPage,
-#inputCashBackPage,
-#doubleCashBackPage,
-#doubleAccPage,
-#formulaPage{
-
-    margin-top:25px;
-
-    padding:30px;
-
-    border-radius:30px;
-
-
-    background:
-
-    linear-gradient(
-        145deg,
-        #ffffff,
-        #f8fafc
-    );
-
-
-    border:
-
-    1px solid #e2e8f0;
-
-
-    box-shadow:
-
-    0 25px 60px rgba(15,23,42,.15);
-
-
-    animation:
-
-    pageOpen .5s ease;
-
-}
-
-
-
-@keyframes pageOpen{
-
-    from{
-
-        opacity:0;
-
-        transform:translateY(20px);
-
-    }
-
-
-    to{
-
-        opacity:1;
-
-        transform:translateY(0);
-
-    }
-
-}
-
-
-
-h2{
-
-    color:#0f172a;
-
-    font-weight:900;
-
-    border-left:
-
-    5px solid #2563eb;
-
-
-    padding-left:12px;
-
-}
-
-
-
-/* =========================
-   TABLE SYSTEM
-========================= */
-
-
-table{
-
-    width:100%;
-
-    border-collapse:separate;
-
-    border-spacing:0;
-
-    margin-top:25px;
-
-    overflow:hidden;
-
-    border-radius:20px;
-
-    background:white;
-
-
-    box-shadow:
-
-    0 15px 35px rgba(15,23,42,.12);
-
-}
-
-
-
-thead th{
-
-    padding:15px 12px;
-
-
-    color:white;
-
-
-    text-transform:uppercase;
-
-
-    font-size:13px;
-
-
-    letter-spacing:1px;
-
-
-    background:
-
-    linear-gradient(
-        135deg,
-        #020617,
-        #1e40af,
-        #2563eb
-    );
-
-}
-
-
-
-tbody td{
-
-    padding:14px;
-
-
-    text-align:center;
-
-
-    color:#334155;
-
-
-    font-size:14px;
-
-
-    font-weight:600;
-
-
-    border-bottom:
-
-    1px solid #e2e8f0;
-
-}
-
-
-
-tbody tr{
-
-    background:white;
-
-    transition:.25s;
-
-}
-
-
-
-tbody tr:hover{
-
-    background:#eff6ff;
-
-
-    transform:scale(1.01);
-
-}
-
-
-
-tbody tr:last-child td{
-
-    border-bottom:none;
-
-}
-
-
-
-/* =========================
-   INPUT SYSTEM
-========================= */
-
-
-textarea,
-input[type="file"]{
-
-    width:100%;
-
-
-    padding:15px;
-
-
-    border-radius:16px;
-
-
-    border:
-
-    1px solid #cbd5e1;
-
-
-    background:#f8fafc;
-
-
-    color:#0f172a;
-
-
-    font-size:14px;
-
-
-    transition:.3s;
-
-}
-
-
-
-textarea{
-
-    min-height:150px;
-
-}
-
-
-
-textarea:focus,
-input[type="file"]:focus{
-
-    outline:none;
-
-
-    border-color:#2563eb;
-
-
-    background:white;
-
-
-    box-shadow:
-
-    0 0 20px rgba(37,99,235,.25);
-
-}
-
-
-
-#depositPage button,
-#withdrawPage button,
-#qrisPage button,
-#cashBackPage button,
-#inputCashBackPage button,
-#doubleCashBackPage button,
-#doubleAccPage button{
-
-    margin:5px;
-
-}
-
-
-
-/* =========================
-   FORMULA PAGE
-========================= */
-
-
-#formulaPage{
-
-    background:
-
-    linear-gradient(
-        135deg,
-        #020617,
-        #0f172a
-    );
-
-
-    color:white;
-
-}
-
-
-
-#formulaPage h2{
-
-    text-align:center;
-
-    border:none;
-
-
-    color:#38bdf8;
-
-
-    font-size:32px;
-
-
-    text-shadow:
-
-    0 0 20px #38bdf8;
-
-}
-
-
-
-#formulaPage p{
-
-    text-align:center;
-
-    color:#94a3b8;
-
-}
-
-
-
-.formulaGrid{
-
-    display:grid;
-
-
-    grid-template-columns:
-
-    repeat(
-        auto-fit,
-        minmax(280px,1fr)
-    );
-
-
-    gap:25px;
-
-}
-
-
-
-.formulaCard{
-
-    padding:30px;
-
-
-    border-radius:25px;
-
-
-    text-align:center;
-
-
-    background:
-
-    linear-gradient(
-        145deg,
-        #0f172a,
-        #1e293b
-    );
-
-
-    border:
-
-    1px solid rgba(56,189,248,.3);
-
-
-    box-shadow:
-
-    0 0 30px rgba(56,189,248,.15);
-
-
-    transition:.35s;
-
-}
-
-
-
-.formulaCard:hover{
-
-    transform:
-    translateY(-10px);
-
-
-    box-shadow:
-
-    0 0 45px rgba(56,189,248,.45);
-
-}
-
-
-
-.formulaCard h3{
-
-    color:white;
-
-    font-size:22px;
-
-}
-
-
-
-.formulaCard p{
-
-    color:#cbd5e1;
-
-}
-
-
-
-.formulaCard button{
-
-    margin-top:20px;
-
-    width:90%;
-
-
-    background:
-
-    linear-gradient(
-        135deg,
-        #facc15,
-        #eab308
-    );
-
-
-    color:#111827;
-
-}
-
-.formulaCard button:hover{
-
-    transform:translateY(-3px);
-
-    box-shadow:
-    0 0 25px #facc15;
-
-}
-
-
-
-/* =========================
-   SYSTEM MONITOR
+ SYSTEM MONITOR
 ========================= */
 
 
 .systemMonitor{
 
-    flex:1;
-
-    min-width:450px;
 
     padding:30px;
 
 
-    border-radius:30px;
+    border-radius:22px;
 
 
     background:
 
-    linear-gradient(
-        145deg,
-        #ffffff,
-        #eff6ff
-    );
+    rgba(8,18,35,.85);
 
 
     border:
 
-    1px solid #bfdbfe;
+    1px solid rgba(0,246,255,.25);
 
-
-    box-shadow:
-
-    0 25px 60px rgba(37,99,235,.18);
-
-}
-
-.systemMonitor{
-
-    animation:
-    pageOpen .5s ease;
 
 }
 
@@ -3558,11 +1076,15 @@ input[type="file"]:focus{
 
 .systemMonitor h3{
 
-    color:#2563eb;
 
-    font-size:22px;
+    color:var(--cyan);
 
-    font-weight:900;
+
+    letter-spacing:3px;
+
+
+    text-align:center;
+
 
 }
 
@@ -3570,27 +1092,26 @@ input[type="file"]:focus{
 
 .monitorItem{
 
+
     display:flex;
+
 
     justify-content:space-between;
 
-    align-items:center;
+
+    padding:15px;
 
 
-    padding:12px 0;
+    margin-bottom:10px;
 
 
-    font-weight:800;
+    background:
 
-}
+    rgba(0,246,255,.05);
 
 
+    border-radius:12px;
 
-.online{
-
-    color:#16a34a;
-
-    font-weight:900;
 
 }
 
@@ -3598,7 +1119,8 @@ input[type="file"]:focus{
 
 .monitorBar{
 
-    margin-bottom:18px;
+
+    margin-top:20px;
 
 }
 
@@ -3606,13 +1128,12 @@ input[type="file"]:focus{
 
 .monitorBar label{
 
+
     display:block;
+
 
     margin-bottom:8px;
 
-    color:#1e293b;
-
-    font-weight:900;
 
 }
 
@@ -3620,18 +1141,20 @@ input[type="file"]:focus{
 
 .bar{
 
-    height:12px;
 
-    width:100%;
+    height:14px;
 
 
-    background:#dbeafe;
+    background:
+
+    rgba(255,255,255,.1);
 
 
     border-radius:20px;
 
 
     overflow:hidden;
+
 
 }
 
@@ -3639,889 +1162,374 @@ input[type="file"]:focus{
 
 .fill{
 
-    height:100%;
 
-    border-radius:20px;
+    height:100%;
 
 
     background:
 
     linear-gradient(
         90deg,
-        #2563eb,
-        #38bdf8,
-        white,
-        #38bdf8,
-        #2563eb
+        var(--purple),
+        var(--cyan)
     );
-
-
-    background-size:300% 100%;
 
 
     animation:
 
-    barMove 1.5s linear infinite;
+    flowBar 2s linear infinite;
+
 
 }
 
+
+
+@keyframes flowBar{
+
+
+from{
+
+filter:hue-rotate(0deg);
+
+}
+
+
+to{
+
+filter:hue-rotate(360deg);
+
+}
+
+}
 
 
 .cpu{
-    width:92%;
+width:92%;
 }
-
 
 .memory{
-    width:74%;
+width:74%;
 }
-
 
 .network{
-    width:98%;
-}
-
-
-
-@keyframes barMove{
-
-    from{
-
-        background-position:100% 0;
-
-    }
-
-
-    to{
-
-        background-position:-100% 0;
-
-    }
-
+width:98%;
 }
 
 
 
 /* =========================
-   EFFECT
+ CARD SYSTEM
 ========================= */
 
 
-.status{
-
-    display:inline-block;
+.qrisTotalBox{
 
 
-    padding:8px 18px;
+    display:grid;
 
 
-    border-radius:30px;
+    grid-template-columns:
 
-
-    color:#4ade80;
-
-
-    background:
-
-    rgba(34,197,94,.15);
-
-
-    border:
-
-    1px solid rgba(34,197,94,.4);
-
-}
-
-
-
-::selection{
-
-    background:#facc15;
-
-    color:#020617;
-
-}
-
-
-
-::-webkit-scrollbar{
-
-    width:10px;
-
-}
-
-
-
-::-webkit-scrollbar-track{
-
-    background:#020617;
-
-}
-
-
-
-::-webkit-scrollbar-thumb{
-
-    background:
-
-    linear-gradient(
-        #2563eb,
-        #facc15
+    repeat(
+    auto-fit,
+    minmax(250px,1fr)
     );
+
+
+    gap:20px;
+
+
+}
+
+
+
+.qrisCard{
+
+
+    padding:30px;
+
+
+    text-align:center;
 
 
     border-radius:20px;
 
-}
-
-
-
-/* =========================
-   MOBILE FINAL
-========================= */
-
-
-@media(max-width:900px){
-
-    .menuLayout{
-
-        flex-direction:column;
-
-    }
-
-
-    .menuLeft{
-
-        width:100%;
-
-    }
-
-
-    .systemMonitor{
-
-        min-width:100%;
-
-    }
-
-}
-
-.rightMenu{
-    width:100%;
-}
-
-.menuLayout{
-    gap:20px;
-}
-
-
-
-@media(max-width:700px){
-
-    body{
-
-        padding:10px;
-
-    }
-
-
-    #content{
-
-        padding:20px;
-
-        border-radius:20px;
-
-    }
-
-
-    #adminInfo{
-
-        width:100%;
-
-    }
-
-
-    .topBar{
-
-        flex-direction:column;
-
-        gap:15px;
-
-    }
-
-
-    .qrisTotalBox{
-
-        flex-direction:column;
-
-    }
-
-
-    table{
-
-        font-size:12px;
-
-    }
-
-
-    th,
-    td{
-
-        padding:8px;
-
-    }
-
-
-    .premiumLogin h1{
-
-        font-size:32px;
-
-    }
-
-}
-
-/* =========================
-   MENU SPACING FIX
-========================= */
-
-.menuLeft{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:15px;
-
-}
-
-
-.menuLeft button{
-
-    min-height:50px;
-
-    padding:14px 20px;
-
-    font-size:15px;
-
-    border-radius:16px;
-
-}
-
-
-/* SYSTEM MONITOR RAPI */
-
-.systemMonitor{
-
-    padding:35px;
-
-}
-
-
-.systemMonitor h3{
-
-    margin-bottom:25px;
-
-}
-
-
-.monitorItem{
-
-    padding:15px 0;
-
-    margin-bottom:8px;
-
-    border-bottom:
-
-    1px solid #dbeafe;
-
-}
-
-
-.monitorBar{
-
-    margin-top:20px;
-
-    margin-bottom:25px;
-
-}
-
-
-.monitorBar label{
-
-    margin-bottom:12px;
-
-    font-size:15px;
-
-}
-
-
-.bar{
-
-    height:14px;
-
-}
-
-
-
-/* BUILD INFO */
-
-.buildInfo{
-
-    margin-top:30px;
-
-    padding-top:20px;
-
-    border-top:
-
-    1px solid #dbeafe;
-
-}
-
-
-.buildInfo h2{
-
-    margin-bottom:10px;
-
-}
-
-/* =========================
-   MENU ITEM UNIVERSAL SPACING FIX
-========================= */
-
-.menuLeft > *,
-.menuLeft a,
-.menuLeft div,
-.menuLeft label,
-.menuLeft button{
-
-    margin-bottom:15px !important;
-
-}
-
-
-.menuLeft{
-
-    display:flex !important;
-
-    flex-direction:column !important;
-
-    gap:15px !important;
-
-}
-
-
-.menuLeft *{
-
-    line-height:1.5;
-
-}
-
-.leftMenu button:hover{
-
-    transform:translateX(8px);
 
     background:
-    linear-gradient(
-        135deg,
-        #2563eb,
-        #38bdf8
-    );
+
+    rgba(8,18,35,.85);
+
+
+    border:
+
+    1px solid rgba(0,246,255,.25);
+
 
     box-shadow:
-    0 15px 35px rgba(37,99,235,.45);
 
-}
+    0 0 30px rgba(0,246,255,.12);
 
-/* =========================
-   LEFT MENU PREMIUM EFFECT
-========================= */
-
-.leftMenu button{
-
-    position:relative;
-
-    overflow:hidden;
-
-    transition:.3s;
 
 }
 
 
-.leftMenu button:hover{
 
-    transform:translateX(8px);
-
-    box-shadow:
-    0 10px 30px rgba(37,99,235,.45);
-
-}
+.qrisCard h2{
 
 
-.leftMenu button::after{
+    color:var(--cyan);
 
-    content:"";
-
-    position:absolute;
-
-    left:0;
-
-    top:0;
-
-    width:4px;
-
-    height:100%;
-
-
-    background:
-    linear-gradient(
-        #38bdf8,
-        #facc15
-    );
-
-
-    opacity:0;
-
-    transition:.3s;
-
-}
-
-
-.leftMenu button:hover::after{
-
-    opacity:1;
-
-}
-
-/* =========================
-   SYSTEM MONITOR HEADER PREMIUM
-========================= */
-
-.systemMonitor{
-
-    text-align:center;
-
-}
-
-
-/* SERVER STATUS */
-
-.systemMonitor .serverTitle{
 
     font-size:18px;
 
-    font-weight:900;
-
-    color:#16a34a;
-
-    text-shadow:
-    0 0 15px rgba(22,163,74,.5);
-
-    margin-bottom:15px;
 
 }
 
 
 
-/* SYSTEM NAME */
+.qrisCard span{
 
-.systemMonitor .systemName{
-
-    font-size:24px;
-
-    font-weight:900;
-
-    letter-spacing:3px;
-
-    background:
-
-    linear-gradient(
-        90deg,
-        #2563eb,
-        #38bdf8,
-        #facc15
-    );
-
-
-    -webkit-background-clip:text;
-
-    -webkit-text-fill-color:transparent;
-
-}
-
-
-
-/* DATE */
-
-.systemMonitor .systemDate{
-
-    margin-top:15px;
-
-    color:#64748b;
-
-    font-size:15px;
-
-    font-weight:700;
-
-}
-
-
-
-/* CLOCK */
-
-.systemMonitor .systemClock{
-
-    margin:8px 0;
-
-    font-size:42px;
-
-    font-weight:900;
-
-    letter-spacing:4px;
-
-    color:#020617;
-
-    text-shadow:
-
-    0 0 15px rgba(37,99,235,.25);
-
-}
-
-
-
-/* LOCATION */
-
-.systemMonitor .systemLocation{
-
-    color:#475569;
-
-    font-size:14px;
-
-    font-weight:800;
-
-}
-
-.welcomePanel{
-
-    margin-top:25px;
-
-    padding:25px;
-
-    border-radius:25px;
-
-    background:
-    linear-gradient(
-        145deg,
-        #020617,
-        #1e3a8a
-    );
-
-    color:white;
-
-    border:1px solid rgba(56,189,248,.4);
-
-    box-shadow:
-    0 0 30px rgba(37,99,235,.35);
-
-    text-align:center;
-
-}
-
-
-.welcomePanel h2{
-
-    color:#38bdf8;
-
-    border:none;
-
-    padding:0;
-
-    text-shadow:
-    0 0 15px #38bdf8;
-
-}
-
-
-.welcomePanel p{
-
-    color:#cbd5e1;
-
-    line-height:1.7;
-
-    font-weight:700;
-
-}
-
-
-.welcomePanel span{
 
     display:block;
 
-    margin-top:20px;
 
-    color:#facc15;
+    margin-top:15px;
+
+
+    font-size:38px;
+
 
     font-weight:900;
 
-    letter-spacing:2px;
+
+    color:white;
+
 
 }
 
 /* =====================================
-   AI MANAGEMENT CONSOLE DASHBOARD
+   CYBER CORE PREMIUM CSS
+   PART 3 - PAGE + TABLE + FORM
 ===================================== */
 
 
-/* BODY */
+/* =========================
+   ALL CONTENT PAGE
+========================= */
 
-body{
 
-    background:
-
-    radial-gradient(
-        circle at top,
-        #12345b,
-        #020617 70%
-    ) !important;
-
-}
-
-
-
-/* MAIN DASHBOARD */
-
-#content{
-
-    background:
-
-    rgba(5,15,30,.85) !important;
-
-
-    backdrop-filter:
-
-    blur(20px);
-
-
-    border:
-
-    1px solid rgba(56,189,248,.25) !important;
-
-
-    border-radius:28px !important;
-
-
-    box-shadow:
-
-    0 30px 80px rgba(0,0,0,.55),
-
-    inset 0 0 40px rgba(56,189,248,.08);
-
-
-    color:#e2e8f0 !important;
-
-}
-
-
-
-/* TOP ADMIN CARD */
-
-#adminInfo{
-
-    background:
-
-    linear-gradient(
-        135deg,
-        rgba(30,64,175,.8),
-        rgba(2,6,23,.9)
-    ) !important;
-
-
-    border:
-
-    1px solid rgba(56,189,248,.35);
-
-
-    box-shadow:
-
-    0 15px 40px rgba(0,0,0,.4);
-
-}
-
-
-
-/* LEFT MODULE MENU */
-
-.leftMenu{
-
-
-    background:
-
-    rgba(15,23,42,.75);
-
-
-    border:
-
-    1px solid rgba(56,189,248,.2);
-
-
-    border-radius:22px;
-
-
-    padding:20px;
-
-}
-
-
-
-/* MENU BUTTON */
-
-.leftMenu button{
-
-
-    background:
-
-    rgba(15,35,60,.9) !important;
-
-
-    border:
-
-    1px solid rgba(56,189,248,.25) !important;
-
-
-    color:#e0f2fe !important;
-
-
-    border-radius:14px !important;
-
-
-    transition:.25s;
-
-}
-
-
-
-.leftMenu button:hover{
-
-
-    background:
-
-    linear-gradient(
-        135deg,
-        #2563eb,
-        #38bdf8
-    ) !important;
-
-
-    transform:
-
-    translateX(6px);
-
-
-    box-shadow:
-
-    0 10px 25px rgba(56,189,248,.25);
-
-}
-
-
-
-/* CONTENT PANEL */
-
-.systemMonitor,
-.rightMenu,
-.qrisCard,
+#depositPgaPage,
+#pgaCheckingPage,
 #depositPage,
 #withdrawPage,
 #qrisPage,
-#cashBackPage,
 #inputCashBackPage,
+#cashBackPage,
 #doubleCashBackPage,
 #doubleAccPage,
 #formulaPage{
 
 
+    margin-top:25px;
+
+
+    padding:30px;
+
+
     background:
 
-    rgba(15,23,42,.8) !important;
+    rgba(8,18,35,.85);
 
 
     border:
 
-    1px solid rgba(56,189,248,.18) !important;
+    1px solid rgba(0,246,255,.2);
 
 
-    border-radius:22px !important;
+    border-radius:22px;
 
 
     box-shadow:
 
-    0 20px 45px rgba(0,0,0,.35);
+    0 0 35px rgba(0,246,255,.12);
+
+
+    animation:
+
+    pageOpen .4s ease;
 
 
 }
 
 
 
-/* TITLE */
-
-#content h1,
-#content h2,
-#content h3{
+@keyframes pageOpen{
 
 
-    color:#7dd3fc !important;
+from{
+
+opacity:0;
+
+transform:translateY(20px);
+
+}
+
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+
+}
+
+
+
+/* =========================
+ HEADINGS
+========================= */
+
+
+#content h2{
+
+
+    color:var(--cyan);
 
 
     letter-spacing:2px;
 
 
-}
+    border-left:
+
+    4px solid var(--cyan);
 
 
+    padding-left:12px;
 
-/* TEXT */
-
-#content p,
-#content span,
-#content label{
-
-
-    color:#cbd5e1 !important;
 
 }
 
 
 
-/* BUTTON */
+#content h3{
 
-#content button{
+
+    color:#9fefff;
+
+
+}
+
+
+
+/* =========================
+ INPUT SYSTEM
+========================= */
+
+
+textarea,
+input[type="file"],
+input[type="text"],
+input[type="password"]{
+
+
+    width:100%;
+
+
+    padding:15px;
+
+
+    margin:10px 0;
 
 
     background:
 
-    linear-gradient(
-        135deg,
-        #2563eb,
-        #1d4ed8
-    ) !important;
+    rgba(0,0,0,.4);
 
 
-    border-radius:12px !important;
+    color:white;
 
 
-    color:white !important;
+    border:
+
+    1px solid rgba(0,246,255,.3);
+
+
+    border-radius:12px;
 
 
 }
 
 
 
-/* TABLE */
+textarea{
+
+
+    min-height:150px;
+
+
+}
+
+
+
+textarea:focus,
+input:focus{
+
+
+    outline:none;
+
+
+    border-color:var(--cyan);
+
+
+    box-shadow:
+
+    0 0 20px rgba(0,246,255,.3);
+
+
+}
+
+
+
+/* =========================
+ TABLE SYSTEM
+========================= */
+
 
 table{
 
 
-    background:#020617 !important;
+    width:100%;
+
+
+    margin-top:25px;
+
+
+    border-collapse:
+
+    separate;
+
+
+    border-spacing:0;
+
+
+    overflow:hidden;
+
 
     border-radius:15px;
+
+
+    background:
+
+    rgba(2,6,23,.8);
+
+
+    border:
+
+    1px solid rgba(0,246,255,.2);
+
 
 }
 
@@ -4530,13 +1538,25 @@ table{
 thead th{
 
 
+    padding:15px;
+
+
+    color:white;
+
+
     background:
 
     linear-gradient(
         135deg,
-        #1e40af,
+        #073b66,
         #2563eb
-    ) !important;
+    );
+
+
+    letter-spacing:1px;
+
+
+    font-size:13px;
 
 
 }
@@ -4546,61 +1566,1391 @@ thead th{
 tbody td{
 
 
-    background:#0f172a !important;
+    padding:14px;
 
 
-    color:#e2e8f0 !important;
+    text-align:center;
+
+
+    color:#dff8ff;
+
+
+    border-bottom:
+
+    1px solid rgba(255,255,255,.08);
+
 
 }
 
 
 
-/* INPUT */
-
-textarea,
-input[type="file"],
-input[type="text"]{
+tbody tr{
 
 
-    background:#020617 !important;
+    transition:.25s;
 
 
-    color:white !important;
+}
+
+
+
+tbody tr:hover{
+
+
+    background:
+
+    rgba(0,246,255,.08);
+
+
+    box-shadow:
+
+    inset 3px 0 0 var(--cyan);
+
+
+}
+
+
+
+/* =========================
+ FORMULA CENTER
+========================= */
+
+
+.formulaCard{
+
+
+    display:inline-block;
+
+
+    width:280px;
+
+
+    margin:15px;
+
+
+    padding:30px;
+
+
+    text-align:center;
+
+
+    background:
+
+    rgba(15,23,42,.8);
 
 
     border:
 
-    1px solid #334155 !important;
-
-}
-
-/* =====================================
-   CLEAN CYBER TABLE HOVER
-===================================== */
-
-tbody tr {
-    transition: .25s ease;
-}
+    1px solid rgba(0,246,255,.25);
 
 
-tbody tr:hover td {
+    border-radius:20px;
 
-    background:#132238 !important;
-
-    color:#f8fafc !important;
-
-}
-
-
-tbody tr:hover {
 
     box-shadow:
-    inset 4px 0 0 #38bdf8,
-    0 0 10px rgba(56,189,248,.25);
+
+    0 0 30px rgba(0,246,255,.15);
+
+
+    transition:.3s;
+
 
 }
 
 
+
+.formulaCard:hover{
+
+
+    transform:
+
+    translateY(-8px);
+
+
+    box-shadow:
+
+    0 0 40px rgba(0,246,255,.35);
+
+
+}
+
+
+
+.formulaCard h3{
+
+
+    color:var(--cyan);
+
+
+}
+
+
+
+.formulaCard button{
+
+
+    margin-top:20px;
+
+
+}
+
+
+
+/* =========================
+ WELCOME PANEL
+========================= */
+
+
+.welcomePanel{
+
+
+    margin-top:25px;
+
+
+    padding:25px;
+
+
+    text-align:center;
+
+
+    border-radius:20px;
+
+
+    background:
+
+    linear-gradient(
+        135deg,
+        rgba(0,246,255,.12),
+        rgba(123,44,255,.15)
+    );
+
+
+    border:
+
+    1px solid rgba(0,246,255,.3);
+
+
+}
+
+
+
+.welcomePanel h2{
+
+
+    border:none!important;
+
+
+}
+
+
+
+.welcomePanel span{
+
+
+    color:var(--green);
+
+
+    font-weight:bold;
+
+
+    letter-spacing:3px;
+
+
+}
+
+
+
+/* =========================
+ SCROLLBAR
+========================= */
+
+
+::-webkit-scrollbar{
+
+
+    width:10px;
+
+
+}
+
+
+
+::-webkit-scrollbar-track{
+
+
+    background:#020617;
+
+
+}
+
+
+
+::-webkit-scrollbar-thumb{
+
+
+    background:
+
+    linear-gradient(
+        var(--purple),
+        var(--cyan)
+    );
+
+
+    border-radius:20px;
+
+
+}
+
+
+
+/* =========================
+ MOBILE
+========================= */
+
+
+@media(max-width:1000px){
+
+
+    .hud-login{
+
+
+        grid-template-columns:1fr;
+
+
+        min-height:auto;
+
+
+    }
+
+
+    .left-panel,
+    .right-panel{
+
+
+        display:none;
+
+
+    }
+
+
+    .login-form{
+
+
+        width:90%;
+
+
+    }
+
+
+    .menuLayout{
+
+
+        grid-template-columns:1fr;
+
+
+    }
+
+
+}
+
+
+
+@media(max-width:600px){
+
+
+    #content{
+
+
+        padding:20px;
+
+
+    }
+
+
+    #currentTime{
+
+
+        font-size:30px;
+
+
+    }
+
+
+    .topBar{
+
+
+        flex-direction:column;
+
+
+        gap:15px;
+
+
+    }
+
+
+    table{
+
+
+        font-size:12px;
+
+
+    }
+
+
+    .formulaCard{
+
+
+        width:100%;
+
+
+        margin:10px 0;
+
+
+    }
+
+
+}
+
+#content .boot-screen {
+    display: none !important;
+}
+
+/* =========================
+   CYBER LOGIN SYSTEM
+========================= */
+
+
+body.login-mode{
+
+background:
+radial-gradient(circle,#071827,#02050a);
+
+color:#00f7ff;
+
+font-family:"Courier New", monospace;
+
+}
+
+
+
+/* LOGIN CONTAINER */
+
+#loginBox{
+
+width:100%;
+
+height:100vh;
+
+display:none;
+
+align-items:center;
+
+justify-content:center;
+
+background:#02040a;
+
+}
+
+
+
+/* LOGIN CARD */
+
+.cyber-login{
+
+width:430px;
+
+padding:45px;
+
+
+background:
+
+linear-gradient(
+135deg,
+rgba(0,255,255,.12),
+rgba(0,0,0,.9)
+);
+
+
+border:1px solid #00ffff;
+
+
+box-shadow:
+
+0 0 25px #00ffff,
+inset 0 0 25px rgba(0,255,255,.15);
+
+
+position:relative;
+
+}
+
+
+
+
+/* HEADER */
+
+.cyber-header{
+
+text-align:center;
+
+color:white;
+
+}
+
+
+
+.cyber-header h1{
+
+font-size:65px;
+
+letter-spacing:15px;
+
+margin:25px 0 5px;
+
+color:#00ffff;
+
+
+text-shadow:
+
+0 0 10px cyan,
+0 0 30px cyan;
+
+}
+
+
+
+.cyber-header p{
+
+letter-spacing:5px;
+
+font-size:14px;
+
+color:#9fffff;
+
+}
+
+
+
+
+
+/* CORE ICON */
+
+.cyber-core{
+
+width:100px;
+
+height:100px;
+
+margin:auto;
+
+
+border:3px solid cyan;
+
+
+border-radius:50%;
+
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+
+box-shadow:
+
+0 0 25px cyan;
+
+}
+
+
+
+.core-circle{
+
+width:55px;
+
+height:55px;
+
+
+border-radius:50%;
+
+
+border:2px solid white;
+
+
+box-shadow:
+
+0 0 20px cyan;
+
+}
+
+
+
+
+/* FORM */
+
+.cyber-form{
+
+margin-top:40px;
+
+}
+
+
+
+.field{
+
+margin-bottom:25px;
+
+}
+
+
+
+.field label{
+
+display:block;
+
+color:#00ffff;
+
+font-size:12px;
+
+letter-spacing:3px;
+
+margin-bottom:8px;
+
+}
+
+
+
+.field input{
+
+width:100%;
+
+height:55px;
+
+box-sizing:border-box;
+
+
+background:#030712;
+
+
+border:1px solid cyan;
+
+
+color:white;
+
+
+padding:15px;
+
+
+font-size:16px;
+
+
+outline:none;
+
+}
+
+
+
+.field input:focus{
+
+box-shadow:
+
+0 0 15px cyan;
+
+}
+
+
+
+
+/* BUTTON */
+
+.cyber-form button{
+
+width:100%;
+
+
+height:60px;
+
+
+margin-top:10px;
+
+
+background:transparent;
+
+
+border:1px solid cyan;
+
+
+color:#00ffff;
+
+
+font-size:18px;
+
+
+letter-spacing:4px;
+
+
+cursor:pointer;
+
+
+box-shadow:
+
+0 0 15px cyan;
+
+}
+
+
+
+.cyber-form button:hover{
+
+background:#00ffff;
+
+
+color:black;
+
+
+box-shadow:
+
+0 0 30px cyan;
+
+}
+
+
+
+
+
+/* STATUS TEXT */
+
+.system-text,
+.login-status{
+
+margin-top:25px;
+
+
+text-align:center;
+
+
+font-size:12px;
+
+
+letter-spacing:4px;
+
+
+color:#00ffff;
+
+
+text-shadow:
+
+0 0 10px cyan;
+
+}
+
+
+
+
+
+/* CYBER SIDE TERMINAL */
+
+.cyber-side,
+.cyber-terminal{
+
+
+border:1px solid #00f7ff;
+
+
+padding:30px;
+
+
+background:
+
+rgba(0,20,35,.75);
+
+
+box-shadow:
+
+
+0 0 20px #00f7ff inset,
+0 0 20px #00f7ff;
+
+}
+
+
+
+
+.cyber-side h3,
+.cyber-terminal h3{
+
+
+text-align:center;
+
+
+letter-spacing:3px;
+
+
+color:#00ffff;
+
+}
+
+
+
+
+.cyber-side p,
+.cyber-terminal p,
+.terminal{
+
+
+font-size:13px;
+
+
+line-height:25px;
+
+
+color:#7fffff;
+
+}
+
+
+
+
+
+/* WRAPPER */
+
+.cyber-wrapper{
+
+
+width:95%;
+
+
+max-width:1400px;
+
+
+display:grid;
+
+
+grid-template-columns:1fr 420px 1fr;
+
+
+gap:40px;
+
+
+align-items:center;
+
+}
+
+
+
+
+
+/* STATUS BAR */
+
+.cyber-status-top,
+.cyber-status-bottom{
+
+
+color:#00ffff;
+
+
+letter-spacing:3px;
+
+
+text-align:center;
+
+
+font-size:12px;
+
+}
+
+
+
+
+/* FOOTER */
+
+.cyber-footer{
+
+
+margin-top:25px;
+
+
+text-align:center;
+
+
+font-size:12px;
+
+
+letter-spacing:3px;
+
+
+color:#55ffff;
+
+
+opacity:.7;
+
+}
+
+/* ===== CYBER LOGIN LAYOUT ===== */
+
+.cyber-login-wrapper{
+
+    width:95%;
+    max-width:1400px;
+
+    display:grid;
+
+    grid-template-columns: 1fr 420px 1fr;
+
+    gap:35px;
+
+    align-items:center;
+
+}
+
+
+
+
+.cyber-panel{
+
+    height:360px;
+
+    padding:25px;
+
+    border:1px solid #00ffff;
+
+    background:
+    rgba(0,15,25,0.85);
+
+    color:#00ffff;
+
+    box-shadow:
+    0 0 20px #00ffff;
+
+}
+
+
+
+.cyber-panel h2{
+
+    text-align:center;
+
+    font-size:18px;
+
+    letter-spacing:3px;
+
+}
+
+
+
+
+
+.cyber-login{
+
+    padding:40px;
+
+    border:1px solid #00ffff;
+
+    background:
+    rgba(0,10,20,.95);
+
+    color:#00ffff;
+
+    box-shadow:
+    0 0 30px #00ffff;
+
+}
+
+
+
+.cyber-login h1{
+
+    text-align:center;
+
+    font-size:45px;
+
+    letter-spacing:10px;
+
+}
+
+
+
+.cyber-login p{
+
+    text-align:center;
+
+    letter-spacing:4px;
+
+}
+
+
+
+
+
+.input-box{
+
+    margin-top:20px;
+
+}
+
+
+.input-box label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+}
+
+
+
+.input-box input{
+
+    width:100%;
+
+    padding:14px;
+
+    background:#020b12;
+
+    border:1px solid #00ffff;
+
+    color:white;
+
+}
+
+
+
+
+
+.cyber-login button{
+
+    width:100%;
+
+    margin-top:30px;
+
+    padding:15px;
+
+    background:transparent;
+
+    color:#00ffff;
+
+    border:1px solid #00ffff;
+
+    cursor:pointer;
+
+}
+
+
+
+.cyber-login button:hover{
+
+    background:#00ffff;
+
+    color:black;
+
+}
+
+
+
+
+
+.terminal{
+
+    margin-top:30px;
+
+    line-height:25px;
+
+    font-size:13px;
+
+    color:#7fffff;
+
+}
+
+
+
+
+
+.line{
+
+    margin:18px 0;
+
+}
+
+
+
+.line span{
+
+    color:#00ff66;
+
+}
+
+.cyber-login-screen{
+
+height:100vh;
+width:100%;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+gap:70px;
+
+
+background:
+
+radial-gradient(
+circle,
+rgba(0,255,255,.12),
+transparent 45%
+),
+
+#020609;
+
+
+color:#00ffff;
+
+font-family:"Courier New",monospace;
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+
+
+
+.cyber-status-top{
+
+position:absolute;
+
+top:30px;
+
+width:100%;
+
+display:flex;
+
+justify-content:space-around;
+
+font-size:13px;
+
+letter-spacing:3px;
+
+color:#00ff99;
+
+}
+
+
+
+
+.cyber-status-bottom{
+
+position:absolute;
+
+bottom:30px;
+
+width:100%;
+
+text-align:center;
+
+color:#00ff99;
+
+letter-spacing:2px;
+
+}
+
+
+
+
+.cyber-terminal{
+
+width:260px;
+
+font-size:13px;
+
+line-height:28px;
+
+color:#00ff99;
+
+text-shadow:0 0 8px #00ff99;
+
+}
+
+
+
+.cyber-terminal h3{
+
+color:#00ffff;
+
+border-bottom:1px solid #00ffff;
+
+padding-bottom:10px;
+
+}
+
+
+
+.cyber-terminal p{
+
+margin:12px 0;
+
+}
+
+
+
+
+.cyber-access{
+
+width:420px;
+
+padding:45px;
+
+background:
+
+rgba(0,15,20,.85);
+
+
+border:
+
+1px solid #00ffff;
+
+
+box-shadow:
+
+0 0 40px rgba(0,255,255,.5);
+
+
+text-align:center;
+
+}
+
+
+
+
+
+.cyber-logo{
+
+width:90px;
+
+height:90px;
+
+border-radius:50%;
+
+border:2px solid #00ffff;
+
+margin:auto;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+box-shadow:0 0 25px #00ffff;
+
+}
+
+
+
+.cyber-logo div{
+
+width:35px;
+
+height:35px;
+
+background:#00ffff;
+
+border-radius:50%;
+
+box-shadow:0 0 25px #00ffff;
+
+}
+
+
+
+
+
+.cyber-access h1{
+
+font-size:55px;
+
+letter-spacing:12px;
+
+margin:20px 0;
+
+color:white;
+
+}
+
+
+
+.cyber-access h2{
+
+font-size:14px;
+
+letter-spacing:5px;
+
+font-weight:normal;
+
+}
+
+
+
+
+.input-group{
+
+margin-top:25px;
+
+text-align:left;
+
+}
+
+
+
+.input-group label{
+
+font-size:12px;
+
+color:#00ffff;
+
+}
+
+
+
+.input-group input{
+
+width:100%;
+
+box-sizing:border-box;
+
+padding:15px;
+
+margin-top:8px;
+
+background:#01080c;
+
+border:1px solid #00ffff;
+
+color:white;
+
+}
+
+
+
+
+
+.cyber-access button{
+
+width:100%;
+
+margin-top:30px;
+
+padding:15px;
+
+background:#00151c;
+
+border:1px solid #00ffff;
+
+color:#00ffff;
+
+letter-spacing:3px;
+
+cursor:pointer;
+
+}
+
+
+
+.cyber-access button:hover{
+
+background:#00ffff;
+
+color:#000;
+
+}
+
+
+
+
+.login-status{
+
+margin-top:25px;
+
+font-size:12px;
+
+color:#00ff99;
+
+}
+
+#loginBox{
+height:100vh;
+}
+
+
+.cyber-boot{
+
+position:fixed;
+
+inset:0;
+
+background:#020609;
+
+z-index:999;
+
+display:flex;
+
+flex-direction:column;
+
+align-items:center;
+
+justify-content:center;
+
+color:#00ffff;
+
+font-family:monospace;
+
+animation:bootHide 3s forwards;
+
+}
+
+
+
+.boot-logo{
+
+font-size:50px;
+
+letter-spacing:12px;
+
+text-shadow:0 0 25px #00ffff;
+
+margin-bottom:30px;
+
+}
+
+
+
+.boot-line{
+
+color:#00ff99;
+
+margin:8px;
+
+letter-spacing:2px;
+
+}
+
+
+
+@keyframes bootHide{
+
+0%,80%{
+opacity:1;
+}
+
+100%{
+opacity:0;
+visibility:hidden;
+}
+
+}
 
 </style>
 
@@ -4609,80 +2959,88 @@ tbody tr:hover {
 </head>
 
 
-<body class="login-mode">
+<!-- CYBER BOOT START -->
 
+<div id="systemBoot" class="cyber-boot">
 
-<div class="hud-container">
-
-
-<div class="hud-login">
-
-
-    <!-- LEFT PANEL -->
-    <div class="left-panel">
-
-        <div class="panel-header">
-            RADAR SYSTEM
-        </div>
-
-        <div class="panel-content">
-
-            <div class="radar-core"></div>
-
-            <div class="status-row">
-                <span>NETWORK</span>
-                <span class="online">ONLINE</span>
-            </div>
-
-            <div class="status-row">
-                <span>SERVER</span>
-                <span>ACTIVE</span>
-            </div>
-
-            <div class="log-item">
-                > scanning nodes...
-            </div>
-
-            <div class="log-item">
-                > encryption ready
-            </div>
-
-        </div>
-
+    <div class="boot-logo">
+        CYBER CORE
     </div>
 
-<div class="hud-info top-left">
-    SECTOR 07 // NODE ACTIVE
+    <div id="bootText" class="boot-line">
+        > INITIALIZING SECURITY SYSTEM...
+    </div>
+
+    <div class="boot-line">
+        > ENCRYPTION CHANNEL ACTIVE...
+    </div>
+
+    <div class="boot-line">
+        > NETWORK CONNECTION READY...
+    </div>
+
+    <div class="boot-line">
+        > ACCESS TERMINAL ONLINE...
+    </div>
+
 </div>
 
-
-<div class="hud-info top-right">
-    CYBER CORE v9.7
-</div>
-
-
-<div class="hud-info bottom-left">
-    COORD: 24.315 / 103.845
-</div>
-
-
-<div class="hud-info bottom-right">
-    CONNECTION 100%
-</div>
+<!-- CYBER BOOT END -->
 
 
 
-    <!-- CENTER LOGIN -->
-    <div class="login-panel">
 
 
-        <div class="login-header">
+<!-- LOGIN AREA START -->
+
+<div id="loginBox">
 
 
-            <div class="ai-core">
 
-                <div class="core-ring"></div>
+    <!-- LOGIN SCREEN -->
 
+    <div class="cyber-login-screen">
+
+
+        <!-- TOP STATUS -->
+
+        <div class="cyber-status-top">
+
+            <span>NODE 07 ONLINE</span>
+            <span>SECURITY LEVEL 05</span>
+            <span>CHANNEL ENCRYPTED</span>
+
+        </div>
+
+
+
+
+
+        <!-- LEFT -->
+
+        <div class="cyber-terminal left-terminal">
+
+            <h3>NETWORK TRACE</h3>
+
+            <p>> Firewall active</p>
+            <p>> Port scanning...</p>
+            <p>> Packet verified</p>
+            <p>> Encryption ready</p>
+            <p>> Server connected</p>
+
+        </div>
+
+
+
+
+
+        <!-- CENTER LOGIN -->
+
+        <div class="cyber-access">
+
+
+            <div class="cyber-logo">
+                <div></div>
             </div>
 
 
@@ -4691,283 +3049,92 @@ tbody tr:hover {
             </h1>
 
 
-            <span>
+            <h2>
                 CORE ACCESS SYSTEM
-            </span>
-
-
-        </div>
+            </h2>
 
 
 
-        <div class="login-form">
+            <label>
+                USER IDENTIFICATION
+            </label>
 
-
-            <input 
+            <input
+            id="email"
             type="text"
-            placeholder="USER IDENTIFICATION">
+            placeholder="ENTER USER ID">
 
 
-            <input 
+
+
+
+            <label>
+                ACCESS KEY
+            </label>
+
+
+            <input
+            id="password"
             type="password"
-            placeholder="ACCESS KEY">
+            placeholder="ENTER ACCESS KEY">
 
 
-            <button>
-                INITIALIZE LOGIN
+
+
+
+            <button onclick="login()">
+                INITIALIZE ACCESS
             </button>
 
 
-        </div>
 
 
-    </div>
-
-
-
-    <!-- RIGHT PANEL -->
-    <div class="right-panel">
-
-
-        <div class="panel-header">
-            SYSTEM STATUS
-        </div>
-
-
-        <div class="panel-content">
-
-
-            <div class="status-row">
-
-                <span>FIREWALL</span>
-
-                <span class="online">
-                ACTIVE
-                </span>
-
-            </div>
-
-
-
-            <div class="status-row">
-
-                <span>AI CORE</span>
-
-                <span>
-                READY
-                </span>
-
-            </div>
-
-
-
-            <div class="log-item">
-                CPU LOAD 24%
-            </div>
-
-
-            <div class="log-item">
-                MEMORY 68%
-            </div>
-
-
-            <div class="log-item">
-                CONNECTION STABLE
+            <div class="login-status">
+                SYSTEM ENCRYPTION // ACTIVE
             </div>
 
 
         </div>
 
 
+
+
+
+        <!-- RIGHT -->
+
+        <div class="cyber-terminal right-terminal">
+
+            <h3>SYSTEM MONITOR</h3>
+
+            <p>CPU LOAD : 24%</p>
+            <p>MEMORY : 68%</p>
+            <p>NETWORK : STABLE</p>
+            <p>SERVER : ONLINE</p>
+            <p>SECURITY : ACTIVE</p>
+
+        </div>
+
+
+
+
+
+        <!-- BOTTOM -->
+
+        <div class="cyber-status-bottom">
+
+            SECURE CHANNEL // AUTHENTICATION REQUIRED
+
+        </div>
+
+
+
     </div>
 
 
 </div>
 
 
-
-
-<div id="loginBox">
-
-<div class="boot-screen">
-
-    <div class="boot-title">
-        INITIALIZING SYSTEM
-    </div>
-
-    <div class="boot-bar">
-        <div class="boot-progress"></div>
-    </div>
-
-    <div class="boot-status">
-        LOADING AI CORE...
-    </div>
-
-</div>
-
-
-<div class="hud-container">
-
-<div class="hud-login">
-
-
-<!-- LEFT PANEL -->
-<div class="left-panel">
-
-<div class="panel-header">
-RADAR SYSTEM
-</div>
-
-<div class="panel-content">
-
-<div class="status-row">
-<span>NETWORK</span>
-<span class="online">ONLINE</span>
-</div>
-
-
-<div class="status-row">
-<span>SERVER</span>
-<span>ACTIVE</span>
-</div>
-
-
-<div class="log-item">
-> scanning nodes...
-</div>
-
-
-<div class="log-item">
-> encryption ready
-</div>
-
-
-</div>
-
-</div>
-
-
-
-<!-- CENTER LOGIN -->
-
-<div class="login-panel">
-
-<div class="login-header">
-
-<div class="ai-core">
-<div class="core-ring"></div>
-</div>
-
-
-<h1>CYBER</h1>
-
-<span>
-CORE ACCESS SYSTEM
-</span>
-
-</div>
-
-
-<div class="login-form">
-
-
-<input
-id="email"
-type="text"
-placeholder="USER IDENTIFICATION">
-
-
-<input
-id="password"
-type="password"
-placeholder="ACCESS KEY">
-
-
-<button onclick="login()">
-INITIALIZE LOGIN
-</button>
-
-
-</div>
-
-
-</div>
-
-
-
-<!-- RIGHT PANEL -->
-
-<div class="right-panel">
-
-<div class="panel-header">
-SYSTEM STATUS
-</div>
-
-
-<div class="panel-content">
-
-<div class="status-row">
-<span>FIREWALL</span>
-<span class="online">ACTIVE</span>
-</div>
-
-
-<div class="status-row">
-<span>AI CORE</span>
-<span>READY</span>
-</div>
-
-
-<div class="log-item">
-CPU LOAD 24%
-</div>
-
-
-<div class="log-item">
-MEMORY 68%
-</div>
-
-
-<div class="log-item">
-CONNECTION STABLE
-</div>
-
-
-</div>
-
-</div>
-
-
-</div>
-
-</div>
-
-
-</div>
-
-<input 
-id="email"
-type="text"
-placeholder="USER IDENTIFICATION">
-
-
-<input 
-id="password"
-type="password"
-placeholder="ACCESS KEY">
-
-<span>
-SECURE ACCESS ONLY
-</span>
-
-
-</div>
-
-</div>
-
-</div>
-
-
+<!-- LOGIN AREA END -->
 
 
 <div id="content" style="display:none">
@@ -5203,7 +3370,7 @@ BUILD V5.2
 </h2>
 
 <h3>
-CYBER CORE PREMIUM
+NEWS UPDATE
 </h3>
 
 <div class="welcomePanel">
@@ -6072,16 +4239,24 @@ return;
 
 }
 
-document.body.classList.remove("login-mode");
 
-document.querySelector(".hud-container").style.display="none";
+// HIDE LOGIN
+document.getElementById("loginBox").style.display="none";
 
+
+// SHOW DASHBOARD
 document.getElementById("content").style.display="block";
 
 
+document.body.classList.remove("login-mode");
+
+
 loadData();
+
 toggleMenu();
+
 showDeposit();
+
 }
 
 async function loadData(){
@@ -9086,6 +7261,136 @@ function clearPgaResult(){
 
 
 }
+
+// ===============================
+// CYBER BOOT SYSTEM
+// ===============================
+
+const bootMessages = [
+    "INITIALIZING SYSTEM...",
+    "LOADING SECURITY MODULE...",
+    "CHECKING DATABASE...",
+    "VERIFYING CONNECTION...",
+    "SYSTEM READY"
+];
+
+
+function startCyberBoot(callback){
+
+    let boot = document.getElementById("systemBoot");
+    let text = document.getElementById("bootText");
+
+
+    if(!boot){
+
+        if(callback){
+            callback();
+        }
+
+        return;
+
+    }
+
+
+    boot.style.display = "flex";
+
+
+    let index = 0;
+
+
+    let interval = setInterval(()=>{
+
+
+        if(text){
+
+            text.innerHTML = "> " + bootMessages[index];
+
+        }
+
+
+        index++;
+
+
+
+        if(index >= bootMessages.length){
+
+
+            clearInterval(interval);
+
+
+
+            setTimeout(()=>{
+
+
+                boot.style.display="none";
+
+
+                if(callback){
+
+                    callback();
+
+                }
+
+
+            },800);
+
+
+        }
+
+
+    },600);
+
+}
+
+
+
+
+// ===============================
+// CEK SESSION SAAT REFRESH
+// ===============================
+
+window.addEventListener("load", async ()=>{
+
+
+    const {data} = await supabaseClient.auth.getSession();
+
+
+
+    startCyberBoot(()=>{
+
+
+        if(data.session){
+
+
+            // USER SUDAH LOGIN
+
+            document.getElementById("loginBox").style.display="none";
+
+            document.getElementById("content").style.display="block";
+
+
+            loadData();
+
+
+
+        }else{
+
+
+            // USER BELUM LOGIN
+
+            document.getElementById("loginBox").style.display="block";
+
+            document.getElementById("content").style.display="none";
+
+
+        }
+
+
+    });
+
+
+});
+
 </script>
 
 
