@@ -7391,6 +7391,44 @@ window.addEventListener("load", async ()=>{
 
 });
 
+// ===== PROTEKSI TAMBAHAN =====
+
+// Blok klik kanan
+document.addEventListener("contextmenu", function(e) {
+    e.preventDefault();
+});
+
+// Blok shortcut inspect/devtools
+document.addEventListener("keydown", function(e) {
+    if (
+        e.key === "F12" ||
+        (e.ctrlKey && e.shiftKey && e.key === "I") ||
+        (e.ctrlKey && e.shiftKey && e.key === "J") ||
+        (e.ctrlKey && e.key === "U") ||
+        (e.metaKey && e.altKey && e.key === "I")
+    ) {
+        e.preventDefault();
+        return false;
+    }
+});
+
+// Blok drag gambar/text
+document.addEventListener("dragstart", function(e) {
+    e.preventDefault();
+});
+
+// Deteksi DevTools terbuka (peringatan sederhana)
+setInterval(function() {
+    if (
+        window.outerWidth - window.innerWidth > 200 ||
+        window.outerHeight - window.innerHeight > 200
+    ) {
+        console.clear();
+        console.log("Protected Page");
+    }
+}, 1000);
+
+
 </script>
 
 
