@@ -4208,20 +4208,82 @@ login();
 
 async function login(){
 
-const email=document.getElementById("email").value.trim();
+const loginInput=document.getElementById("email").value.trim();
 
 const password=document.getElementById("password").value.trim();
 
 
-if(!email || !password){
+if(!loginInput || !password){
 
-alert("Isi email dan password");
+alert("Isi username/email dan password");
 
 return;
 
 }
 
 
+let email = loginInput;
+
+
+// Kalau login pakai username
+if(!loginInput.includes("@")){
+
+
+const {data, error}=await supabaseClient
+.from("profiles")
+.select("email, admin_password, role")
+.eq("username", loginInput)
+.maybeSingle();
+
+
+if(error || !data){
+
+alert("Username tidak ditemukan");
+
+return;
+
+}
+
+
+// Kalau akun admin, cek password khusus
+if(data.role === "admin"){
+
+    if(password !== data.admin_password){
+
+        alert("Password admin salah");
+
+        return;
+
+    }
+
+
+    // langsung masuk dashboard
+    document.getElementById("loginBox").style.display="none";
+
+    document.getElementById("content").style.display="block";
+
+    document.body.classList.remove("login-mode");
+
+
+    loadData();
+
+    toggleMenu();
+
+    showDeposit();
+
+    return;
+
+}
+
+
+// kalau bukan admin
+email=data.email;
+
+
+}
+
+
+// Login user biasa pakai Supabase Auth
 const {error}=await supabaseClient.auth.signInWithPassword({
 
 email,
