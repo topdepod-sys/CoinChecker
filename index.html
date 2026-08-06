@@ -2952,6 +2952,115 @@ visibility:hidden;
 
 }
 
+.summary-box{
+
+    display:flex;
+    gap:15px;
+    margin:18px 0;
+
+}
+
+
+.summary-item{
+
+    flex:1;
+
+    background:
+    linear-gradient(
+        135deg,
+        rgba(0,255,136,0.15),
+        rgba(0,0,0,0.8)
+    );
+
+    border:1px solid #00ff88;
+
+    border-radius:12px;
+
+    padding:18px;
+
+    text-align:center;
+
+    box-shadow:
+    0 0 15px rgba(0,255,136,0.25),
+    inset 0 0 15px rgba(0,255,136,0.08);
+
+}
+
+
+
+.summary-item span{
+
+    display:block;
+
+    color:#00ff88;
+
+    font-size:13px;
+
+    letter-spacing:1px;
+
+    text-transform:uppercase;
+
+    margin-bottom:10px;
+
+}
+
+
+
+.summary-item b{
+
+    font-size:24px;
+
+    color:white;
+
+    text-shadow:
+    0 0 10px #00ff88;
+
+}
+
+
+
+
+/* DB MERAH CYBER */
+
+#dbTable{
+
+}
+
+
+.card:nth-last-child(1) .summary-item{
+
+    border-color:#ff004c;
+
+    background:
+    linear-gradient(
+        135deg,
+        rgba(255,0,76,0.18),
+        rgba(0,0,0,0.8)
+    );
+
+    box-shadow:
+    0 0 15px rgba(255,0,76,0.25),
+    inset 0 0 15px rgba(255,0,76,0.08);
+
+}
+
+
+
+.card:nth-last-child(1) .summary-item span{
+
+    color:#ff004c;
+
+}
+
+
+
+.card:nth-last-child(1) .summary-item b{
+
+    text-shadow:
+    0 0 10px #ff004c;
+
+}
+
 </style>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
@@ -3214,6 +3323,11 @@ QRIS Cepat
 </label>
 
 <label>
+<input type="checkbox" id="checkValidasiBca" checked onchange="toggleMenu()">
+Validasi BCA PRO
+</label>
+
+<label>
 <input type="checkbox" id="checkInputCashBack" checked onchange="toggleMenu()">
 Input Data Cash Back
 </label>
@@ -3259,6 +3373,10 @@ Double ACC
 
 <button id="btnQris" onclick="showQris()">
 ⚡ QRIS Cepat
+</button>
+
+<button id="btnValidasiBca" onclick="showValidasiBca()">
+🏦 Validasi BCA PRO
 </button>
 
 <button id="btnInputCashBack" onclick="showInputCashBack()">
@@ -3793,6 +3911,245 @@ Rp 0
 </table>
 
 </div>
+
+
+<div id="validasiBcaPage" class="page" style="display:none;">
+
+
+    <div class="card">
+
+        <h2>🏦 VALIDASI BCA PRO</h2>
+
+        <h3>Tempel Data Mutasi</h3>
+
+
+        <textarea
+            id="dataMutasiBca"
+            rows="14"
+            placeholder="Tempel mutasi BCA di sini..."></textarea>
+
+
+        <br><br>
+
+
+        <button onclick="processValidasiBca()">
+            ⚡ PROSES VALIDASI
+        </button>
+
+
+        <button onclick="clearValidasiBca()">
+            🗑 CLEAR
+        </button>
+
+
+    </div>
+
+
+
+    <br>
+
+
+
+    <!-- ================= CR ================= -->
+
+
+    <div class="card">
+
+
+        <h2 style="color:green;">
+            🟢 UANG MASUK (CR)
+        </h2>
+
+
+
+        <div class="summary-box">
+
+
+            <div class="summary-item">
+
+                <span>Total Data</span>
+
+                <b id="totalCrData">0</b>
+
+            </div>
+
+
+
+            <div class="summary-item">
+
+                <span>Total Nominal</span>
+
+                <b>
+                    Rp <span id="totalCrNominal">0</span>
+                </b>
+
+            </div>
+
+
+        </div>
+
+
+
+
+        <table>
+
+
+            <thead>
+
+                <tr>
+
+                    <th>No</th>
+
+                    <th>Nama</th>
+
+                    <th>Jenis</th>
+
+                    <th>Nominal</th>
+
+                </tr>
+
+            </thead>
+
+
+
+            <tbody id="crTable">
+
+            </tbody>
+
+
+        </table>
+
+
+
+        <br>
+
+
+        <button onclick="copyCrNama()">
+
+            📋 COPY CR (NAMA + NOMINAL)
+
+        </button>
+
+
+    </div>
+
+
+
+
+
+    <br>
+
+
+
+
+
+    <!-- ================= DB ================= -->
+
+
+    <div class="card">
+
+
+        <h2 style="color:red;">
+
+            🔴 UANG KELUAR (DB)
+
+        </h2>
+
+
+
+
+
+        <div class="summary-box">
+
+
+
+            <div class="summary-item">
+
+                <span>Total Data</span>
+
+                <b id="totalDbData">0</b>
+
+            </div>
+
+
+
+
+            <div class="summary-item">
+
+                <span>Total Nominal</span>
+
+                <b>
+
+                    Rp <span id="totalDbNominal">0</span>
+
+                </b>
+
+            </div>
+
+
+
+        </div>
+
+
+
+
+
+
+        <table>
+
+
+            <thead>
+
+
+                <tr>
+
+                    <th>No</th>
+
+                    <th>Nama</th>
+
+                    <th>Jenis</th>
+
+                    <th>Nominal</th>
+
+                </tr>
+
+
+            </thead>
+
+
+
+
+            <tbody id="dbTable">
+
+
+            </tbody>
+
+
+
+
+        </table>
+
+
+
+
+        <br>
+
+
+
+        <button onclick="copyDbNama()">
+
+            📋 COPY DB (NAMA + NOMINAL)
+
+        </button>
+
+
+
+    </div>
+
+
+
+</div>
+
 
 
 
@@ -4386,6 +4743,7 @@ function showDepositPga(){
     document.getElementById("doubleAccPage").style.display="none";
     document.getElementById("formulaPage").style.display="none";
     document.getElementById("pgaCheckingPage").style.display="none";
+    document.getElementById("validasiBcaPage").style.display="none";
 
     document.getElementById("depositPgaPage").style.display="block";
 
@@ -4404,6 +4762,7 @@ function showPgaChecking(){
     document.getElementById("doubleCashBackPage").style.display="none";
     document.getElementById("doubleAccPage").style.display="none";
     document.getElementById("formulaPage").style.display="none";
+    document.getElementById("validasiBcaPage").style.display="none";
 
     document.getElementById("pgaCheckingPage").style.display="block";
 
@@ -4422,6 +4781,7 @@ function showDeposit(){
     document.getElementById("doubleAccPage").style.display="none";
     document.getElementById("formulaPage").style.display="none";
     document.getElementById("pgaCheckingPage").style.display="none";
+    document.getElementById("validasiBcaPage").style.display="none";
 
     document.getElementById("depositPage").style.display="block";
 
@@ -4440,6 +4800,7 @@ function showWithdraw(){
     document.getElementById("doubleAccPage").style.display="none";
     document.getElementById("formulaPage").style.display="none";
     document.getElementById("pgaCheckingPage").style.display="none";
+    document.getElementById("validasiBcaPage").style.display="none";
 
     document.getElementById("withdrawPage").style.display="block";
 
@@ -4458,6 +4819,7 @@ function showQris(){
     document.getElementById("doubleAccPage").style.display="none";
     document.getElementById("formulaPage").style.display="none";
     document.getElementById("pgaCheckingPage").style.display="none";
+    document.getElementById("validasiBcaPage").style.display="none";
 
     document.getElementById("qrisPage").style.display="block";
 
@@ -4476,6 +4838,7 @@ function showInputCashBack(){
     document.getElementById("doubleAccPage").style.display="none";
     document.getElementById("formulaPage").style.display="none";
     document.getElementById("pgaCheckingPage").style.display="none";
+    document.getElementById("validasiBcaPage").style.display="none";
 
     document.getElementById("inputCashBackPage").style.display="block";
 
@@ -4494,6 +4857,7 @@ function showCashBack(){
     document.getElementById("doubleAccPage").style.display="none";
     document.getElementById("formulaPage").style.display="none";
     document.getElementById("pgaCheckingPage").style.display="none";
+    document.getElementById("validasiBcaPage").style.display="none";
 
     document.getElementById("cashBackPage").style.display="block";
 
@@ -4512,6 +4876,7 @@ function showDoubleCashBack(){
     document.getElementById("doubleAccPage").style.display="none";
     document.getElementById("formulaPage").style.display="none";
     document.getElementById("pgaCheckingPage").style.display="none";
+    document.getElementById("validasiBcaPage").style.display="none";
 
     document.getElementById("doubleCashBackPage").style.display="block";
 
@@ -4530,6 +4895,7 @@ function showDoubleAcc(){
     document.getElementById("doubleCashBackPage").style.display="none";
     document.getElementById("formulaPage").style.display="none";
     document.getElementById("pgaCheckingPage").style.display="none";
+    document.getElementById("validasiBcaPage").style.display="none";
 
     document.getElementById("doubleAccPage").style.display="block";
 
@@ -4548,8 +4914,28 @@ function showFormula(){
     document.getElementById("doubleCashBackPage").style.display="none";
     document.getElementById("doubleAccPage").style.display="none";
     document.getElementById("pgaCheckingPage").style.display="none";
+    document.getElementById("validasiBcaPage").style.display="none";
 
     document.getElementById("formulaPage").style.display="block";
+
+}
+
+
+
+function showValidasiBca(){
+
+    document.getElementById("depositPgaPage").style.display="none";
+    document.getElementById("depositPage").style.display="none";
+    document.getElementById("withdrawPage").style.display="none";
+    document.getElementById("qrisPage").style.display="none";
+    document.getElementById("inputCashBackPage").style.display="none";
+    document.getElementById("cashBackPage").style.display="none";
+    document.getElementById("doubleCashBackPage").style.display="none";
+    document.getElementById("doubleAccPage").style.display="none";
+    document.getElementById("formulaPage").style.display="none";
+    document.getElementById("pgaCheckingPage").style.display="none";
+
+    document.getElementById("validasiBcaPage").style.display="block";
 
 }
 
@@ -4636,6 +5022,8 @@ function toggleMenu(){
 
         ["checkQris","btnQris","qrisPage"],
 
+        ["checkValidasiBca","btnValidasiBca","validasiBcaPage"],
+
         ["checkInputCashBack","btnInputCashBack","inputCashBackPage"],
 
         ["checkCashBack","btnCashBack","cashBackPage"],
@@ -4651,15 +5039,29 @@ function toggleMenu(){
     data.forEach(item=>{
 
 
-        let checked = document.getElementById(item[0]).checked;
+        let checkbox = document.getElementById(item[0]);
+
+
+        if(!checkbox){
+            return;
+        }
+
+
+        let checked = checkbox.checked;
 
 
 
         // tombol menu
 
-        document.getElementById(item[1]).style.display =
+        let button = document.getElementById(item[1]);
 
-        checked ? "block" : "none";
+
+        if(button){
+
+            button.style.display =
+            checked ? "block" : "none";
+
+        }
 
 
 
@@ -4686,7 +5088,6 @@ function toggleMenu(){
 
 
 }
-
 
 
 
@@ -7526,6 +7927,652 @@ setInterval(function() {
 
 }, 1000);
 
+
+function processValidasiBca(){
+
+    let input=document.getElementById("dataMutasiBca").value.trim();
+
+    if(!input){
+        showNotif("❌ Paste data mutasi dulu");
+        return;
+    }
+
+
+    let lines=input.split("\n")
+    .map(x=>x.trim())
+    .filter(x=>x);
+
+
+
+    let hasil=[];
+    let blok=[];
+
+
+
+    function prosesBlok(){
+
+        if(blok.length){
+
+            let data=parseTransaksi(blok);
+
+            if(data){
+                hasil.push(data);
+            }
+
+        }
+
+        blok=[];
+
+    }
+
+
+
+    lines.forEach(line=>{
+
+        let up=line.toUpperCase();
+
+
+        if(
+            up.includes("SWITCHING") ||
+            up.includes("TRSF E-BANKING") ||
+            up.includes("BI-FAST")
+        ){
+
+            prosesBlok();
+
+        }
+
+
+        blok.push(line);
+
+
+    });
+
+
+
+    prosesBlok();
+
+
+    tampilkanMutasi(hasil);
+
+
+    showNotif(
+        "✅ VALIDASI BERHASIL - "+hasil.length+" DATA DIPROSES"
+    );
+
+}
+
+
+
+
+
+
+function parseTransaksi(arr){
+
+
+    let header=arr[0].toUpperCase();
+
+
+    let jenis="";
+
+
+    if(header.includes("CR")){
+        jenis="CR";
+    }
+
+
+    if(header.includes("DB")){
+        jenis="DB";
+    }
+
+
+    if(!jenis){
+        return null;
+    }
+
+
+
+
+    let text=arr.join(" ");
+
+
+
+
+    // ======================
+    // AMBIL NOMINAL
+    // ======================
+
+    let nominal=0;
+
+
+    for(let i=arr.length-1;i>=0;i--){
+
+
+        let angka=arr[i]
+        .replace(/,/g,"")
+        .trim();
+
+
+
+        if(
+            /^\d{10,}$/.test(angka)
+        ){
+            continue;
+        }
+
+
+
+        if(/^\d+(\.\d+)?$/.test(angka)){
+
+
+            nominal=parseFloat(angka);
+            break;
+
+
+        }
+
+
+    }
+
+
+
+
+
+
+
+    let nama="";
+
+
+
+
+    // ======================
+    // GOPAY / EWALLET
+    // ======================
+
+
+    let idWallet=text.match(/ID\d+[A-Z0-9]*/i);
+
+
+    if(idWallet){
+
+        nama=idWallet[0].toUpperCase();
+
+    }
+
+
+
+
+
+
+
+    // ======================
+    // DANA
+    // ======================
+
+
+    if(!nama){
+
+
+        let dana=text.match(/TRFDN-([A-Z ]+)/i);
+
+
+        if(dana){
+
+            nama=dana[1];
+
+        }
+
+
+    }
+
+
+
+
+
+
+
+
+    // ======================
+    // TRANSFER DR
+    // ======================
+
+
+    if(!nama){
+
+
+        let dr=text.match(
+            /TRANSFER DR\s+\d*\s*([A-Z ]+)/i
+        );
+
+
+        if(dr){
+
+            nama=dr[1];
+
+        }
+
+
+    }
+
+
+
+
+
+
+
+
+    // ======================
+    // SWITCHING
+    // ======================
+
+
+    if(!nama && header.includes("SWITCHING")){
+
+
+        nama=text
+
+        .replace(/SWITCHING CR|SWITCHING DB/gi,"")
+
+        .replace(/TANGGAL\s*:\d+\/\d+/gi,"")
+
+        .replace(/TRF/gi,"")
+
+        .replace(/MBKBKE DIGI/gi,"")
+
+        .replace(/0998/g,"")
+
+        .replace(/535/g,"");
+
+
+    }
+
+
+
+
+
+
+
+
+
+    // ======================
+    // BANK BIASA
+    // ======================
+
+
+    if(!nama){
+
+
+        for(let i=1;i<arr.length;i++){
+
+
+            let x=arr[i];
+
+
+
+            if(
+                x==="0000" ||
+                x.includes("/") ||
+                x.includes("FTSCY") ||
+                /^\d/.test(x)
+            ){
+
+                continue;
+
+            }
+
+
+            nama=x;
+
+            break;
+
+
+        }
+
+
+    }
+
+
+
+
+
+
+
+
+
+    // ======================
+    // CLEAN NAMA
+    // ======================
+
+
+    if(!nama){
+
+        nama="-";
+
+    }
+
+
+
+    // jangan hapus ID transaksi
+
+    if(!nama.startsWith("ID")){
+
+
+        nama=nama
+
+        .replace(/TANGGAL\s*:\d+\/\d+/gi,"")
+
+        .replace(/TRF/gi,"")
+
+        .replace(/TRANSFER DR/gi,"")
+
+        .replace(/535/g,"")
+
+        .replace(/0998/g,"")
+
+        .replace(/MBKBKE DIGI/gi,"")
+
+        .replace(/ESPAY DEBIT INDONE/gi,"")
+
+        .replace(/M-BCA/gi,"")
+
+        .replace(/CAHAYA PR/gi,"")
+
+        .replace(/0000/g,"")
+
+        .replace(/[\d,.]+/g,"")
+
+        .replace(/\s+/g," ")
+
+        .trim();
+
+
+    }
+
+
+
+
+
+    return {
+
+        nama:nama,
+
+        jenis:jenis,
+
+        tipe:arr[0],
+
+        nominal:nominal
+
+    };
+
+}
+
+
+
+
+
+
+
+function tampilkanMutasi(data){
+
+
+    let cr=document.getElementById("crTable");
+
+    let db=document.getElementById("dbTable");
+
+
+
+    cr.innerHTML="";
+    db.innerHTML="";
+
+
+
+    let totalCR=0;
+    let totalDB=0;
+
+    let jumlahCR=0;
+    let jumlahDB=0;
+
+
+
+    data.forEach((x,i)=>{
+
+
+        let row=document.createElement("tr");
+
+
+        row.innerHTML=`
+
+        <td>${i+1}</td>
+        <td>${x.nama}</td>
+        <td>${x.tipe}</td>
+        <td>${x.nominal.toLocaleString("id-ID")}</td>
+
+        `;
+
+
+
+        if(x.jenis==="CR"){
+
+            cr.appendChild(row);
+
+            jumlahCR++;
+
+            totalCR+=x.nominal;
+
+        }
+
+
+
+        if(x.jenis==="DB"){
+
+            db.appendChild(row);
+
+            jumlahDB++;
+
+            totalDB+=x.nominal;
+
+        }
+
+
+    });
+
+
+
+
+    document.getElementById("totalCrData").innerHTML=jumlahCR;
+
+    document.getElementById("totalCrNominal").innerHTML=
+    "Rp "+totalCR.toLocaleString("id-ID");
+
+
+
+    document.getElementById("totalDbData").innerHTML=jumlahDB;
+
+    document.getElementById("totalDbNominal").innerHTML=
+    "Rp "+totalDB.toLocaleString("id-ID");
+
+
+}
+
+
+
+
+function copyCrNama(){
+
+    copyNamaNominalBca("crTable","CR");
+
+}
+
+
+function copyDbNama(){
+
+    copyNamaNominalBca("dbTable","DB");
+
+}
+
+
+
+function copyNamaNominalBca(tableId,jenis){
+
+
+    let hasil=[];
+
+
+    document.querySelectorAll("#"+tableId+" tr")
+    .forEach(function(row){
+
+
+        let td=row.querySelectorAll("td");
+
+
+        if(td.length){
+
+
+            let nama = td[1].innerText.trim();
+
+
+            let nominal = td[3].innerText
+                .replace(/\./g,"")
+                .replace(/,/g,"")
+                .trim();
+
+
+
+            nominal = Number(nominal)
+                .toLocaleString("en-US");
+
+
+
+            hasil.push(
+                nama + "\t" + nominal
+            );
+
+
+        }
+
+
+    });
+
+
+
+    if(hasil.length===0){
+
+        showNotif("❌ Tidak ada data "+jenis);
+
+        return;
+
+    }
+
+
+
+
+    navigator.clipboard.writeText(
+        hasil.join("\n")
+    )
+
+    .then(function(){
+
+
+        showNotif(
+            "✅ "+jenis+" Nama + Nominal berhasil dicopy"
+        );
+
+
+    })
+
+
+    .catch(function(){
+
+
+        showNotif(
+            "❌ "+jenis+" gagal dicopy"
+        );
+
+
+    });
+
+
+
+}
+
+
+
+
+// NOTIFIKASI
+
+function showNotif(pesan){
+
+
+    let lama=document.getElementById("notifCopy");
+
+
+    if(lama){
+
+        lama.remove();
+
+    }
+
+
+
+    let notif=document.createElement("div");
+
+
+    notif.id="notifCopy";
+
+
+    notif.innerHTML=pesan;
+
+
+
+    notif.style.position="fixed";
+
+    notif.style.top="20px";
+
+    notif.style.left="50%";
+
+    notif.style.transform="translateX(-50%)";
+
+
+    notif.style.background="#222";
+
+    notif.style.color="#00ff88";
+
+
+    notif.style.padding="12px 25px";
+
+
+    notif.style.borderRadius="10px";
+
+
+    notif.style.fontSize="16px";
+
+
+    notif.style.fontWeight="bold";
+
+
+    notif.style.zIndex="999999";
+
+
+    notif.style.boxShadow=
+    "0 0 15px rgba(0,255,136,0.5)";
+
+
+
+    document.body.appendChild(notif);
+
+
+
+    setTimeout(function(){
+
+
+        notif.remove();
+
+
+    },2500);
+
+
+
+}
 
 </script>
 
