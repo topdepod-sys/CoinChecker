@@ -8574,6 +8574,29 @@ function showNotif(pesan){
 
 }
 
+function clearValidasiBca(){
+
+    // hapus tabel CR dan DB
+    document.getElementById("crTable").innerHTML = "";
+    document.getElementById("dbTable").innerHTML = "";
+
+    // reset jumlah dan nominal
+    document.getElementById("totalCrData").innerHTML = "0";
+    document.getElementById("totalCrNominal").innerHTML = "Rp 0";
+
+    document.getElementById("totalDbData").innerHTML = "0";
+    document.getElementById("totalDbNominal").innerHTML = "Rp 0";
+
+    // kalau ada textarea/input sumber data
+    let input = document.getElementById("inputData");
+    if(input){
+        input.value = "";
+    }
+
+    showNotif("🗑 Data berhasil dibersihkan");
+
+}
+
 </script>
 
 
