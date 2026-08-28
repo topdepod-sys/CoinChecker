@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>TOP1TOTO</title>
+
+<!-- FONT -->
+<link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+>
+
+<!-- ICON FONT -->
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+>
+
+<!-- CSS -->
+<link rel="stylesheet" href="style.css">
+
+<!-- XLSX -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+
+</head>
+
+<body class="login-mode">
+
+<!-- =====================================================
+     LOGIN
+===================================================== -->
+
+<div id="loginBox">
+
+
+<div class="cyber-login-screen">
+
+    <!-- TOP STATUS -->
+    <div class="cyber-status-top">
+        <span>SERVER ONLINE</span>
+        <span>SECURITY LEVEL 05</span>
+        <span>CHANNEL ENCRYPTED</span>
+    </div>
+
+
+    <!-- LEFT TERMINAL -->
+    <div class="cyber-terminal left-terminal">
+
+        <h3>NETWORK TRACE</h3>
+
+        <p>&gt; Firewall active</p>
+        <p>&gt; Port scanning...</p>
+        <p>&gt; Packet verified</p>
+        <p>&gt; Encryption ready</p>
+        <p>&gt; Server connected</p>
+
+    </div>
+
+
+    <!-- CENTER LOGIN -->
+    <div class="cyber-access">
+
+        <div class="cyber-logo">
+            <div></div>
+        </div>
+
+        <!-- LOGO -->
+        <h1 class="brand-logo">
+            <span class="brand-top">TOP</span><span class="brand-one">1</span><span class="brand-toto">TOTO</span>
+        </h1>
+
+        <h2>TOP1TOTO ACCESS SYSTEM</h2>
+
+
+        <div class="input-group">
+
+            <label>USER IDENTIFICATION</label>
+
+            <input
+                id="email"
+                type="text"
+                placeholder="ENTER USER ID"
+                autocomplete="username"
+            >
+
+        </div>
+
+
+        <div class="input-group">
+
+            <label>ACCESS KEY</label>
+
+            <input
+                id="password"
+                type="password"
+                placeholder="ENTER ACCESS KEY"
+                autocomplete="current-password"
+            >
+
+        </div>
+
+
+        <button
+            type="button"
+            onclick="login()"
+        >
+            INITIALIZE ACCESS
+        </button>
+
+
+        <div class="login-status">
+            SYSTEM ENCRYPTION // ACTIVE
+        </div>
+
+    </div>
+
+
+    <!-- RIGHT TERMINAL -->
+    <div class="cyber-terminal right-terminal">
+
+        <h3>SYSTEM MONITOR</h3>
+
+        <p>CPU LOAD : 24%</p>
+        <p>MEMORY : 68%</p>
+        <p>NETWORK : STABLE</p>
+        <p>SERVER : ONLINE</p>
+        <p>SECURITY : ACTIVE</p>
+
+    </div>
+
+
+    <!-- BOTTOM STATUS -->
+    <div class="cyber-status-bottom">
+        SECURE CHANNEL // AUTHENTICATION REQUIRED
+    </div>
+
+</div>
+
+
+</div>
+
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+<div id="content" style="display:none">
+
+<!-- ADMIN INFO -->
+
+<div id="adminInfo">
+
+
+<div id="serverStatus">
+    SERVER ONLINE
+</div>
+
+<!-- BRAND -->
+<div id="adminName" class="brand-logo">
+    <span class="brand-top">TOP</span><span class="brand-one">1</span><span class="brand-toto">TOTO</span>
+</div>
+
+<div id="currentDate"></div>
+
+<div id="currentTime"></div>
+
+<div id="timezone">
+    SIHANOUKVILLE • GMT +7
+</div>
+
+
+</div>
+
+<!-- TOP BAR -->
+
+<div class="topBar">
+
+
+<button
+    type="button"
+    onclick="openMenu()"
+>
+    MENU
+</button>
+
+<button
+    type="button"
+    class="logoutBtn"
+    onclick="logout()"
+>
+    <i class="fa-solid fa-power-off"></i>
+    Logout
+</button>
+
+
+</div>
+
+<!-- =====================================================
+     MENU
+===================================================== -->
+
+<div id="menuBox" class="menuBox">
+
+
+<div class="menuLayout">
+
+
+    <!-- LEFT MENU -->
+
+    <div class="menuLeft">
+
+        <div
+            class="rightMenu"
+            id="menuSetting"
+        >
+
+            <h3>MENU SELECTION</h3>
+
+            <label>
+                <input
+                    type="checkbox"
+                    id="checkDepositPga"
+                    checked
+                    onchange="toggleMenu()"
+                >
+                Deposit PGA
+            </label>
+
+            <label>
+                <input
+                    type="checkbox"
+                    id="checkPgaChecking"
+                    checked
+                    onchange="toggleMenu()"
+                >
+                PGA Data Checking
+            </label>
+
+            <label>
+                <input
+                    type="checkbox"
+                    id="checkDeposit"
+                    checked
+                    onchange="toggleMenu()"
+                >
+                Deposit
+            </label>
+
+            <label>
+                <input
+                    type="checkbox"
+                    id="checkWithdraw"
+                    checked
+                    onchange="toggleMenu()"
+                >
+                Withdraw
+            </label>
+
+            <label>
+                <input
+                    type="checkbox"
+                    id="checkQris"
+                    checked
+                    onchange="toggleMenu()"
+                >
+                QRIS Cepat
+            </label>
+
+            <label>
+                <input
+                    type="checkbox"
+                    id="checkInputCashBack"
+                    checked
+                    onchange="toggleMenu()"
+                >
+                Input Data Cash Back
+            </label>
+
+            <label>
+                <input
+                    type="checkbox"
+                    id="checkCashBack"
+                    checked
+                    onchange="toggleMenu()"
+                >
+                Coin Cash Back
+            </label>
+
+            <label>
+                <input
+                    type="checkbox"
+                    id="checkDoubleCashBack"
+                    checked
+                    onchange="toggleMenu()"
+                >
+                Double Cash Back
+            </label>
+
+            <label>
+                <input
+                    type="checkbox"
+                    id="checkDoubleAcc"
+                    checked
+                    onchange="toggleMenu()"
+                >
+                Double ACC
+            </label>
+
+        </div>
+
+
+        <hr>
+
+
+        <!-- MENU BUTTON -->
+
+        <div class="leftMenu">
+
+            <button id="btnDepositPga" onclick="showDepositPga()">
+                <span>Deposit PGA</span>
+            </button>
+
+            <button id="btnPgaChecking" onclick="showPgaChecking()">
+                <span>PGA Data Checking</span>
+            </button>
+
+            <button id="btnDeposit" onclick="showDeposit()">
+                <span>Deposit</span>
+            </button>
+
+            <button id="btnWithdraw" onclick="showWithdraw()">
+                <span>Withdraw</span>
+            </button>
+
+            <button id="btnQris" onclick="showQris()">
+                <span>QRIS Cepat</span>
+            </button>
+
+            <button id="btnInputCashBack" onclick="showInputCashBack()">
+                <span>Input Data Cash Back</span>
+            </button>
+
+            <button id="btnCashBack" onclick="showCashBack()">
+                <span>Coin Cash Back</span>
+            </button>
+
+            <button id="btnDoubleCashBack" onclick="showDoubleCashBack()">
+                <span>Double Cash Back</span>
+            </button>
+
+            <button id="btnDoubleAcc" onclick="showDoubleAcc()">
+                <span>Double ACC</span>
+            </button>
+
+            <button id="btnFormula" onclick="showFormula()">
+                <span>Export Formula</span>
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- SYSTEM MONITOR -->
+
+    <div class="systemMonitor">
+
+        <h3>SYSTEM MONITOR</h3>
+
+        <div class="monitorItem">
+            <span>SERVER</span>
+            <span class="online">ONLINE</span>
+        </div>
+
+        <div class="monitorItem">
+            <span>STORAGE</span>
+            <span class="online">READY</span>
+        </div>
+
+        <div class="monitorItem">
+            <span>SECURITY</span>
+            <span class="online">ACTIVE</span>
+        </div>
+
+        <div class="monitorItem">
+            <span>SYSTEM</span>
+            <span class="online">READY</span>
+        </div>
+
+        <div class="monitorItem">
+            <span>SERVICES</span>
+            <span class="online">RUNNING</span>
+        </div>
+
+        <hr>
+
+        <div class="monitorBar">
+            <label>CPU</label>
+            <div class="bar">
+                <div class="fill cpu"></div>
+            </div>
+        </div>
+
+        <div class="monitorBar">
+            <label>MEMORY</label>
+            <div class="bar">
+                <div class="fill memory"></div>
+            </div>
+        </div>
+
+        <div class="monitorBar">
+            <label>NETWORK</label>
+            <div class="bar">
+                <div class="fill network"></div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="buildInfo">
+
+            <h2>BUILD V5.2</h2>
+
+            <h3>NEWS UPDATE</h3>
+
+            <div class="welcomePanel">
+
+                <h2>WELCOME, ADMIN</h2>
+
+                <p>
+                    Selamat datang di TOP1TOTO.
+                </p>
+
+                <p>
+                    Pusat kontrol pencarian selisih,
+                    <br>
+                    validasi data, dan analisa transaksi
+                    <br>
+                    dengan performa sistem tinggi.
+                </p>
+
+                <p>
+                    Bekerja lebih cepat.
+                    <br>
+                    Menganalisa lebih akurat.
+                    <br>
+                    Mengontrol lebih mudah.
+                </p>
+
+                <span>
+                    SYSTEM READY
+                    <br>
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</div>
+
+<!-- =====================================================
+     DEPOSIT PGA
+===================================================== -->
+
+<div id="depositPgaPage" style="display:none">
+
+
+<h2>Deposit PGA</h2>
+
+<h3>Deposit PGA Checker</h3>
+
+<h3>Upload History Deposit PGA CSV</h3>
+
+<input
+    type="file"
+    id="depositPgaCsv"
+    accept=".csv"
+>
+
+<br><br>
+
+<button onclick="processDepositPga()">
+    Proses Deposit PGA
+</button>
+
+<button onclick="copyDepositPga()">
+    COPY ID + AMOUNT + REFF NUMBER
+</button>
+
+<button onclick="clearDepositPga()">
+    CLEAR ALL
+</button>
+
+<br><br>
+
+<div class="qrisTotalBox">
+
+    <div class="qrisCard">
+        <h2>TOTAL DEPOSIT PGA</h2>
+        <span id="totalDepositPga">0</span>
+    </div>
+
+    <div class="qrisCard">
+        <h2>TOTAL AMOUNT PGA</h2>
+        <span id="totalAmountPga">Rp 0</span>
+    </div>
+
+</div>
+
+<table>
+
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>AMOUNT</th>
+            <th>REFF NUMBER</th>
+        </tr>
+    </thead>
+
+    <tbody id="depositPgaData"></tbody>
+
+</table>
+
+
+</div>
+
+<!-- =====================================================
+     PGA CHECKING
+===================================================== -->
+
+<div id="pgaCheckingPage" style="display:none">
+
+
+<h2>PGA Data Checking</h2>
+
+<h3>Upload PGA Admin CSV</h3>
+
+<input
+    type="file"
+    id="pgaAdminFile"
+    accept=".csv"
+>
+
+<h3>Upload PGA Motion XLSX</h3>
+
+<input
+    type="file"
+    id="pgaMotionFile"
+    accept=".xlsx"
+    multiple
+>
+
+<br><br>
+
+<button onclick="processPgaChecking()">
+    CHECK DATA
+</button>
+
+<button onclick="copyPgaResult()">
+    COPY RESULT
+</button>
+
+<button onclick="clearPgaResult()">
+    CLEAR
+</button>
+
+<br><br>
+
+<table
+    id="pgaResultTable"
+    border="1"
+    style="width:100%"
+>
+
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Amount</th>
+            <th>Ref Number</th>
+        </tr>
+    </thead>
+
+    <tbody></tbody>
+
+</table>
+
+
+</div>
+
+<!-- =====================================================
+     DEPOSIT
+===================================================== -->
+
+<div id="depositPage" style="display:none">
+
+
+<h2>History Coin</h2>
+
+<table>
+
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Info</th>
+            <th>Username</th>
+            <th>BY</th>
+            <th>Coin</th>
+            <th>Last Coin</th>
+        </tr>
+    </thead>
+
+    <tbody id="data"></tbody>
+
+</table>
+
+<hr>
+
+<h2>Upload History Coin CSV</h2>
+
+<input
+    type="file"
+    id="csvFile"
+    accept=".csv"
+>
+
+<br><br>
+
+<h2>Paste Data Google Sheet</h2>
+
+<textarea
+    id="sheetData"
+    rows="10"
+></textarea>
+
+<br><br>
+
+<button onclick="processData()">
+    Proses Deposit
+</button>
+
+<button onclick="copyDepositDifference()">
+    COPY USERNAME + SELISIH
+</button>
+
+<button onclick="clearDeposit()">
+    CLEAR ALL
+</button>
+
+<h2>Difference Deposit</h2>
+
+<table>
+
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Administration</th>
+            <th>Google Sheet</th>
+            <th>Selisih</th>
+        </tr>
+    </thead>
+
+    <tbody id="difference"></tbody>
+
+</table>
+
+
+</div>
+
+<!-- =====================================================
+     WITHDRAW
+===================================================== -->
+
+<div id="withdrawPage" style="display:none">
+
+
+<h2>Withdraw Checker</h2>
+
+<h2>Upload History Withdraw CSV</h2>
+
+<input
+    type="file"
+    id="withdrawCsv"
+    accept=".csv"
+>
+
+<br><br>
+
+<h2>Paste Data Google Sheet Withdraw</h2>
+
+<textarea
+    id="withdrawSheetData"
+    rows="10"
+></textarea>
+
+<br><br>
+
+<button onclick="processWithdraw()">
+    Proses Withdraw
+</button>
+
+<button onclick="copyWithdrawDifference()">
+    COPY USERNAME + SELISIH
+</button>
+
+<button onclick="clearWithdraw()">
+    CLEAR ALL
+</button>
+
+<table>
+
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Administration</th>
+            <th>Google Sheet</th>
+            <th>Selisih</th>
+        </tr>
+    </thead>
+
+    <tbody id="withdrawDifference"></tbody>
+
+</table>
+
+
+</div>
+
+<!-- =====================================================
+     QRIS
+===================================================== -->
+
+<div id="qrisPage" style="display:none">
+
+
+<h2>QRIS Cepat</h2>
+
+<h2>Upload History QRIS CSV</h2>
+
+<input
+    type="file"
+    id="qrisCsv"
+    accept=".csv"
+>
+
+<br><br>
+
+<button onclick="processQris()">
+    Proses QRIS
+</button>
+
+<br><br>
+
+<button onclick="copyQrisIdAmount()">
+    COPY ID & AMOUNT
+</button>
+
+<button onclick="copyQrisTransaction()">
+    COPY TRANSACTION ID
+</button>
+
+<button onclick="clearQris()">
+    CLEAR ALL
+</button>
+
+<div class="qrisTotalBox">
+
+    <div class="qrisCard">
+        <h2>TOTAL DEPOSIT QRIS</h2>
+        <span id="totalQris">0</span>
+    </div>
+
+    <div class="qrisCard">
+        <h2>TOTAL AMOUNT</h2>
+        <span id="totalQrisAmount">Rp 0</span>
+    </div>
+
+</div>
+
+<table>
+
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>AMOUNT</th>
+            <th>TRANSACTION ID</th>
+            <th>STATUS</th>
+        </tr>
+    </thead>
+
+    <tbody id="qrisData"></tbody>
+
+</table>
+
+
+</div>
+
+<!-- =====================================================
+     INPUT CASH BACK
+===================================================== -->
+
+<div id="inputCashBackPage" style="display:none">
+
+
+<h2>Input Data Cash Back</h2>
+
+<h3>Upload Data Cash Back CSV</h3>
+
+<input
+    type="file"
+    id="cashBackFile"
+    accept=".csv"
+>
+
+<br><br>
+
+<button onclick="processInputCashBack()">
+    Proses Cash Back
+</button>
+
+<button onclick="copyCashBackPage()">
+    COPY HALAMAN INI
+</button>
+
+<button onclick="copyAllCashBack()">
+    COPY SEMUA DATA
+</button>
+
+<button onclick="clearInputCashBack()">
+    CLEAR ALL
+</button>
+
+<hr>
+
+<h2>Data Cash Back</h2>
+
+<div class="cashBackSummary">
+
+    <div>
+        Jumlah Data :
+        <b id="jumlahCashBack">0</b>
+    </div>
+
+    <div>
+        TOTAL CASH BACK :
+        <b id="totalCashBack">0</b>
+    </div>
+
+</div>
+
+<br>
+
+<table>
+
+    <thead>
+        <tr>
+            <th>NO</th>
+            <th>USERNAME</th>
+            <th>TOTAL KEKALAHAN</th>
+            <th>PERSEN</th>
+            <th>BONUS</th>
+        </tr>
+    </thead>
+
+    <tbody id="dataInputCashBack"></tbody>
+
+</table>
+
+<br>
+
+<div id="pageInfo">
+    Data 0 - 0
+</div>
+
+<br>
+
+<div id="cashBackPages"></div>
+
+
+</div>
+
+<!-- =====================================================
+     CASH BACK
+===================================================== -->
+
+<div id="cashBackPage" style="display:none">
+
+
+<h2>Coin Cash Back</h2>
+
+<h2>Upload History Cash Back CSV</h2>
+
+<input
+    type="file"
+    id="cashBackCsv"
+    accept=".csv"
+>
+
+<br><br>
+
+<h2>Paste Data Google Sheet Cash Back</h2>
+
+<textarea
+    id="cashBackSheetData"
+    rows="10"
+></textarea>
+
+<br><br>
+
+<button onclick="processCashBack()">
+    Proses Cash Back
+</button>
+
+<button onclick="copyCashBackDifference()">
+    COPY USERNAME + SELISIH
+</button>
+
+<button onclick="clearCoinCashBack()">
+    CLEAR ALL
+</button>
+
+<h2>Difference Cash Back</h2>
+
+<table>
+
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Administration</th>
+            <th>Google Sheet</th>
+            <th>Selisih</th>
+        </tr>
+    </thead>
+
+    <tbody id="cashBackDifference"></tbody>
+
+</table>
+
+
+</div>
+
+<!-- =====================================================
+     DOUBLE CASH BACK
+===================================================== -->
+
+<div id="doubleCashBackPage" style="display:none">
+
+
+<h2>Double Cash Back</h2>
+
+<h2>Upload History Cash Back CSV</h2>
+
+<input
+    type="file"
+    id="doubleCashBackCsv"
+    accept=".csv"
+>
+
+<br><br>
+
+<button onclick="processDoubleCashBack()">
+    Proses Double Cash Back
+</button>
+
+<button onclick="copyDoubleCashBack()">
+    COPY USERNAME + AMOUNT
+</button>
+
+<button onclick="clearDoubleCashBack()">
+    CLEAR ALL
+</button>
+
+<h2>Hasil Double Cash Back</h2>
+
+<table>
+
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Amount</th>
+        </tr>
+    </thead>
+
+    <tbody id="doubleCashBackResult"></tbody>
+
+</table>
+
+
+</div>
+
+<!-- =====================================================
+     DOUBLE ACC
+===================================================== -->
+
+<div id="doubleAccPage" style="display:none">
+
+
+<h2>Double ACC</h2>
+
+<h2>Upload History Double ACC CSV</h2>
+
+<input
+    type="file"
+    id="doubleAccCsv"
+    accept=".csv"
+>
+
+<br><br>
+
+<button onclick="processDoubleAcc()">
+    Proses Double ACC
+</button>
+
+<button onclick="copyDoubleAcc()">
+    COPY USERNAME + AMOUNT
+</button>
+
+<button onclick="clearDoubleAcc()">
+    CLEAR ALL
+</button>
+
+<h2>Hasil Double ACC</h2>
+
+<table>
+
+    <thead>
+        <tr>
+            <th>NO</th>
+            <th>Username</th>
+            <th>Amount</th>
+            <th>Information</th>
+        </tr>
+    </thead>
+
+    <tbody id="doubleAccData"></tbody>
+
+</table>
+
+
+</div>
+
+<!-- =====================================================
+     EXPORT FORMULA
+===================================================== -->
+
+<div id="formulaPage" style="display:none">
+
+
+<h2>EXPORT DATA CENTER</h2>
+
+<p>
+    Copy Formula kemudian Paste ke Google Spreadsheet
+</p>
+
+<div class="formulaCard">
+
+    <h3>BANK EXPORT</h3>
+
+    <p>
+        Export seluruh Formula Data BANK
+    </p>
+
+    <button onclick="copyBankFormula()">
+        COPY FORMULA
+    </button>
+
+</div>
+
+
+<div class="formulaCard">
+
+    <h3>DANA EXPORT</h3>
+
+    <p>
+        Export seluruh Formula Data DANA
+    </p>
+
+    <button onclick="copyDanaFormula()">
+        COPY FORMULA
+    </button>
+
+</div>
+
+
+<div class="formulaCard">
+
+    <h3>WITHDRAW EXPORT</h3>
+
+    <p>
+        Export seluruh Formula Data WITHDRAW
+    </p>
+
+    <button onclick="copyWithdrawFormula()">
+        COPY FORMULA
+    </button>
+
+</div>
+
+
+<div class="formulaCard">
+
+    <h3>CASH BACK EXPORT</h3>
+
+    <p>
+        Export seluruh Formula Data CASH BACK
+    </p>
+
+    <button onclick="copyCashBackFormula()">
+        COPY FORMULA
+    </button>
+
+</div>
+
+
+</div>
+
+</div>
+
+<!-- =====================================================
+     SUPABASE
+===================================================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- =====================================================
+     JAVASCRIPT UTAMA
+===================================================== -->
+
+<script src="script.js"></script>
+
+</body>
+</html>
