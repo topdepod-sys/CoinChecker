@@ -1,7 +1,8 @@
 /* =========================================================
    TOP1TOTO LUXURY GLASS
    PREMIUM BLACK / GOLD / WHITE
-   STYLE.CSS — FINAL
+   STYLE.CSS — FINAL UPDATED
+   BACKGROUND UPDATED → background.png
    ========================================================= */
 
 :root {
@@ -101,27 +102,18 @@ body {
         sans-serif;
 
     background:
-        radial-gradient(
-            circle at 50% -15%,
-            rgba(214,169,74,.115),
-            transparent 28%
-        ),
-        radial-gradient(
-            circle at 8% 42%,
-            rgba(214,169,74,.045),
-            transparent 25%
-        ),
-        radial-gradient(
-            circle at 92% 65%,
-            rgba(255,255,255,.025),
-            transparent 25%
-        ),
         linear-gradient(
-            135deg,
-            #010101 0%,
-            #080808 45%,
-            #030303 100%
-        );
+            rgba(2, 2, 2, 0.45),
+            rgba(2, 2, 2, 0.45)
+        ),
+        url("background.png");
+
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    background-color: #020202;
 
     overflow-x: hidden;
 }
@@ -144,13 +136,13 @@ body::before {
     background:
         radial-gradient(
             ellipse at center top,
-            rgba(255,255,255,.028),
-            transparent 42%
+            rgba(214, 169, 74, 0.05),
+            transparent 50%
         ),
         linear-gradient(
             115deg,
             transparent 0%,
-            rgba(214,169,74,.018) 50%,
+            rgba(214, 169, 74, 0.025) 50%,
             transparent 100%
         );
 }
@@ -211,17 +203,18 @@ body.login-mode {
     color: var(--white-soft);
 
     background:
-        radial-gradient(
-            circle at center top,
-            rgba(214,169,74,.12),
-            transparent 32%
+        linear-gradient(
+            rgba(2, 2, 2, 0.45),
+            rgba(2, 2, 2, 0.45)
         ),
-        radial-gradient(
-            circle at 50% 100%,
-            rgba(255,255,255,.025),
-            transparent 35%
-        ),
-        #020202;
+        url("background.png");
+
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    background-color: #020202;
 
     font-family:
         'Orbitron',
@@ -269,8 +262,8 @@ body.login-mode {
     background:
         radial-gradient(
             circle at center,
-            rgba(255,255,255,.018),
-            transparent 42%
+            rgba(214, 169, 74, 0.03),
+            transparent 50%
         );
 }
 
@@ -329,8 +322,8 @@ body.login-mode {
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,.055),
-            rgba(255,255,255,.018)
+            rgba(18, 18, 18, 0.65),
+            rgba(5, 5, 5, 0.75)
         );
 
     box-shadow:
@@ -425,9 +418,8 @@ body.login-mode {
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,.065),
-            rgba(255,255,255,.025) 42%,
-            rgba(0,0,0,.55)
+            rgba(20, 20, 20, 0.7),
+            rgba(8, 8, 8, 0.82)
         );
 
     border:
@@ -604,9 +596,6 @@ body.login-mode {
 
 /* =========================================================
    BRAND
-   TOP = GOLD
-   1 = RED
-   TOTO = WHITE
    ========================================================= */
 
 .cyber-access h1,
@@ -1040,9 +1029,8 @@ button:active {
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,.048),
-            rgba(255,255,255,.018) 42%,
-            rgba(0,0,0,.62)
+            rgba(18, 18, 18, 0.72),
+            rgba(5, 5, 5, 0.82)
         );
 
     border:
@@ -1282,8 +1270,8 @@ button:active {
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,.045),
-            rgba(0,0,0,.42)
+            rgba(20, 20, 20, 0.65),
+            rgba(5, 5, 5, 0.75)
         );
 
     border:
@@ -1415,8 +1403,8 @@ button:active {
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,.045),
-            rgba(0,0,0,.46)
+            rgba(20, 20, 20, 0.65),
+            rgba(5, 5, 5, 0.75)
         );
 
     border:
@@ -1655,9 +1643,8 @@ button:active {
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,.045),
-            rgba(255,255,255,.012) 50%,
-            rgba(0,0,0,.48)
+            rgba(18, 18, 18, 0.68),
+            rgba(5, 5, 5, 0.8)
         );
 
     border:
@@ -1776,9 +1763,7 @@ input:focus {
 
 
 /* =========================================================
-   TABLE
-   PENTING:
-   ANGKA TIDAK IKUT GRADIENT BRAND
+   TABLE SYSTEM
    ========================================================= */
 
 table {
@@ -1795,10 +1780,10 @@ table {
     border-radius: 9px;
 
     background:
-        rgba(5,5,5,.72);
+        rgba(5,5,5,.78);
 
     border:
-        1px solid rgba(255,255,255,.09);
+        1px solid rgba(214,169,74,.22);
 
     color:
         #dddddd;
@@ -1814,23 +1799,21 @@ table {
 
     text-shadow:
         none;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.5);
 }
-
-
-/* =========================================================
-   TABLE HEADER
-   ========================================================= */
 
 thead th {
     padding: 13px 12px;
 
-    color: #f4f4f4;
+    color: var(--gold-light);
 
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,.09),
-            rgba(255,255,255,.025)
+            rgba(255,255,255,.08),
+            rgba(0,0,0,.45)
         );
 
     border-bottom:
@@ -1847,26 +1830,18 @@ thead th {
     white-space: nowrap;
 
     text-shadow:
-        none;
+        0 1px 4px rgba(0,0,0,.8);
 }
 
-
-/* =========================================================
-   TABLE BODY
-   ========================================================= */
-
 tbody td {
-    padding: 12px;
-
-    color: #d4d4d4;
-
-    background:
-        transparent;
-
-    border-bottom:
-        1px solid rgba(255,255,255,.055);
+    padding: 11px 12px;
 
     text-align: center;
+
+    border-bottom:
+        1px solid rgba(255,255,255,.04);
+
+    color: #dddddd;
 
     font-family:
         'Segoe UI',
@@ -1876,549 +1851,118 @@ tbody td {
     font-size: 13px;
 
     font-weight: 400;
-
-    line-height: 1.4;
-
-    letter-spacing: 0;
-
-    text-shadow:
-        none;
-
-    white-space: normal;
-
-    word-break: normal;
 }
 
 
 /* =========================================================
-   FORCE TABLE NUMBERS WHITE / NEUTRAL
+   EXPORT DATA CENTER - FORCE GRID 4 COLUMN
    ========================================================= */
 
-tbody td:nth-child(n) {
-    color: #d6d6d6;
-
-    -webkit-text-fill-color:
-        #d6d6d6;
-
-    background-image:
-        none;
-
-    filter:
-        none;
+/* Paksa kontainer menjadi Grid 4 Kolom Ke Samping */
+.export-container,
+#formulaPage .card-grid,
+#formulaPage > div:not(h2):not(p) {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 16px !important;
+    margin-top: 25px !important;
+    width: 100% !important;
+    align-items: stretch !important;
 }
 
-
-/* =========================================================
-   LAST ROW
-   ========================================================= */
-
-tbody tr:last-child td {
-    border-bottom: none;
+/* Paksa setiap item pembungkus menjadi bentuk Kartu Vertikal */
+.export-container > div,
+#formulaPage .card-grid > div,
+#formulaPage .card,
+.export-card {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    
+    padding: 22px 14px 18px !important;
+    height: 185px !important;
+    min-height: 185px !important;
+    text-align: center !important;
+    
+    border-radius: 8px !important;
+    background: linear-gradient(145deg, rgba(20, 20, 20, 0.85), rgba(8, 8, 8, 0.95)) !important;
+    border: 1px solid rgba(214, 169, 74, 0.35) !important;
+    
+    box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 0.05),
+        0 10px 25px rgba(0, 0, 0, 0.5) !important;
+        
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    transition: all 0.25s ease !important;
 }
 
-
-/* =========================================================
-   TABLE HOVER
-   ========================================================= */
-
-tbody tr {
-    transition:
-        background .2s ease,
-        box-shadow .2s ease;
+/* Hover Kartu */
+.export-container > div:hover,
+#formulaPage .card-grid > div:hover,
+#formulaPage .card:hover,
+.export-card:hover {
+    border-color: rgba(214, 169, 74, 0.75) !important;
+    box-shadow: 
+        0 12px 30px rgba(0, 0, 0, 0.7),
+        0 0 15px rgba(214, 169, 74, 0.15) !important;
+    transform: translateY(-2px) !important;
 }
 
-tbody tr:hover {
-    background:
-        rgba(214,169,74,.045);
-
-    box-shadow:
-        inset 2px 0 0 var(--gold);
-}
-
-
-/* =========================================================
-   QRIS CARDS
-   ========================================================= */
-
-.qrisTotalBox {
-    display: grid;
-
-    grid-template-columns:
-        repeat(
-            auto-fit,
-            minmax(220px, 1fr)
-        );
-
-    gap: 16px;
-
-    margin-top: 20px;
-}
-
-.qrisCard {
-    position: relative;
-
-    padding: 22px;
-
-    text-align: center;
-
-    border-radius: 9px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.065),
-            rgba(255,255,255,.015)
-        );
-
-    border:
-        1px solid rgba(214,169,74,.22);
-
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.035),
-        0 15px 35px rgba(0,0,0,.30);
-
-    backdrop-filter:
-        blur(10px);
-}
-
-.qrisCard h2 {
-    border: none !important;
-
-    padding: 0 !important;
-
-    color:
-        var(--gold-light) !important;
-
-    font-size: 12px !important;
-
-    letter-spacing: 1px;
-}
-
-.qrisCard span {
-    display: block;
-
-    margin-top: 13px;
-
-    color:
-        var(--white);
-
-    font-family:
-        'Segoe UI',
-        Arial,
-        sans-serif;
-
-    font-size: 32px;
-
-    font-weight: 800;
-
-    letter-spacing: 1px;
-
-    text-shadow:
-        0 0 10px rgba(255,255,255,.10);
-}
-
-
-/* =========================================================
-   FORMULA CARD
-   ========================================================= */
-
-.formulaCard {
-    display: inline-block;
-
-    vertical-align: top;
-
-    width: 280px;
-
-    margin: 12px;
-
-    padding: 25px;
-
-    text-align: center;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.055),
-            rgba(0,0,0,.42)
-        );
-
-    border:
-        1px solid rgba(214,169,74,.22);
-
-    border-radius: 9px;
-
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.03),
-        0 15px 40px rgba(0,0,0,.45);
-
-    transition:
-        .25s ease;
-}
-
-.formulaCard:hover {
-    transform:
-        translateY(-5px);
-
-    border-color:
-        rgba(214,169,74,.55);
-
-    box-shadow:
-        0 15px 45px rgba(0,0,0,.55),
-        0 0 25px rgba(214,169,74,.12);
-}
-
-.formulaCard h3 {
-    color:
-        var(--gold-light);
-}
-
-.formulaCard p {
-    color:
-        #929292;
-
-    font-size: 12px;
-
-    line-height: 1.6;
-}
-
-.formulaCard button {
-    margin-top: 15px;
-}
-
-
-/* =========================================================
-   PAGE INFO
-   ========================================================= */
-
-#pageInfo {
-    color: #777;
-
-    font-size: 11px;
-
-    letter-spacing: 1px;
-}
-
-
-/* =========================================================
-   HR
-   ========================================================= */
-
-hr {
-    border: none;
-
-    height: 1px;
-
-    margin: 22px 0;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(214,169,74,.30),
-            rgba(255,255,255,.08),
-            rgba(214,169,74,.30),
-            transparent
-        );
-}
-
-
-/* =========================================================
-   PREMIUM CARD GENERAL
-   ========================================================= */
-
-.card,
-.panel,
-.box {
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.045),
-            rgba(0,0,0,.40)
-        );
-
-    border:
-        1px solid rgba(214,169,74,.20);
-
-    border-radius:
-        9px;
-
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.035),
-        0 15px 45px rgba(0,0,0,.40);
-
-    backdrop-filter:
-        blur(10px);
-}
-
-
-/* =========================================================
-   WHITE TEXT HELPERS
-   ========================================================= */
-
-.text-white {
-    color: var(--white) !important;
-}
-
-.text-silver {
-    color: var(--white-muted) !important;
-}
-
-.text-gold {
+/* Styling Judul (BANK EXPORT, dll) */
+.export-container h3, .export-container h4, .export-container strong,
+#formulaPage .card h3, #formulaPage .card-grid h3 {
+    margin: 0 0 6px 0 !important;
     color: var(--gold-light) !important;
+    font-size: 11px !important;
+    font-weight: 800 !important;
+    letter-spacing: 1.5px !important;
+    text-transform: uppercase !important;
+    display: block !important;
 }
 
-.text-red {
-    color: var(--red-light) !important;
+/* Styling Deskripsi */
+.export-container p, .export-container span,
+#formulaPage .card p, #formulaPage .card-grid p {
+    margin: 0 !important;
+    color: #9a9a9a !important;
+    font-size: 10px !important;
+    line-height: 1.4 !important;
+    letter-spacing: 0.5px !important;
+    display: block !important;
 }
 
-.text-green {
-    color: var(--green) !important;
+/* Styling Tombol COPY FORMULA */
+.export-container button,
+#formulaPage .card button,
+#formulaPage .card-grid button {
+    width: 90% !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    
+    margin-top: 12px !important;
+    padding: 0 10px !important;
+    border-radius: 6px !important;
+    
+    border: 1px solid rgba(214, 169, 74, 0.5) !important;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.03), rgba(0, 0, 0, 0.4)) !important;
+    
+    color: var(--gold-light) !important;
+    font-family: 'Orbitron', sans-serif !important;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    letter-spacing: 1px !important;
+    
+    cursor: pointer !important;
+    transition: all 0.25s ease !important;
 }
 
-
-/* =========================================================
-   GOLD LINE HELPER
-   ========================================================= */
-
-.gold-line {
-    height: 1px;
-
-    width: 100%;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            var(--gold),
-            transparent
-        );
-
-    box-shadow:
-        0 0 10px rgba(214,169,74,.30);
+.export-container button:hover,
+#formulaPage .card button:hover,
+#formulaPage .card-grid button:hover {
+    color: #000000 !important;
+    background: linear-gradient(135deg, var(--gold-bright), var(--gold-main)) !important;
+    border-color: var(--gold-bright) !important;
+    box-shadow: 0 0 15px rgba(214, 169, 74, 0.35) !important;
 }
-
-
-/* =========================================================
-   SCROLLBAR
-   ========================================================= */
-
-::-webkit-scrollbar {
-    width: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background:
-        #020202;
-}
-
-::-webkit-scrollbar-thumb {
-    background:
-        linear-gradient(
-            180deg,
-            var(--gold-light),
-            var(--gold),
-            var(--gold-dark)
-        );
-
-    border-radius: 20px;
-
-    box-shadow:
-        0 0 10px rgba(214,169,74,.25);
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background:
-        linear-gradient(
-            180deg,
-            var(--gold-pale),
-            var(--gold-light),
-            var(--gold)
-        );
-}
-
-
-/* =========================================================
-   SELECTION
-   ========================================================= */
-
-::selection {
-    background:
-        rgba(214,169,74,.30);
-
-    color:
-        white;
-}
-
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 1100px) {
-
-    .cyber-login-screen {
-        gap: 20px;
-
-        padding:
-            90px 20px;
-    }
-
-    .cyber-terminal {
-        width: 220px;
-
-        padding: 20px;
-    }
-
-    .cyber-access,
-    .cyber-login {
-        width: 390px;
-    }
-
-    .menuLayout {
-        grid-template-columns:
-            300px 1fr;
-    }
-}
-
-
-/* =========================================================
-   TABLET
-   ========================================================= */
-
-@media (max-width: 900px) {
-
-    .cyber-login-screen {
-        display: grid;
-
-        grid-template-columns: 1fr;
-
-        justify-items: center;
-
-        padding:
-            100px 20px;
-    }
-
-    .cyber-terminal {
-        display: none;
-    }
-
-    .cyber-access,
-    .cyber-login {
-        width:
-            min(430px, 100%);
-    }
-
-    .cyber-status-top {
-        gap: 15px;
-
-        font-size: 9px;
-    }
-
-    .menuLayout {
-        grid-template-columns:
-            1fr;
-    }
-}
-
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 600px) {
-
-    body {
-        background:
-            radial-gradient(
-                circle at 50% -10%,
-                rgba(214,169,74,.09),
-                transparent 30%
-            ),
-            #030303;
-    }
-
-    #content {
-        width: 96vw;
-
-        margin: 10px auto;
-
-        padding: 15px;
-
-        border-radius: 10px;
-    }
-
-    #adminInfo {
-        padding: 25px 10px;
-    }
-
-    #adminName {
-        font-size: 30px;
-
-        letter-spacing: 5px;
-    }
-
-    #currentTime {
-        font-size: 32px;
-
-        letter-spacing: 3px;
-    }
-
-    #currentDate {
-        font-size: 10px;
-
-        letter-spacing: 1px;
-    }
-
-    #timezone {
-        font-size: 9px;
-    }
-
-    .topBar {
-        flex-direction: column;
-
-        align-items: stretch;
-    }
-
-    .topBar button {
-        width: 100%;
-    }
-
-    .cyber-access,
-    .cyber-login {
-        padding:
-            28px 20px;
-
-        border-radius:
-            10px;
-    }
-
-    .cyber-access h1,
-    .cyber-login h1 {
-        font-size: 32px;
-
-        letter-spacing: 5px;
-    }
-
-    .cyber-status-top {
-        flex-wrap: wrap;
-
-        padding: 0 15px;
-
-        line-height: 1.7;
-    }
-
-    .cyber-status-bottom {
-        font-size: 8px;
-
-        padding: 0 15px;
-    }
-
-    table {
-        display: block;
-
-        overflow-x: auto;
-
-        white-space: nowrap;
-
-        font-size: 12px
-    }
